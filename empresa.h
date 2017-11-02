@@ -3,6 +3,9 @@
 
 #include <vector>
 #include <string>
+#include <fstream>
+#include <sstream>
+#include <algorithm>
 #include "cliente.h"
 #include "fornecedor.h"
 
@@ -23,8 +26,12 @@ public:
 	void removeFornecedor(Fornecedor fornecedorRemove);
 	void removeCliente(Cliente * clienteRemove);
 	Cliente * getCliente() const;
-	Fornecedor getFornecedor() const;
+	vector<Fornecedor> getFornecedor() const;
 	string getNome () const;
+	void carregaFornecedores()const; //extrai o conteúdo do ficheiro de fornecedores
+	void carregaOfertas()const; //extrai o conteúdo do ficheiro de ofertas
+	void guardaFornecedores(); //guarda o que está no vetor no ficheiro de texto
+	void guardaOfertas(); // ""
 };
 
 
