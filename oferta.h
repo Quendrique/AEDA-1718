@@ -28,6 +28,7 @@ public:
 	string getDestino() const;
 	unsigned int getLotacao() const;
 	void addToLotacao();
+	bool operator ==(const Oferta * o2);
 
 };
 
