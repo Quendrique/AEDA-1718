@@ -29,7 +29,8 @@ public:
 	unsigned int getNIF() const;
 	string getMorada() const;
 	vector<Oferta> getOfertas() const;
-	void printOfertas();
+	void printOfertas(ostream &os) const;
+	friend ostream & operator <<(ostream &os, const Fornecedor &fornecedor);
 	void updateLucro(unsigned int sum);
 
 };

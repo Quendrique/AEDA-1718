@@ -58,7 +58,24 @@ int Fornecedor::removeOferta(Data data, string destino, string barco, unsigned i
 	return 1;
 }
 
-void Fornecedor::printOfertas() {
+void Fornecedor::printOfertas(ostream &os) const {
 
+	os << "**** " << nome << " ****" << endl;
+
+	for (unsigned int i = 0; i < ofertas.size(); i++) {
+
+		os << "Oferta " << i << ":" << endl
+				<< "Barco: " << ofertas.at(i).getBarco() << endl
+				<< "Lotacao maxima: " << ofertas.at(i).getLotacaoMax() << endl
+				<< "Destino: " << ofertas.at(i).getDestino() << endl
+				// << "Data: " << ofertas.at(i).getData() << endl
+				<< "Lotacao atual: " << ofertas.at(i).getLotacao() << endl;
+	}
+}
+
+ostream & operator <<(ostream &os, const Fornecedor &fornecedor) {
+
+	fornecedor.printOfertas(os);
+	return os;
 }
 
