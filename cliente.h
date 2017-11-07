@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
@@ -22,6 +23,8 @@ public:
 	string getNome() const;
 	unsigned int getNIF() const;
 	string getMorada() const;
+	virtual void printInfo() const;
+	bool operator ==(const Cliente &c2);
 
 };
 
@@ -33,6 +36,7 @@ private:
 
 public:
 	ClienteReg(string nome, unsigned int NIF, string morada);
+	void printInfo() const;
 };
 
 #endif /* CLIENTE_H_ */

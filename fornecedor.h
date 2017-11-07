@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 #include "oferta.h"
 
 using namespace std;
@@ -32,6 +33,7 @@ public:
 	string getMorada() const;
 	vector<Oferta> getOfertas() const;
 	void printOfertas(ostream &os) const ;
+	void printInfo() const;
 	//void updateLucro(unsigned int sum);
 	void removeOfertaMenu(unsigned int i);
 	int calculaLucro();

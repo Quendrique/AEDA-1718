@@ -27,8 +27,9 @@ public:
 	unsigned int getLotacaoMax() const;
 	string getDestino() const;
 	unsigned int getLotacao() const;
+	unsigned int getDistancia() const;
 	void addToLotacao();
-	bool operator ==(const Oferta * o2);
+	bool operator ==(const Oferta &o2);
 
 };
 

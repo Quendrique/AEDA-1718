@@ -33,6 +33,8 @@ public:
 	void guardaFornecedores(); //guarda o que est� no vetor no ficheiro de texto
 	void guardaOfertas(); // ""
 	void printLucrosTotais() const;
+	void printClientes() const;
+	void printFornecedores() const;
 };
 
 

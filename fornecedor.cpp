@@ -37,6 +37,7 @@ vector<Oferta> Fornecedor::getOfertas() const {
 	return ofertas;
 }
 
+
 int Fornecedor::addOferta(Data data, string destino, string barco, unsigned int lotacaoMax) {
 	Oferta * o1 = new Oferta(barco, lotacaoMax, destino, data);
 
@@ -47,6 +48,8 @@ int Fornecedor::addOferta(Data data, string destino, string barco, unsigned int 
 	ofertas.push_back(*o1);
 	return 0;
 }
+
+
 
 int Fornecedor::removeOferta(Data data, string destino, string barco, unsigned int lotacaoMax) {
 	Oferta o1(barco, lotacaoMax, destino, data);
@@ -59,6 +62,7 @@ int Fornecedor::removeOferta(Data data, string destino, string barco, unsigned i
 	}
 	return 1;
 }
+
 
 void Fornecedor::printOfertas(std::ostream &os) const {
 
@@ -73,6 +77,19 @@ void Fornecedor::printOfertas(std::ostream &os) const {
 				// << "Data: " << ofertas.at(i).getData() << endl
 				<< "Lotacao atual: " << ofertas.at(i).getLotacao() << endl << endl;
 	}
+}
+
+void Fornecedor::printInfo() const {
+
+	cout << "Fornecedor: " << nome << endl
+			<< "NIF: " << NIF << endl
+			<< "Morada: " << morada << endl
+			<< "Lucro: " << lucro << endl
+			<< "Preco por kilometro: " << precoKm << endl
+			<< "Preco por escalao de lotacao maxima:" << endl
+			<< " - 20 pessoas: " << precoLot.at(0) << endl
+			<< " - 35 pessoas: " << precoLot.at(1) << endl
+			<< " - 50 pessoas: " << precoLot.at(2) << endl << endl;
 }
 
 int Fornecedor::calculaLucro() {

@@ -31,3 +31,27 @@ void Empresa::printLucrosTotais() const {
 	}
 
 }
+
+void Empresa::printClientes() const {
+	for (unsigned int i=0; i < clientes.size() ; i++) {
+		clientes.at(i)->printInfo();
+	}
+
+}
+
+void Empresa::printFornecedores() const {
+	for (unsigned int i=0; i < fornecedores.size(); i++) {
+		fornecedores.at(i).printInfo();
+	}
+}
+
+void Empresa::addCliente(Cliente * clienteNew) {
+
+	for (unsigned int i=0; i < clientes.size() ; i++) {
+		if (*(clientes.at(i)) == *clienteNew)
+			; //throw ClienteExistente
+	}
+
+	clientes.push_back(clienteNew);
+
+}
