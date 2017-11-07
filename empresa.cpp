@@ -23,3 +23,11 @@ void Empresa::guardaFornecedores()
 {
 	ofstream os;
 }
+
+void Empresa::printLucrosTotais() const {
+
+	for (unsigned int i=0 ; i < fornecedores.size(); i++) {
+		fornecedores.at(i).printLucro();
+	}
+
+}

@@ -1,5 +1,7 @@
 #include "fornecedor.h"
 
+Fornecedor::Fornecedor () {};
+
 Fornecedor::Fornecedor(string nome, unsigned int NIF, string morada) {
 	this->nome=nome;
 	this->NIF=NIF;
@@ -51,26 +53,84 @@ int Fornecedor::removeOferta(Data data, string destino, string barco, unsigned i
 
 	for(unsigned int i = 0 ; i < ofertas.size(); i++) {
 		if (ofertas[i] == o1) {
-			ofertas.erase(ofertas.begin()+1);
+			ofertas.erase(ofertas.begin()+i);
 			return 0;
 		}
 	}
 	return 1;
 }
 
-void Fornecedor::printOfertas(ostream &os) const {
+void Fornecedor::printOfertas(std::ostream &os) const {
 
 	os << "**** " << nome << " ****" << endl;
 
 	for (unsigned int i = 0; i < ofertas.size(); i++) {
 
-		os << "Oferta " << i << ":" << endl
+		os << "Oferta " << i << ":"  << endl
 				<< "Barco: " << ofertas.at(i).getBarco() << endl
 				<< "Lotacao maxima: " << ofertas.at(i).getLotacaoMax() << endl
 				<< "Destino: " << ofertas.at(i).getDestino() << endl
 				// << "Data: " << ofertas.at(i).getData() << endl
-				<< "Lotacao atual: " << ofertas.at(i).getLotacao() << endl;
+				<< "Lotacao atual: " << ofertas.at(i).getLotacao() << endl << endl;
 	}
+}
+
+int Fornecedor::calculaLucro() {
+
+	int sum=0;
+	unsigned int lotacaoType;
+
+	for(unsigned int i=0; i < ofertas.size(); i++) {
+
+		lotacaoType == ofertas.at(i).getLotacaoMax();
+
+		switch(lotacaoType){
+
+		case 20:
+			sum += precoLot.at(0) * ofertas.at(i).getLotacao() + precoKm * ofertas.at(i).getDistancia();
+			break;
+		case 35:
+			sum += precoLot.at(1) * ofertas.at(i).getLotacao() + precoKm * ofertas.at(i).getDistancia();
+			break;
+		case 50:
+			sum += precoLot.at(2) * ofertas.at(i).getLotacao() + precoKm * ofertas.at(i).getDistancia();
+			break;
+		}
+	}
+
+	lucro = sum;
+	return sum;
+
+}
+
+void Fornecedor::printLucro() const {
+
+	cout << "**** " << nome << " ****" << endl << "Lucro: " << getLucro() << endl;
+
+}
+
+void Fornecedor::updateOferta(const Oferta &o1) {
+
+	for (unsigned int i = 0; i < ofertas.size(); i++) {
+
+		if (ofertas.at(i) == o1) {
+			ofertas.at(i).addToLotacao();
+			calculaLucro();
+		}
+
+	}
+
+}
+
+void Fornecedor::removeOfertaMenu(unsigned int i) {
+
+	if ((i-1) >= 0 && (i-1) < ofertas.size()) {
+		ofertas.erase(ofertas.begin()+i);
+	}
+	else
+		// throw OfertaInexistente
+		;
+
 }
 
 ostream & operator <<(ostream &os, const Fornecedor &fornecedor) {
