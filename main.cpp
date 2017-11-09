@@ -5,8 +5,20 @@
 #include"empresa.h"
 #include "fornecedor.h"
 #include "oferta.h"
+#include <cstdlib>
+#include <limits>
 
 using namespace std;
+
+void clear_screen() // em linux, o comando system() nao aceita o argumento "cls", dai esta wrapper function que determina o sistema operativo
+{
+#ifdef _WIN32
+    std::system("cls");
+#else
+    // Assume POSIX
+    std::system ("clear");
+#endif
+}
 
 int main () 
 {
@@ -23,7 +35,7 @@ int main ()
 
 	Empresa e1;
 
-	system("cls"); // limpa a janela de comando
+	clear_screen(); // limpa a janela de comando
 
 	/*
 	Chamar ler ficheiro de linhas e condutores
@@ -58,7 +70,14 @@ int main ()
 		cout << "+-----------------------------------------------------+" << endl;
 		cout << "opção: ";
 		cin >> option;
-		system("cls"); // limpa a janela de comando
+		while(cin.fail()) {// input nao e um numero
+
+		    cin.clear();
+		    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		    cout << "Por favor insira um numero: ";
+		    cin >> option;
+		}
+		clear_screen(); // limpa a janela de comando
 
 
 		switch (option)
@@ -75,9 +94,16 @@ int main ()
 
 			// VERIFICA SE CLIENTE EXISTE
 
-			while(clienteExiste) {
+			while(!clienteExiste) {
 				cout << "Insira o seu NIF (0 para cancelar): ";
 				cin >> NIF;
+				while(cin.fail()) {// input nao e um numero
+
+				    cin.clear();
+				    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				    cout << "Por favor insira um numero: ";
+				    cin >> NIF;
+				}
 				if (NIF == 0) break;
 
 				try {
@@ -103,7 +129,14 @@ int main ()
 			cout << "+-----------------------------------------------------+" << endl;
 			cout << "opção: ";
 			cin >> option_utilizador;
-			system("cls");
+			while(cin.fail()) {// input nao e um numero
+
+			    cin.clear();
+			    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			    cout << "Por favor insira um numero: ";
+			    cin >> option_utilizador;
+			}
+			clear_screen();
 
 			switch (option_utilizador)
 			{
@@ -111,7 +144,7 @@ int main ()
 				c1->printPontos();
 				cout << "Prima Enter para continuar";
 				getchar();
-				system("cls");
+				clear_screen();
 				break;
 
 				break;
@@ -135,9 +168,16 @@ int main ()
 
 			// VERIFICA SE FORNECEDOR EXISTE
 
-			while(fornecedorExiste) {
+			while(!fornecedorExiste) {
 				cout << "Insira o seu NIF (0 para cancelar): ";
 				cin >> NIF;
+				while(cin.fail()) {// input nao e um numero
+
+				    cin.clear();
+				    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				    cout << "Por favor insira um numero: ";
+				    cin >> NIF;
+				}
 				if (NIF == 0) break;
 
 				try {
@@ -163,7 +203,14 @@ int main ()
 			cout << "|   3.Remover oferta                                  |" << endl;
 			cout << "+-----------------------------------------------------+" << endl;
 			cin >> opcao_fornecedor;
-			system("cls");
+			while(cin.fail()) {// input nao e um numero
+
+			    cin.clear();
+			    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			    cout << "Por favor insira um numero: ";
+			    cin >> opcao_fornecedor;
+			}
+			clear_screen();
 
 			switch (opcao_fornecedor)
 			{
@@ -198,7 +245,14 @@ int main ()
 
 			cout << "opção: ";
 			cin >> option_gestor;
-			system("cls"); // limpa a janela de comando
+			while(cin.fail()) {// input nao e um numero
+
+			    cin.clear();
+			    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			    cout << "Por favor insira um numero: ";
+			    cin >> option_gestor;
+			}
+			clear_screen(); // limpa a janela de comando
 
 			switch (option_gestor)
 			{
@@ -214,7 +268,14 @@ int main ()
 
 				cout << "opção: ";
 				cin >> option_visualiza_g;
-				system("cls");
+				while(cin.fail()) {// input nao e um numero
+
+				    cin.clear();
+				    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				    cout << "Por favor insira um numero: ";
+				    cin >> option_visualiza_g;
+				}
+				clear_screen();
 
 				switch (option_visualiza_g)
 				{
@@ -223,7 +284,7 @@ int main ()
 					e1.printFornecedores();
 					cout << "Prima enter para continuar" << endl;
 					getchar();
-					system("cls");
+					clear_screen();
 					break;
 
 				case 2: // mostra informacao sobre todos os clientes (registados ou nao)
@@ -231,7 +292,7 @@ int main ()
 					e1.printClientes();
 					cout << "Prima enter para continuar" << endl;
 					getchar();
-					system("cls");
+					clear_screen();
 					break;
 
 				}
@@ -243,7 +304,7 @@ int main ()
 				e1.printLucrosTotais();
 				cout << "Prima enter para continuar" << endl;
 				getchar();
-				system("cls");
+				clear_screen();
 				break;
 
 			case 3: //adicionar um novo fornecedor ao vetor de forncecedores
@@ -263,7 +324,7 @@ int main ()
 
 
 		default:
-			system("cls");
+			clear_screen();
 			cerr << "Erro! Opcao submetida nao existe";
 		}
 

@@ -72,5 +72,9 @@ public:
 	unsigned int getNIF() const {return NIF;}
 };
 
+class NotANumber {
+public:
+	NotANumber() {}
+};
 
 #endif /* EMPRESA_H_ */

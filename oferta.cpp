@@ -31,6 +31,10 @@ unsigned int Oferta::getLotacao() const
 {
 	return lotacao;
 }
+unsigned int Oferta::getDistancia() const
+{
+	return distancia;
+}
 void Oferta::setBarco(string barco)
 {
 	this->barco = barco;

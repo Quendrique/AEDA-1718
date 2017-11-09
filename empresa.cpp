@@ -64,7 +64,7 @@ void Empresa::addCliente(Cliente * clienteNew) {
 void Empresa::addFornecedor(Fornecedor fornecedorNew) {
 	for (unsigned int i = 0; i < fornecedores.size(); i++) {
 		if (fornecedores.at(i).getNIF() == fornecedorNew.getNIF())
-			throw FornecedorExistente;
+			throw FornecedorExistente(fornecedores.at(i).getNIF());
 	}
 
 	fornecedores.push_back(fornecedorNew);

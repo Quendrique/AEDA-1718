@@ -122,7 +122,7 @@ int Fornecedor::calculaLucro() {
 
 void Fornecedor::printLucro() const {
 
-	cout << "**** " << nome << " ****" << endl << "Lucro: " << getLucro() << endl;
+	cout << "**** " << nome << " ****" << endl << "Lucro: " << lucro << endl;
 
 }
 
