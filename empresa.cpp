@@ -119,3 +119,42 @@ bool Empresa::checkFornecedorNIF(unsigned int NIF, const Fornecedor *f1) {
 /* Metodos para consulta de informacao */
 /////////////////////////////////////////
 
+
+/////////////////////////////////////////////////
+/* Metodos para guardar informacao em ficheiro */
+/////////////////////////////////////////////////
+
+void Empresa::guardaFornecedores(string fichFornecedores) {
+
+	ofstream fornecedoresFile(fichFornecedores.c_str());
+
+	for (unsigned int i=0; i < fornecedores.size(); i++) {
+
+		fornecedoresFile << fornecedores.at(i).getNome() << ", " << fornecedores.at(i).getNIF() << ", " << fornecedores.at(i).getMorada();
+		if (i != (fornecedores.size()-1))
+			fornecedoresFile << endl;
+
+	}
+
+}
+
+void Empresa::guardaOfertas(string fichOfertas) {
+
+	ofstream ofertasFile(fichOfertas.c_str());
+
+	for (unsigned int i=0; i < fornecedores.size(); i++) {
+
+		for(unsigned int j = 0; j < fornecedores.at(i).getOfertas().size(); j++) {
+
+			ofertasFile << fornecedores.at(i).getNIF() << fornecedores.at(i).getOfertas().at(j).getBarco() << ", " << fornecedores.at(i).getOfertas().at(j).getDestino() << ", "
+					<< fornecedores.at(i).getOfertas().at(j).getLotacao() << ", " << fornecedores.at(i).getOfertas().at(j).getLotacaoMax() << ", "
+					<< fornecedores.at(i).getOfertas().at(j).getData().getHoraInicio() << ":00, " << fornecedores.at(i).getOfertas().at(j).getData().getHoraFim()
+					<< ":00, ";
+			if(i != (fornecedores.size()-1))
+				ofertasFile << endl;
+
+		}
+
+	}
+
+}
