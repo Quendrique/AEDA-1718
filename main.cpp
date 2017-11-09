@@ -79,9 +79,7 @@ int main ()
 			cin >> option_utilizador;
 			system("cls");
 
-			int  option_utilizador_2;
-
-			switch (option_utilizador_2)
+			switch (option_utilizador)
 			{
 			case 1: // consultar pontos
 				//chamar a função de consular pontos
@@ -93,6 +91,7 @@ int main ()
 
 			case 3: //cancelar reserva
 				//chamar a função que apaga a reserva no vetor de reservas e trata da taxa (saldo da empresa= saldo-taxa de cancelamento )
+				break;
 			}
 
 			break;
@@ -103,7 +102,7 @@ int main ()
 			cout << "+-----------------------------------------------------+" << endl;
 			cout << "|   Escolha a opcao pertendida                        |" << endl;
 			cout << "+-----------------------------------------------------+" << endl;
-			cout << "|   1.Registar novo fornecedor                        |" << endl;
+			cout << "|   1.Visualizar as minhas ofertas                    |" << endl;
 			cout << "+-----------------------------------------------------+" << endl;
 			cout << "|   2.Acrescentar oferta                              |" << endl;
 			cout << "+-----------------------------------------------------+" << endl;
@@ -114,8 +113,7 @@ int main ()
 
 			switch (opcao_fornecedor)
 			{
-			case 1: //registar novo fornecedor
-				 //adicionar o fornecedor ao vetor de fornecedores da empresa DEVIA ESTAR NA OPCAO DE GESTOR
+			case 1: //visualizar as ofertas do formcecedor em causa
 				break;
 
 			case 2: // acrescentar oferta
@@ -134,18 +132,23 @@ int main ()
 			cout << "+-----------------------------------------------------+" << endl;
 			cout << "| Escolha a opcao pretendida:                         |" << endl;
 			cout << "+-----------------------------------------------------+" << endl;
-			cout << "|   1. Vizualizar dados                                |" << endl;
+			cout << "|   1. Vizualizar dados                               |" << endl;
 			cout << "+-----------------------------------------------------+" << endl;
 			cout << "|   2. Gerir saldo                                    |" << endl;
 			cout << "+-----------------------------------------------------+" << endl;
+			cout << "|   3. Registar novo fornecedor                       |" << endl;
+			cout << "+-----------------------------------------------------+" << endl;
+			cout << "|   4. Remover fornecedor                             |" << endl;
+			cout << "+-----------------------------------------------------+" << endl;
+			
 
 			cout << "opção: ";
-			cin >> option;
+			cin >> option_gestor;
 			system("cls"); // limpa a janela de comando
 
 			switch (option_gestor)
 			{
-			case1: //visualizar dados
+			case 1: //visualizar dados
 				int option_visualiza_g;
 				cout << "+-----------------------------------------------------+" << endl;
 				cout << "| O que pretende visualizar:                         |" << endl;
@@ -175,6 +178,13 @@ int main ()
 				//imprime o saldo no ecrã (mostrando o dinheiro ganho com as viajens e taxas perdidas com cancelamentos de viajens)
 
 
+				break;
+
+			case 3: //adicionar um novo fornecedor ao vetor de forncecedores
+				
+				break;
+
+			case 4: //remove forneceedor do vetor de fornecedores
 				break;
 			}
 			break;

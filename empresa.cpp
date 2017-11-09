@@ -1,6 +1,8 @@
 #include "empresa.h"
 
-Empresa::Empresa(){}
+Empresa::Empresa()
+{
+}
 
 Empresa::Empresa(string nome, vector<Fornecedor> fornecedores, vector<Cliente*> clientes)
 {
@@ -19,11 +21,9 @@ string Empresa::getNome() const
 	return nome;
 }
 
-void Empresa::guardaFornecedores()
-{
-	ofstream os;
-}
-
+/**
+métodos de imprir informações
+*/
 void Empresa::printLucrosTotais() const {
 
 	for (unsigned int i=0 ; i < fornecedores.size(); i++) {
@@ -45,6 +45,11 @@ void Empresa::printFornecedores() const {
 	}
 }
 
+
+
+/**
+Métodos de adicionar clientes e fornecedores
+*/
 void Empresa::addCliente(Cliente * clienteNew) {
 
 	for (unsigned int i=0; i < clientes.size() ; i++) {
@@ -54,4 +59,32 @@ void Empresa::addCliente(Cliente * clienteNew) {
 
 	clientes.push_back(clienteNew);
 
+}
+
+void Empresa::addFornecedor(Fornecedor fornecedorNew)
+{
+	for (unsigned int i = 0; i < fornecedores.size(); i++)
+		if (fornecedores.at(i).getNIF() == fornecedorNew.getNIF())
+			//throw FornecedorExistente
+			fornecedores.push_back(fornecedorNew);
+}
+
+
+
+/**
+Métodos de remover clientes e fornecedores
+*/
+
+void Empresa::removeCliente()
+{
+
+}
+
+void Empresa::removeFornecedor(double fornecedorRemoveNif)
+{
+	for (unsigned int i = 0; i < fornecedores.size(); i++)
+		if (fornecedores.at(i).getNIF() == fornecedorRemoveNif)
+		{
+
+		}
 }

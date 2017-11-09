@@ -35,7 +35,7 @@ private:
 	unsigned int pontos;
 
 public:
-	ClienteReg(string nome, unsigned int NIF, string morada);
+	ClienteReg(string nome, unsigned int NIF, string morada, unsigned int pontos);
 	void printInfo() const;
 };
 
