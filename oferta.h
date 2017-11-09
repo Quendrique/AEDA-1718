@@ -16,6 +16,7 @@ private:
 	unsigned int lotacao;
 	unsigned int distancia;
 	Data data;
+	unsigned int id; //TEMPORARIO
 
 public:
 	Oferta();
@@ -24,6 +25,8 @@ public:
 	void setLotacaoMax(unsigned int lotacaoMax);
 	void setDestino(string destino);
 	string getBarco() const;
+	Data getData() const;
+	unsigned int getId() const;
 	unsigned int getLotacaoMax() const;
 	string getDestino() const;
 	unsigned int getLotacao() const;

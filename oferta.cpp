@@ -1,9 +1,8 @@
 #include "oferta.h"
-#include <fstream>
-#include <sstream>
+
 Oferta::Oferta()
 {
-	
+
 }
 Oferta::Oferta(string barco, unsigned int lotacaoMax, string destino, Data data)
 {
@@ -44,23 +43,23 @@ void Oferta::setDestino(string destino)
 {
 	this->destino = destino;
 }
-bool Oferta::operator ==(const Oferta * o2)
+bool Oferta::operator ==(const Oferta &o2)
 {
-	if (this->barco == o2->barco)
+	if (this->barco == o2.barco)
 	{
-		if (this->destino == o2->destino)
+		if (this->destino == o2.destino)
 		{
-			if (this->lotacaoMax == o2->lotacaoMax)
+			if (this->lotacaoMax == o2.lotacaoMax)
 			{
-				if (this->distancia == o2->distancia)
+				if (this->distancia == o2.distancia)
 				{
-					if (this->data.getMes() == o2->data.getMes())
+					if (this->data.getMes() == o2.data.getMes())
 					{
-						if (this->data.getDia() == o2->data.getDia())
+						if (this->data.getDia() == o2.data.getDia())
 						{
-							if (this->data.getHoraInicio() == o2->data.getHoraInicio())
+							if (this->data.getHoraInicio() == o2.data.getHoraInicio())
 							{
-								if (this->data.getHoraFim() == o2->data.getHoraFim())
+								if (this->data.getHoraFim() == o2.data.getHoraFim())
 								{
 									return true;
 								}
@@ -77,3 +76,5 @@ void Oferta::addToLotacao()
 {
 	this->lotacao = lotacao + 1;
 }
+Data Oferta::getData() const {return data;}
+

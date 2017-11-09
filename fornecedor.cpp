@@ -74,7 +74,7 @@ void Fornecedor::printOfertas(std::ostream &os) const {
 				<< "Barco: " << ofertas.at(i).getBarco() << endl
 				<< "Lotacao maxima: " << ofertas.at(i).getLotacaoMax() << endl
 				<< "Destino: " << ofertas.at(i).getDestino() << endl
-				// << "Data: " << ofertas.at(i).getData() << endl
+				<< "Data: " << ofertas.at(i).getData().printData() << endl
 				<< "Lotacao atual: " << ofertas.at(i).getLotacao() << endl << endl;
 	}
 }

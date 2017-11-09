@@ -25,6 +25,7 @@ public:
 	string getMorada() const;
 	virtual void printInfo() const;
 	bool operator ==(const Cliente &c2);
+	virtual void printPontos() const;
 
 };
 
@@ -35,8 +36,9 @@ private:
 	unsigned int pontos;
 
 public:
-	ClienteReg(string nome, unsigned int NIF, string morada, unsigned int pontos);
+	ClienteReg(string nome, unsigned int NIF, string morada);
 	void printInfo() const;
+	void printPontos() const;
 };
 
 #endif /* CLIENTE_H_ */

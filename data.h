@@ -3,6 +3,8 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
+#include <sstream>
 
 using namespace std;
 
@@ -25,6 +27,7 @@ public:
 	unsigned int getMes() const;
 	unsigned int getHoraInicio() const;
 	unsigned int getHoraFim() const;
+	string printData() const;
 
 };
 

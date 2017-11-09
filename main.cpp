@@ -10,6 +10,8 @@ using namespace std;
 
 int main () 
 {
+	unsigned int NIF; // NIF usado para identificacao do cliente ou do fornecedor
+
 	cout << "               __Bemvindo a empresa Porto Rivers__             " << endl << endl;
 
 	//Inserir o nome dos ficheiros de texto
@@ -18,6 +20,8 @@ int main ()
 	/*
 	PROCESS IT..
 	*/
+
+	Empresa e1;
 
 	system("cls"); // limpa a janela de comando
 
@@ -65,6 +69,28 @@ int main ()
 
 		case 1: //entrar como utilizador
 			int option_utilizador;
+			bool clienteExiste;
+			clienteExiste = false;
+			Cliente *c1;
+
+			// VERIFICA SE CLIENTE EXISTE
+
+			while(clienteExiste) {
+				cout << "Insira o seu NIF (0 para cancelar): ";
+				cin >> NIF;
+				if (NIF == 0) break;
+
+				try {
+					clienteExiste=e1.checkClienteNIF(NIF, c1); //funcao que procura o NIF inserido no vetor de clientes, atira excecao se nao existir
+				}
+				catch(ClienteInexistente &e) {
+					cout << "Cliente com o NIF " << e.getNIF() << " nao existe" << endl;
+				}
+			}
+
+			if (NIF == 0) break;
+
+			//FIM DE VERIFICACAO
 
 			cout << "+-----------------------------------------------------+" << endl;
 			cout << "|   Escolha a opcao pertendida                        |" << endl;
@@ -82,7 +108,12 @@ int main ()
 			switch (option_utilizador)
 			{
 			case 1: // consultar pontos
-				//chamar a função de consular pontos
+				c1->printPontos();
+				cout << "Prima Enter para continuar";
+				getchar();
+				system("cls");
+				break;
+
 				break;
 
 			case 2: //fazer reserva
@@ -98,6 +129,29 @@ int main ()
 
 		case 2:
 			int opcao_fornecedor;
+			bool fornecedorExiste;
+			fornecedorExiste = false;
+			Fornecedor *f1;
+
+			// VERIFICA SE FORNECEDOR EXISTE
+
+			while(fornecedorExiste) {
+				cout << "Insira o seu NIF (0 para cancelar): ";
+				cin >> NIF;
+				if (NIF == 0) break;
+
+				try {
+					fornecedorExiste=e1.checkFornecedorNIF(NIF, f1); //funcao que procura o NIF inserido no vetor de clientes, atira excecao se nao existir
+				}
+				catch(FornecedorInexistente &e) {
+					cout << "Fornecedor com o NIF " << e.getNIF() << " nao existe" << endl;
+				}
+
+			}
+
+			if (NIF == 0) break;
+
+			//FIM DE VERIFICACAO
 
 			cout << "+-----------------------------------------------------+" << endl;
 			cout << "|   Escolha a opcao pertendida                        |" << endl;
@@ -140,7 +194,7 @@ int main ()
 			cout << "+-----------------------------------------------------+" << endl;
 			cout << "|   4. Remover fornecedor                             |" << endl;
 			cout << "+-----------------------------------------------------+" << endl;
-			
+
 
 			cout << "opção: ";
 			cin >> option_gestor;
@@ -164,24 +218,36 @@ int main ()
 
 				switch (option_visualiza_g)
 				{
-				case 1:
-					//chama função de visualização dos fornecedores
+				case 1: // mostra informacao sobre todos os fornecedores
+
+					e1.printFornecedores();
+					cout << "Prima enter para continuar" << endl;
+					getchar();
+					system("cls");
 					break;
-				case 2:
-					//chama a função de visualização dos clientes
+
+				case 2: // mostra informacao sobre todos os clientes (registados ou nao)
+
+					e1.printClientes();
+					cout << "Prima enter para continuar" << endl;
+					getchar();
+					system("cls");
 					break;
+
 				}
+
 				break;
 
 			case 2: //gerir saldo
 
-				//imprime o saldo no ecrã (mostrando o dinheiro ganho com as viajens e taxas perdidas com cancelamentos de viajens)
-
-
+				e1.printLucrosTotais();
+				cout << "Prima enter para continuar" << endl;
+				getchar();
+				system("cls");
 				break;
 
 			case 3: //adicionar um novo fornecedor ao vetor de forncecedores
-				
+
 				break;
 
 			case 4: //remove forneceedor do vetor de fornecedores
