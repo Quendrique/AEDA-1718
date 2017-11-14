@@ -28,7 +28,7 @@ public:
 	Cliente * getCliente() const;
 	vector<Fornecedor> getFornecedor() const;
 	string getNome () const;
-	void carregaFornecedores()const; //extrai o conteudo do ficheiro de fornecedores
+	void carregaFornecedores(string fichFornecedor); //extrai o conteudo do ficheiro de fornecedores
 	void carregaOfertas()const; //extrai o conteudo do ficheiro de ofertas
 	void guardaFornecedores(string fichFornecedores); //guarda o que esta no vetor no ficheiro de texto
 	void guardaOfertas(string fichOfertas); // ""

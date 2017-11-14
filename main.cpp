@@ -34,6 +34,7 @@ int main ()
 	*/
 
 	Empresa e1;
+	e1.carregaFornecedores("C:\\Users\\Admin\\Documents\\Faculdade\\2\\AEDA\\Projeto1\\fornecedores.txt");
 
 	clear_screen(); // limpa a janela de comando
 
@@ -86,30 +87,30 @@ int main ()
 			return 0;
 			break;
 
-		case 1: //entrar como utilizador
+		case 1: { //entrar como utilizador
 			int option_utilizador;
 			bool clienteExiste;
 			clienteExiste = false;
-			Cliente *c1; //apontador para o cliente com que estamos a trabalhar
+			Cliente *c1 = NULL; //apontador para o cliente com que estamos a trabalhar
 
 			// VERIFICA SE CLIENTE EXISTE
 
-			while(!clienteExiste) {
+			while (!clienteExiste) {
 				cout << "Insira o seu NIF (0 para cancelar): ";
 				cin >> NIF;
-				while(cin.fail()) {// input nao e um numero
+				while (cin.fail()) {// input nao e um numero
 
-				    cin.clear();
-				    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-				    cout << "Por favor insira um numero: ";
-				    cin >> NIF;
+					cin.clear();
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					cout << "Por favor insira um numero: ";
+					cin >> NIF;
 				}
 				if (NIF == 0) break;
 
 				try {
-					clienteExiste=e1.checkClienteNIF(NIF, c1); //funcao que procura o NIF inserido no vetor de clientes, atira excecao se nao existir
+					clienteExiste = e1.checkClienteNIF(NIF, c1); //funcao que procura o NIF inserido no vetor de clientes, atira excecao se nao existir
 				}
-				catch(ClienteInexistente &e) {
+				catch (ClienteInexistente &e) {
 					cout << "Cliente com o NIF " << e.getNIF() << " nao existe" << endl;
 				}
 			}
@@ -127,27 +128,26 @@ int main ()
 			cout << "+-----------------------------------------------------+" << endl;
 			cout << "|   3.Cancelar reserva                                |" << endl;
 			cout << "+-----------------------------------------------------+" << endl;
-			cout << "opção: ";
+			cout << "opcao: ";
 			cin >> option_utilizador;
-			while(cin.fail()) {// input nao e um numero
+			while (cin.fail()) {// input nao e um numero
 
-			    cin.clear();
-			    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			    cout << "Por favor insira um numero: ";
-			    cin >> option_utilizador;
+				cin.clear();
+				cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				cout << "Por favor insira um numero: ";
+				cin >> option_utilizador;
 			}
 			clear_screen();
 
 			switch (option_utilizador)
 			{
-			case 1: // consultar pontos
+			case 1: { // consultar pontos
 				c1->printPontos();
 				cout << "Prima Enter para continuar";
 				getchar();
 				clear_screen();
-				break;
-
-				break;
+			}
+					break;
 
 			case 2: //fazer reserva
 				//mostrar as vigens disponiveis adado o dia e o local de chegada pretendididos pelo utilizador
@@ -158,32 +158,33 @@ int main ()
 				break;
 			}
 
-			break;
+		}
+		break;
 
-		case 2:
+		case 2: {
 			int opcao_fornecedor;
 			bool fornecedorExiste;
 			fornecedorExiste = false;
-			Fornecedor *f1; //apontador para o fornecedor com qu estamos a trabalhar
+			Fornecedor *f1 = NULL; //apontador para o fornecedor com que estamos a trabalhar
 
 			// VERIFICA SE FORNECEDOR EXISTE
 
-			while(!fornecedorExiste) {
+			while (!fornecedorExiste) {
 				cout << "Insira o seu NIF (0 para cancelar): ";
 				cin >> NIF;
-				while(cin.fail()) {// input nao e um numero
+				while (cin.fail()) {// input nao e um numero
 
-				    cin.clear();
-				    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-				    cout << "Por favor insira um numero: ";
-				    cin >> NIF;
+					cin.clear();
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					cout << "Por favor insira um numero: ";
+					cin >> NIF;
 				}
 				if (NIF == 0) break;
 
 				try {
-					fornecedorExiste=e1.checkFornecedorNIF(NIF, f1); //funcao que procura o NIF inserido no vetor de clientes, atira excecao se nao existir
+					fornecedorExiste = e1.checkFornecedorNIF(NIF, f1); //funcao que procura o NIF inserido no vetor de clientes, atira excecao se nao existir
 				}
-				catch(FornecedorInexistente &e) {
+				catch (FornecedorInexistente &e) {
 					cout << "Fornecedor com o NIF " << e.getNIF() << " nao existe" << endl;
 				}
 
@@ -203,12 +204,12 @@ int main ()
 			cout << "|   3.Remover oferta                                  |" << endl;
 			cout << "+-----------------------------------------------------+" << endl;
 			cin >> opcao_fornecedor;
-			while(cin.fail()) {// input nao e um numero
+			while (cin.fail()) {// input nao e um numero
 
-			    cin.clear();
-			    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			    cout << "Por favor insira um numero: ";
-			    cin >> opcao_fornecedor;
+				cin.clear();
+				cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				cout << "Por favor insira um numero: ";
+				cin >> opcao_fornecedor;
 			}
 			clear_screen();
 
@@ -221,19 +222,19 @@ int main ()
 				//adicionar uma nova oferta
 				break;
 
-			case 3: //remover oferta
+			case 3: { //remover oferta
 
 				unsigned int i;
 
 				f1->printOfertas();
 				cout << "Insira o indice da oferta que deseja remover (0 para cancelar): ";
 				cin >> i;
-				while(cin.fail()) {// input nao e um numero
+				while (cin.fail()) {// input nao e um numero
 
-				    cin.clear();
-				    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-				    cout << "Por favor insira um numero: ";
-				    cin >> i;
+					cin.clear();
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					cout << "Por favor insira um numero: ";
+					cin >> i;
 				}
 
 				if (i == 0)
@@ -242,18 +243,19 @@ int main ()
 				try {
 					f1->removeOfertaMenu(i);
 				}
-				catch(OfertaInexistente &o) {
+				catch (OfertaInexistente &o) {
 					cout << "Oferta com o indice " << o.getI() << " nao existe" << endl;
 				}
 
 				clear_screen();
-				break;
 
+				}
 			}
 
+		}
 			break;
 
-		case 3: //entar como gestor
+		case 3: { //entar como gestor
 			int option_gestor;
 
 			cout << "+-----------------------------------------------------+" << endl;
@@ -269,14 +271,14 @@ int main ()
 			cout << "+-----------------------------------------------------+" << endl;
 
 
-			cout << "opção: ";
+			cout << "opcao: ";
 			cin >> option_gestor;
-			while(cin.fail()) {// input nao e um numero
+			while (cin.fail()) {// input nao e um numero
 
-			    cin.clear();
-			    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			    cout << "Por favor insira um numero: ";
-			    cin >> option_gestor;
+				cin.clear();
+				cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				cout << "Por favor insira um numero: ";
+				cin >> option_gestor;
 			}
 			clear_screen(); // limpa a janela de comando
 
@@ -292,14 +294,14 @@ int main ()
 				cout << "|   2. Clientes                                       |" << endl;
 				cout << "+-----------------------------------------------------+" << endl;
 
-				cout << "opção: ";
+				cout << "opcao: ";
 				cin >> option_visualiza_g;
-				while(cin.fail()) {// input nao e um numero
+				while (cin.fail()) {// input nao e um numero
 
-				    cin.clear();
-				    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-				    cout << "Por favor insira um numero: ";
-				    cin >> option_visualiza_g;
+					cin.clear();
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					cout << "Por favor insira um numero: ";
+					cin >> option_visualiza_g;
 				}
 				clear_screen();
 
@@ -342,6 +344,8 @@ int main ()
 			}
 			break;
 
+		}
+
 		case 4: //guardar a informção nos ficheiros de texto
 			/*
 			Chamar a função que guarda a informação nos ficheiros de texto
@@ -349,9 +353,10 @@ int main ()
 			break;
 
 
-		default:
+		default: {
 			clear_screen();
 			cerr << "Erro! Opcao submetida nao existe";
+		}
 		}
 
 	}

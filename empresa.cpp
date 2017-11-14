@@ -20,6 +20,100 @@ string Empresa::getNome() const
 {
 	return nome;
 }
+
+//////////////////////////////////////////////
+/* Metodos para ler informacao dos ficheiros*/
+//////////////////////////////////////////////
+
+void Empresa::carregaFornecedores(string fichFornecedor)
+{
+	stringstream ssF;
+	ifstream forne(fichFornecedor);
+	vector <Fornecedor> fornecedor;
+	char comma;
+	string nome, morada;
+	string nifTmp;
+	long unsigned int nif = 0;
+
+	if (forne.is_open())
+	{
+		string line;
+
+		while (getline(forne, line))
+		{
+			Fornecedor f;
+			ssF.clear();
+			nome.clear();
+			morada.clear();
+			nifTmp.clear();
+			nif = 0;
+			ssF.str(line);
+
+			getline(ssF, nome, ',');
+
+			for (int j = 0; j < nome.length(); j++) //retira espaço no inicio do nome
+			{
+				if (isalpha(nome[j]))
+					break;
+				if (nome[j] == ' ')
+				{
+					nome.erase(nome.begin() + j);
+					j--;
+				}
+			}
+
+			for (int j = nome.length() - 1; j >= 0; j--) // retira espaço no fim do nome
+			{
+				if (isalpha(nome[j]))
+					break;
+				if (nome[j] == ' ')
+				{
+					nome.erase(nome.begin() + j);
+					j--;
+				}
+
+			}
+
+			getline(ssF, nifTmp, ',');
+
+			for (int j = 0; j < nifTmp.length(); j++) //retira espaço no inicio do nome
+			{
+				if (isalpha(nifTmp[j]))
+					break;
+				if (nifTmp[j] == ' ')
+				{
+					nifTmp.erase(nifTmp.begin() + j);
+					j--;
+				}
+			}
+
+			nif = stoi(nifTmp);
+			getline(ssF, morada, '\n');
+
+			for (int j = 0; j < morada.length(); j++) //retira espaço no inicio da morada
+			{
+				if (isalpha(morada[j]))
+					break;
+				if (morada[j] == ' ')
+				{
+					morada.erase(morada.begin() + j);
+					j--;
+				}
+			}
+
+
+			f.setNome(nome);
+			f.setNIF(nif);
+			f.setMorada(morada);
+			addFornecedor(f);
+
+		}
+	}
+}
+
+
+
+
 /////////////////////////////////////
 /* Metodos de imprimir informações */
 /////////////////////////////////////
@@ -63,8 +157,9 @@ void Empresa::addCliente(Cliente * clienteNew) {
 
 void Empresa::addFornecedor(Fornecedor fornecedorNew) {
 	for (unsigned int i = 0; i < fornecedores.size(); i++) {
-		if (fornecedores.at(i).getNIF() == fornecedorNew.getNIF())
+		if (fornecedores.at(i).getNIF() == fornecedorNew.getNIF()) {
 			throw FornecedorExistente(fornecedores.at(i).getNIF());
+		}
 	}
 
 	fornecedores.push_back(fornecedorNew);

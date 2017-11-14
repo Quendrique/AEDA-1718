@@ -99,7 +99,7 @@ int Fornecedor::calculaLucro() {
 
 	for(unsigned int i=0; i < ofertas.size(); i++) {
 
-		lotacaoType == ofertas.at(i).getLotacaoMax();
+		lotacaoType = ofertas.at(i).getLotacaoMax();
 
 		switch(lotacaoType){
 
