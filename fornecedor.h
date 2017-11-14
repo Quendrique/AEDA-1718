@@ -32,7 +32,7 @@ public:
 	unsigned int getNIF() const;
 	string getMorada() const;
 	vector<Oferta> getOfertas() const;
-	void printOfertas(ostream &os) const ;
+	void printOfertas() const ;
 	void printInfo() const;
 	//void updateLucro(unsigned int sum);
 	void removeOfertaMenu(unsigned int i);
@@ -42,6 +42,16 @@ public:
 
 };
 
+/////////////////////////
+/////// EXCECOES ////////
+/////////////////////////
+
+class OfertaInexistente {
+public:
+	unsigned int i;
+	OfertaInexistente(unsigned int i) {this->i=i;}
+	unsigned int getI() const {return i;}
+};
 
 
 #endif /* FORNECEDOR_H_ */

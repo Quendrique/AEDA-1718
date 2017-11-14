@@ -91,7 +91,7 @@ void Empresa::removeFornecedor(unsigned int  fornecedorRemoveNIF) {
 /* Metodos para verificar a existencia de clientes e fornecedores */
 ////////////////////////////////////////////////////////////////////
 
-bool Empresa::checkClienteNIF(unsigned int NIF, const Cliente *c1) {
+bool Empresa::checkClienteNIF(unsigned int NIF, Cliente *c1) {
 
 	for (unsigned int i=1; i < clientes.size(); i++) {
 		if (clientes.at(i)->getNIF() == NIF) {
@@ -104,12 +104,14 @@ bool Empresa::checkClienteNIF(unsigned int NIF, const Cliente *c1) {
 
 }
 
-bool Empresa::checkFornecedorNIF(unsigned int NIF, const Fornecedor *f1) {
+bool Empresa::checkFornecedorNIF(unsigned int NIF, Fornecedor *f1) {
 
 	for (unsigned int i=1; i < fornecedores.size(); i++) {
-			if (fornecedores.at(i).getNIF() == NIF)
-				return true;
+		if (fornecedores.at(i).getNIF() == NIF) {
+			f1 = &(fornecedores.at(i));
+			return true;
 		}
+	}
 
 		throw FornecedorInexistente(NIF);
 

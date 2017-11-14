@@ -64,13 +64,13 @@ int Fornecedor::removeOferta(Data data, string destino, string barco, unsigned i
 }
 
 
-void Fornecedor::printOfertas(std::ostream &os) const {
+void Fornecedor::printOfertas() const {
 
-	os << "**** " << nome << " ****" << endl;
+	cout << "**** " << nome << " ****" << endl;
 
 	for (unsigned int i = 0; i < ofertas.size(); i++) {
 
-		os << "Oferta " << i << ":"  << endl
+		cout << "Oferta " << i << ":"  << endl
 				<< "Barco: " << ofertas.at(i).getBarco() << endl
 				<< "Lotacao maxima: " << ofertas.at(i).getLotacaoMax() << endl
 				<< "Destino: " << ofertas.at(i).getDestino() << endl
@@ -145,14 +145,18 @@ void Fornecedor::removeOfertaMenu(unsigned int i) {
 		ofertas.erase(ofertas.begin()+i);
 	}
 	else
-		// throw OfertaInexistente
-		;
+		throw OfertaInexistente(i);
 
 }
 
+/*
+ * para voltar a utilizar esta funcao temos de modificar os parametros de printOfertas para std::ostream &os
+ *
 ostream & operator <<(ostream &os, const Fornecedor &fornecedor) {
 
 	fornecedor.printOfertas(os);
 	return os;
 }
+
+*/
 

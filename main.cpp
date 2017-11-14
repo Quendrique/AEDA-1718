@@ -90,7 +90,7 @@ int main ()
 			int option_utilizador;
 			bool clienteExiste;
 			clienteExiste = false;
-			Cliente *c1;
+			Cliente *c1; //apontador para o cliente com que estamos a trabalhar
 
 			// VERIFICA SE CLIENTE EXISTE
 
@@ -164,7 +164,7 @@ int main ()
 			int opcao_fornecedor;
 			bool fornecedorExiste;
 			fornecedorExiste = false;
-			Fornecedor *f1;
+			Fornecedor *f1; //apontador para o fornecedor com qu estamos a trabalhar
 
 			// VERIFICA SE FORNECEDOR EXISTE
 
@@ -222,9 +222,35 @@ int main ()
 				break;
 
 			case 3: //remover oferta
+
+				unsigned int i;
+
+				f1->printOfertas();
+				cout << "Insira o indice da oferta que deseja remover (0 para cancelar): ";
+				cin >> i;
+				while(cin.fail()) {// input nao e um numero
+
+				    cin.clear();
+				    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				    cout << "Por favor insira um numero: ";
+				    cin >> i;
+				}
+
+				if (i == 0)
+					break;
+
+				try {
+					f1->removeOfertaMenu(i);
+				}
+				catch(OfertaInexistente &o) {
+					cout << "Oferta com o indice " << o.getI() << " nao existe" << endl;
+				}
+
+				clear_screen();
 				break;
 
 			}
+
 			break;
 
 		case 3: //entar como gestor
