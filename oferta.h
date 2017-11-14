@@ -26,7 +26,7 @@ public:
 	void setDestino(string destino);
 	void setData(Data data);
 	void setDistancia(unsigned int distancia);
-	int setId(unsigned int id);
+	void setId(unsigned int id);
 	string getBarco() const;
 	Data getData() const;
 	unsigned int getId() const;

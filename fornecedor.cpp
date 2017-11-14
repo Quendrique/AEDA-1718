@@ -2,7 +2,7 @@
 
 Fornecedor::Fornecedor () {};
 
-Fornecedor::Fornecedor(string nome, unsigned int NIF, string morada) {
+Fornecedor::Fornecedor(string nome, long double NIF, string morada) {
 	this->nome=nome;
 	this->NIF=NIF;
 	this->morada=morada;
@@ -49,7 +49,15 @@ int Fornecedor::addOferta(Data data, string destino, string barco, unsigned int 
 	return 0;
 }
 
+int Fornecedor::addOfertaInit(Oferta oferta) {
 
+	for (unsigned int i = 0; i < ofertas.size(); i++) {
+		if (ofertas[i] == oferta)
+			return 1;
+	}
+	ofertas.push_back(oferta);
+	return 0;
+}
 
 int Fornecedor::removeOferta(Data data, string destino, string barco, unsigned int lotacaoMax) {
 	Oferta o1(barco, lotacaoMax, destino, data);
@@ -108,12 +116,12 @@ bool Fornecedor::printOfertasByData(Data data) const {
 	cout << "Fornecedor: " << nome << " (NIF: " << NIF << ")" << endl << endl;
 
 	for (unsigned int i = 0; i < ofertas.size(); i++) {
-
-		if (ofertas.at(i).getData() == data) {
+		
+		if (/*ofertas.at(i).getData() == data*/true) {
 
 			test = true;
 
-			cout << "Oferta " << i << ":" << endl;
+			cout << "Oferta " << i << ":" << endl
 					<< "Barco: " << ofertas.at(i).getBarco() << endl
 					<< "Lotacao maxima: " << ofertas.at(i).getLotacaoMax() << endl
 					<< "Destino: " << ofertas.at(i).getDestino() << endl
@@ -130,15 +138,15 @@ bool Fornecedor::printOfertasByData(Data data) const {
 
 void Fornecedor::printInfo() const {
 
-	cout << "Fornecedor: " << nome << endl
-			<< "NIF: " << NIF << endl
-			<< "Morada: " << morada << endl
-			<< "Lucro: " << lucro << endl
-			<< "Preco por kilometro: " << precoKm << endl
+	cout << "Fornecedor: " << this->nome << endl
+			<< "NIF: " << this->NIF << endl
+			<< "Morada: " << this->morada << endl
+			<< "Lucro: " << this->lucro << endl
+			<< "Preco por kilometro: " << this->precoKm << endl
 			<< "Preco por escalao de lotacao maxima:" << endl
-			<< " - 20 pessoas: " << precoLot.at(0) << endl
-			<< " - 35 pessoas: " << precoLot.at(1) << endl
-			<< " - 50 pessoas: " << precoLot.at(2) << endl << endl;
+			<< " - 20 pessoas: " << this->precoLot.at(0) << endl
+			<< " - 35 pessoas: " << this->precoLot.at(1) << endl
+			<< " - 50 pessoas: " << this->precoLot.at(2) << endl << endl;
 }
 
 int Fornecedor::calculaLucro() {

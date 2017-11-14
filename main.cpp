@@ -34,7 +34,8 @@ int main ()
 	*/
 
 	Empresa e1;
-	e1.carregaFornecedores("C:\\Users\\Admin\\Documents\\Faculdade\\2\\AEDA\\Projeto1\\fornecedores.txt");
+	e1.carregaFornecedores("C:\\Users\\up201604414\\Documents\\AEDA-PROJ1\\fornecedores.txt");
+	e1.carregaOferta("C:\\Users\\up201604414\\Documents\\AEDA-PROJ1\\ofertas.txt");
 
 	clear_screen(); // limpa a janela de comando
 

@@ -34,7 +34,6 @@ public:
 	unsigned int getMinutosInicio() const;
 	unsigned int getMinutosFim() const;
 	string printData() const;
-	bool operator ==(const Data &d2)const;
 
 };
 

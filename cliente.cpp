@@ -51,6 +51,10 @@ void Cliente::printInfo() const {
 			<< "Morada: " << morada << endl;
 }
 
+void Cliente::printPontos() const {
+	;
+}
+
 /**
 Clientes Registados
 */

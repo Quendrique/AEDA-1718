@@ -11,7 +11,7 @@ using namespace std;
 class Fornecedor {
 private:
 	string nome;
-	unsigned int NIF;
+	long double NIF;
 	string morada;
 	vector<Oferta> ofertas;
 	unsigned int lucro;
@@ -21,11 +21,12 @@ private:
 
 public:
 	Fornecedor();
-	Fornecedor(string nome, unsigned int NIF, string morada);
+	Fornecedor(string nome, long double NIF, string morada);
 	void setNome(string nome);
 	void setNIF(unsigned int NIF);
 	void setMorada(string morada);
 	int addOferta(Data data, string destino, string barco, unsigned int lotacaoMax); //necessario?
+	int addOfertaInit(Oferta oferta);
 	int removeOferta(Data data, string destino, string barco, unsigned int lotacaoMax); //necessario? parametros errados?
 	string getNome() const;
 	unsigned int getLucro() const;

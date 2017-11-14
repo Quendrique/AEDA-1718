@@ -43,7 +43,7 @@ void Oferta::setBarco(string barco)
 {
 	this->barco = barco;
 }
-int Oferta::setId(unsigned int id)
+void Oferta::setId(unsigned int id)
 {
 	this->id=id;
 }

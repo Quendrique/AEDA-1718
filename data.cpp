@@ -57,11 +57,3 @@ void Data::setMinutosFim(unsigned int horaFim)
 	this->minutosFim=minutosFim;
 
 }
-
-bool Data::operator==(const Data &d2) const {
-	if ( mes == d2.getMes() && dia == d2.getDia() && horaInicio == d2.getHoraInicio() && horaFim == d2.getHoraFim() 
-		&& minutosInicio == d2.getMinutosInicio() && minutosFim == d2.getMinutosFim())
-		return true;
-	else 
-		return false;
-}
