@@ -24,6 +24,9 @@ public:
 	void setBarco(string barco);
 	void setLotacaoMax(unsigned int lotacaoMax);
 	void setDestino(string destino);
+	void setData(Data data);
+	void setDistancia(unsigned int distancia);
+	int setId(unsigned int id);
 	string getBarco() const;
 	Data getData() const;
 	unsigned int getId() const;
