@@ -152,7 +152,6 @@ void Empresa::printFornecedores() const {
 	}
 }
 
-
 //////////////////////////////////////////////////
 /* Metodos de adicionar clientes e fornecedores */
 //////////////////////////////////////////////////
@@ -228,6 +227,18 @@ bool Empresa::checkFornecedorNIF(unsigned int NIF, Fornecedor *f1) {
 /////////////////////////////////////////
 /* Metodos para consulta de informacao */
 /////////////////////////////////////////
+
+bool Empresa::printOfertasByDestino(string destino) const {
+
+	bool test;
+
+	for (unsigned int i = 0 ; i < fornecedores.size(); i++) {
+		test = fornecedores.at(i).printOfertasByDestino(destino);
+	}
+
+	return test;
+}
+
 
 
 /////////////////////////////////////////////////

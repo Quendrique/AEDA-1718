@@ -79,6 +79,55 @@ void Fornecedor::printOfertas() const {
 	}
 }
 
+bool Fornecedor::printOfertasByDestino(string destino) const {
+
+	bool test = false;
+
+	for (unsigned int i = 0; i < ofertas.size(); i ++) {
+
+		if (ofertas.at(i).getDestino() == destino) {
+
+			test = true;
+
+			cout << "Barco: " << ofertas.at(i).getBarco() << endl
+					<< "Lotacao maxima: " << ofertas.at(i).getLotacaoMax() << endl
+					<< "Destino: " << ofertas.at(i).getDestino() << endl
+					<< "Data: " << ofertas.at(i).getData().printData() << endl
+					<< "Lotacao atual: " << ofertas.at(i).getLotacao() << endl << endl;
+		}
+	}
+
+	return test;
+
+}
+
+bool Fornecedor::printOfertasByData(Data data) const {
+
+	bool test = false;
+
+	cout << "Fornecedor: " << nome << " (NIF: " << NIF << ")" << endl << endl;
+
+	for (unsigned int i = 0; i < ofertas.size(); i++) {
+
+		if (ofertas.at(i).getData() == data) {
+
+			test = true;
+
+			cout << "Oferta " << i << ":" << endl;
+					<< "Barco: " << ofertas.at(i).getBarco() << endl
+					<< "Lotacao maxima: " << ofertas.at(i).getLotacaoMax() << endl
+					<< "Destino: " << ofertas.at(i).getDestino() << endl
+					<< "Data: " << ofertas.at(i).getData().printData() << endl
+					<< "Lotacao atual: " << ofertas.at(i).getLotacao() << endl << endl;
+
+		}
+
+	}
+
+	return test;
+
+}
+
 void Fornecedor::printInfo() const {
 
 	cout << "Fornecedor: " << nome << endl

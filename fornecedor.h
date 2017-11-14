@@ -33,6 +33,8 @@ public:
 	string getMorada() const;
 	vector<Oferta> getOfertas() const;
 	void printOfertas() const ;
+	bool printOfertasByDestino(string destino) const; //retorna true se encontrar alguma oferta com o destino especificado
+	bool printOfertasByData(Data data) const; //retorna true se encontrar alguma oferta com a data especificada
 	void printInfo() const;
 	//void updateLucro(unsigned int sum);
 	void removeOfertaMenu(unsigned int i);

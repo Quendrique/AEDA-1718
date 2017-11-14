@@ -150,7 +150,89 @@ int main ()
 					break;
 
 			case 2: //fazer reserva
-				//mostrar as vigens disponiveis adado o dia e o local de chegada pretendididos pelo utilizador
+
+				int option_utilizador_reserva;
+				long unsigned int nif_reserva;
+				int numero_oferta;
+
+				cout << "+-----------------------------------------------------+" << endl;
+				cout << "|   Escolha a opcao pertendida                        |" << endl;
+				cout << "+-----------------------------------------------------+" << endl;
+				cout << "|   1.Procurar por destino                            |" << endl;
+				cout << "+-----------------------------------------------------+" << endl;
+				cout << "|   2.Procurar por data                               |" << endl;
+				cout << "+-----------------------------------------------------+" << endl;
+				cout << "|   3.Consultar lista de ofertas                      |" << endl;
+				cout << "+-----------------------------------------------------+" << endl;
+				cout << "opcao: ";
+				cin >> option_utilizador_reserva;
+				while (cin.fail()) {// input nao e um numero
+
+					cin.clear();
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					cout << "Por favor insira um numero: ";
+					cin >> option_utilizador_reserva;
+
+					//verificacao do cin
+				}
+				clear_screen();
+
+				switch(option_utilizador_reserva) {
+				case 1: {
+
+					string destino;
+					cout << "Insira o destino que deseja pesquisar: ";
+					getline(cin, destino);
+
+					if(e1.printOfertasByDestino(destino)) {
+
+						cout << "Insira o NIF do fornecedor ao qual a oferta corresponde (0 para cancelar): ";
+						cin >> nif_reserva;
+						while (cin.fail()) {// input nao e um numero
+
+							cin.clear();
+							cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+							cout << "Por favor insira um numero: ";
+							cin >> nif_reserva;
+						}
+
+						if (nif_reserva == 0)
+							break;
+
+						cout << "Insira o numero da oferta (0 para cancelar): ";
+						cin >> numero_oferta;
+						while (cin.fail()) {// input nao e um numero
+
+							cin.clear();
+							cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+							cout << "Por favor insira um numero: ";
+							cin >> numero_oferta;
+						}
+
+						if (numero_oferta == 0)
+							break;
+
+						/* PROCESSAR RESERVA*/
+
+					}
+
+
+				}
+				break;
+
+				case 2: {
+
+				}
+				break;
+
+				case 3: {
+
+				}
+				break;
+				}
+
+
+
 				break;
 
 			case 3: //cancelar reserva

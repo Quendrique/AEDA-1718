@@ -35,6 +35,8 @@ public:
 	void printLucrosTotais() const;
 	void printClientes() const;
 	void printFornecedores() const;
+	bool printOfertasByDestino(string destino) const;
+	bool printOfertasByData() const;
 	bool checkClienteNIF(unsigned int NIF, Cliente *c1);
 	bool checkFornecedorNIF(unsigned int NIF, Fornecedor *f1);
 	void showPontosCliente(Cliente *c1);
