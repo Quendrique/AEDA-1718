@@ -51,7 +51,11 @@ void Empresa::carregaFornecedores(string fichFornecedor)
 
 			getline(ssF, nome, ',');
 
-			for (int j = 0; j < nome.length(); j++) //retira espaço no inicio do nome
+			//////////
+			/* NOME */
+			//////////
+
+			for (unsigned int j = 0; j < nome.length(); j++) //retira espaço no inicio do nome
 			{
 				if (isalpha(nome[j]))
 					break;
@@ -74,11 +78,15 @@ void Empresa::carregaFornecedores(string fichFornecedor)
 
 			}
 
+			/////////
+			/* NIF */
+			/////////
+
 			getline(ssF, nifTmp, ',');
 
-			for (int j = 0; j < nifTmp.length(); j++) //retira espaço no inicio do nome
+			for (unsigned int j = 0; j < nifTmp.length(); j++) //retira espaço no inicio do nif
 			{
-				if (isalpha(nifTmp[j]))
+				if (isalnum(nifTmp[j]))
 					break;
 				if (nifTmp[j] == ' ')
 				{
@@ -87,10 +95,15 @@ void Empresa::carregaFornecedores(string fichFornecedor)
 				}
 			}
 
-			nif = stoi(nifTmp);
+			nif = stol(nifTmp);
+
+			////////////
+			/* MORADA */
+			////////////
+
 			getline(ssF, morada, '\n');
 
-			for (int j = 0; j < morada.length(); j++) //retira espaço no inicio da morada
+			for (unsigned int j = 0; j < morada.length(); j++) //retira espaço no inicio da morada
 			{
 				if (isalpha(morada[j]))
 					break;
