@@ -224,16 +224,23 @@ void Empresa::carregaOferta( string ficheiro_oferta)
 			data.setMinutosFim(minfim);
 			of.setData(data);
 			oferta.push_back(of);
-
-
-
-
-
-
-
 		}
 	}
+	
+	for(int i=0; i < fornecedores.size();i++)
+	{
+		for(int j=0; j < oferta.size();j++)
+		{
+			if(fornecedores.at(i).getNIF()== oferta.at(j).getId())
+			{
+				
+				fornecedores.at(i).addOferta(oferta.at(j).getData(),oferta.at(j).getDestino(),oferta.at(j).getBarco(),oferta.at(j).getLotacaoMax());
 
+			}
+
+		}
+
+	}
 }
 
 
