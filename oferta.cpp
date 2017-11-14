@@ -9,7 +9,11 @@ Oferta::Oferta(string barco, unsigned int lotacaoMax, string destino, Data data)
 	this->barco = barco;
 	this->lotacaoMax = lotacaoMax;
 	this->destino = destino;
-	// falta a data
+	this->data=data;
+}
+void Oferta::setData(Data data)
+{
+this->data=data;
 }
 string Oferta::getBarco() const
 {
@@ -39,6 +43,10 @@ void Oferta::setBarco(string barco)
 {
 	this->barco = barco;
 }
+int Oferta::setId(unsigned int id)
+{
+	this->id=id;
+}
 void Oferta::setLotacaoMax(unsigned int lotacaoMax)
 {
 	this->lotacaoMax = lotacaoMax;
@@ -46,6 +54,10 @@ void Oferta::setLotacaoMax(unsigned int lotacaoMax)
 void Oferta::setDestino(string destino)
 {
 	this->destino = destino;
+}
+void Oferta::setDistancia(unsigned int distancia)
+{
+	this->distancia=distancia;
 }
 bool Oferta::operator ==(const Oferta &o2)
 {
@@ -80,5 +92,4 @@ void Oferta::addToLotacao()
 {
 	this->lotacao = lotacao + 1;
 }
-Data Oferta::getData() const {return data;}
-
+Data Oferta::getData() const { return data; }
