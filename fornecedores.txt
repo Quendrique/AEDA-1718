@@ -1,4 +1,4 @@
-Joana, 222131567, Maia
-João Silva, 345674123, Gondomar
-Lucas Figueiredo, 678900545, Rio Tinto
-Maria de Lurdes, 445234555, Barcelos
+Joana, 222131567, Maia, 4, 30, 25, 18 
+João Silva, 345674123, Gondomar, 4, 30, 25, 18
+Lucas Figueiredo, 678900545, Rio Tinto, 4, 30, 25, 18
+Maria de Lurdes, 445234555, Barcelos, 4, 30, 25, 18

@@ -21,7 +21,7 @@ void clear_screen() // em linux, o comando system() nao aceita o argumento "cls"
 
 int main () 
 {
-	unsigned int NIF;// NIF usado para identificacao do cliente ou do fornecedor
+	long double NIF;// NIF usado para identificacao do cliente ou do fornecedor
 	string FornecedoresFileName, OfertasFileName, ClientesFileName, ClientesRegFileName;
 
 
@@ -49,10 +49,12 @@ int main ()
 
 	Empresa PortoRivers(FornecedoresFileName, OfertasFileName, ClientesFileName, ClientesRegFileName);
 
-	PortoRivers.carregaFornecedores(FornecedoresFileName);
-	PortoRivers.carregaOferta(OfertasFileName);
-	PortoRivers.carregaClientes(ClientesFileName);
-	PortoRivers.carregaClientesReg(ClientesRegFileName);
+	// TEMPORARIO - FILE PATHS PARA FICHEIROS
+
+	PortoRivers.carregaFornecedores("C:\\Users\\up201604414\\Documents\\AEDA\\fornecedores.txt");
+	PortoRivers.carregaOferta("C:\\Users\\up201604414\\Documents\\AEDA\\ofertas.txt");
+	PortoRivers.carregaClientes("C:\\Users\\up201604414\\Documents\\AEDA\\clientest.txt");
+	PortoRivers.carregaClientesReg("C:\\Users\\up201604414\\Documents\\AEDA\\clientesR.txt");
 
 	clear_screen(); // limpa a janela de comando
 
@@ -235,12 +237,22 @@ int main ()
 						if (numero_oferta == 0)
 							break;
 
-						/* PROCESSAR RESERVA*/
+						try {
+							PortoRivers.atribuiReserva(nif_reserva, NIF, numero_oferta);
+						} 
+						catch (ReservaJaFeita &r) {
+							cout << "Esta reserva ja foi feita" << endl;
+							break;
+						}
+						catch (CruzeiroCheio &c) {
+							cout << "O cruzeiro já atingiu a capacidade maxima" << endl;
+							break;
+						}
 
 					}
 
-
 				}
+
 				break;
 
 				case 2: {
@@ -423,7 +435,8 @@ int main ()
 
 					PortoRivers.printFornecedores();
 					cout << "Prima enter para continuar" << endl;
-					getchar();
+					cin.get();
+					cin.get();
 					clear_screen();
 					break;
 
@@ -431,7 +444,8 @@ int main ()
 
 					PortoRivers.printClientes();
 					cout << "Prima enter para continuar" << endl;
-					getchar();
+					cin.get();
+					cin.get();
 					clear_screen();
 					break;
 

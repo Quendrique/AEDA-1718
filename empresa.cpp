@@ -36,8 +36,9 @@ void Empresa::carregaFornecedores(string fichFornecedor)
 	vector <Fornecedor> fornecedor;
 	char comma;
 	string nome, morada;
-	string nifTmp;
-	long unsigned int nif = 0;
+	string nifTmp, precoKmTmp, precoLot20Tmp, precoLot35Tmp, precoLot50Tmp;
+	long double nif = 0;
+	unsigned int precoKm = 0, precoLot20=0, precoLot35 = 0, precoLot50 = 0;
 
 	if (forne.is_open())
 	{
@@ -105,7 +106,7 @@ void Empresa::carregaFornecedores(string fichFornecedor)
 			/* MORADA */
 			////////////
 
-			getline(ssF, morada, '\n');
+			getline(ssF, morada, ',');
 
 			for (unsigned int j = 0; j < morada.length(); j++) //retira espaço no inicio da morada
 			{
@@ -118,7 +119,78 @@ void Empresa::carregaFornecedores(string fichFornecedor)
 				}
 			}
 
+			/////////////////
+			/* PRECO POR KM*/
+			/////////////////
 
+			getline(ssF, precoKmTmp, ',');
+
+			for (unsigned int j = 0; j <precoKmTmp.length(); j++) //retira espaço no inicio do nif
+			{
+				if (isalnum(precoKmTmp[j]))
+					break;
+				if (precoKmTmp[j] == ' ')
+				{
+					precoKmTmp.erase(precoKmTmp.begin() + j);
+					j--;
+				}
+			}
+
+			precoKm = stoi(precoKmTmp);
+
+			///////////////////////
+			/* PRECOS POR LOTACAO*/
+			///////////////////////
+
+			getline(ssF, precoLot20Tmp, ',');
+
+			for (unsigned int j = 0; j <precoLot20Tmp.length(); j++) //retira espaço no inicio do nif
+			{
+				if (isalnum(precoLot20Tmp[j]))
+					break;
+				if (precoLot20Tmp[j] == ' ')
+				{
+					precoLot20Tmp.erase(precoLot20Tmp.begin() + j);
+					j--;
+				}
+			}
+
+			precoLot20 = stoi(precoLot20Tmp);
+
+			getline(ssF, precoLot35Tmp, ',');
+
+			for (unsigned int j = 0; j <precoLot35Tmp.length(); j++) //retira espaço no inicio do nif
+			{
+				if (isalnum(precoLot35Tmp[j]))
+					break;
+				if (precoLot35Tmp[j] == ' ')
+				{
+					precoLot35Tmp.erase(precoLot35Tmp.begin() + j);
+					j--;
+				}
+			}
+
+			precoLot35 = stoi(precoLot35Tmp);
+
+			getline(ssF, precoLot50Tmp, '\n');
+
+			for (unsigned int j = 0; j <precoLot50Tmp.length(); j++) //retira espaço no inicio do nif
+			{
+				if (isalnum(precoLot50Tmp[j]))
+					break;
+				if (precoLot50Tmp[j] == ' ')
+				{
+					precoLot50Tmp.erase(precoLot50Tmp.begin() + j);
+					j--;
+				}
+			}
+
+			precoLot50 = stoi(precoLot50Tmp);
+
+			vector<unsigned int> precoLot = { precoLot20, precoLot35, precoLot50 };
+		
+			f.setPrecoKm(precoKm);
+			f.setPrecoLot(precoLot);
 			f.setNome(nome);
 			f.setNIF(nif);
 			f.setMorada(morada);
@@ -467,12 +539,15 @@ void Empresa::atribuiReserva(long double fornecedorNIF, long double clienteNIF, 
 
 void Empresa::guardaFornecedores(string fichFornecedores) {
 
-	ofstream fornecedoresFile(fichFornecedores.c_str());
+	ofstream fornecedoresFile(fichFornecedores);
 
-	for (unsigned int i=0; i < fornecedores.size(); i++) {
+	for (unsigned int i = 0; i < fornecedores.size(); i++) {
 
-		fornecedoresFile << fornecedores.at(i).getNome() << ", " << fornecedores.at(i).getNIF() << ", " << fornecedores.at(i).getMorada();
-		if (i != (fornecedores.size()-1))
+		fornecedoresFile << fornecedores.at(i).getNome() << ", " << fornecedores.at(i).getNIF() << ", "
+			<< fornecedores.at(i).getMorada() << ", " << fornecedores.at(i).getPrecoKm() << ", "
+			<< fornecedores.at(i).getPrecoLot().at(0) << ", " << fornecedores.at(i).getPrecoLot().at(1) << ", " << fornecedores.at(i).getPrecoLot().at(2);
+
+		if (i != (fornecedores.size() - 1))
 			fornecedoresFile << endl;
 
 	}
@@ -505,7 +580,7 @@ void Empresa::guardaClientes(string fichClientesR,string fichClientes)
 	ofstream ClientesFileR(fichClientesR);
 	ofstream ClientesFile(fichClientes);
 
-	for (int i = 0; i < clientes.size(); i++)
+	for (unsigned int i = 0; i < clientes.size(); i++)
 	{
 		if (clientes.at(i)->isRegistado())
 		{

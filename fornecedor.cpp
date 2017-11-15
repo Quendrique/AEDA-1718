@@ -21,6 +21,16 @@ void Fornecedor::setMorada(string morada) {
 	this->morada=morada;
 }
 
+void Fornecedor::setPrecoKm(unsigned int precoKm)
+{
+	this->precoKm = precoKm;
+}
+
+void Fornecedor::setPrecoLot(vector<unsigned int> precoLot)
+{
+	this->precoLot = precoLot;
+}
+
 string Fornecedor::getNome() const {
 	return nome;
 }
@@ -35,6 +45,16 @@ string Fornecedor::getMorada() const {
 
 vector<Oferta> Fornecedor::getOfertas() const {
 	return ofertas;
+}
+
+vector<unsigned int> Fornecedor::getPrecoLot() const
+{
+	return precoLot;
+}
+
+unsigned int Fornecedor::getPrecoKm() const
+{
+	return precoKm;
 }
 
 
@@ -117,7 +137,7 @@ bool Fornecedor::printOfertasByData(Data data) const {
 
 	for (unsigned int i = 0; i < ofertas.size(); i++) {
 		
-		if (/*ofertas.at(i).getData() == data*/true) {
+		if (ofertas.at(i).getData() == data) {
 
 			test = true;
 
@@ -144,13 +164,14 @@ void Fornecedor::printInfo() const {
 		<< "Lucro: " << this->lucro << endl
 		<< "Preco por kilometro: " << this->precoKm << endl
 		<< "Preco por escalao de lotacao maxima:" << endl;
-	if (this->precoLot.size() > 3)
+
+	if (this->precoLot.size() >= 3)
 	{
 		cout << " - 20 pessoas: " << this->precoLot.at(0) << endl
 			<< " - 35 pessoas: " << this->precoLot.at(1) << endl
 			<< " - 50 pessoas: " << this->precoLot.at(2) << endl << endl;
 	}
-	exit(0);
+	
 }
 
 int Fornecedor::calculaLucro() {
