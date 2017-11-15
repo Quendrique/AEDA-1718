@@ -52,7 +52,7 @@ int main ()
 	// TEMPORARIO - FILE PATHS PARA FICHEIROS
 
 	PortoRivers.carregaFornecedores("C:\\Users\\up201604414\\Documents\\AEDA\\fornecedores.txt");
-	PortoRivers.carregaOferta("C:\\Users\\up201604414\\Documents\\AEDA\\ofertas.txt");
+	//PortoRivers.carregaOferta("C:\\Users\\up201604414\\Documents\\AEDA\\ofertas.txt");
 	PortoRivers.carregaClientes("C:\\Users\\up201604414\\Documents\\AEDA\\clientest.txt");
 	PortoRivers.carregaClientesReg("C:\\Users\\up201604414\\Documents\\AEDA\\clientesR.txt");
 
@@ -337,6 +337,7 @@ int main ()
 			{
 			case 1: //visualizar as ofertas do formcecedor em causa
 
+				PortoRivers.visualizaOfertas(NIF);
 				break;
 
 			case 2: // acrescentar oferta
@@ -475,7 +476,7 @@ int main ()
 		case 4: //guardar a informção nos ficheiros de texto
 			
 			PortoRivers.guardaClientes(ClientesRegFileName, ClientesFileName);
-			PortoRivers.guardaFornecedores(FornecedoresFileName);
+			PortoRivers.guardaFornecedores("C:\\Users\\up201604414\\Documents\\AEDA\\fornecedores.txt"); //file path so para testes
 			PortoRivers.guardaOfertas(OfertasFileName);
 
 			break;

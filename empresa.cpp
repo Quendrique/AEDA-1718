@@ -54,11 +54,11 @@ void Empresa::carregaFornecedores(string fichFornecedor)
 			nif = 0;
 			ssF.str(line);
 
-			getline(ssF, nome, ',');
-
 			//////////
 			/* NOME */
 			//////////
+
+			getline(ssF, nome, ',');
 
 			for (unsigned int j = 0; j < nome.length(); j++) //retira espaço no inicio do nome
 			{
@@ -125,7 +125,7 @@ void Empresa::carregaFornecedores(string fichFornecedor)
 
 			getline(ssF, precoKmTmp, ',');
 
-			for (unsigned int j = 0; j <precoKmTmp.length(); j++) //retira espaço no inicio do nif
+			for (unsigned int j = 0; j <precoKmTmp.length(); j++) //retira espaço no inicio do preco
 			{
 				if (isalnum(precoKmTmp[j]))
 					break;
@@ -144,7 +144,7 @@ void Empresa::carregaFornecedores(string fichFornecedor)
 
 			getline(ssF, precoLot20Tmp, ',');
 
-			for (unsigned int j = 0; j <precoLot20Tmp.length(); j++) //retira espaço no inicio do nif
+			for (unsigned int j = 0; j <precoLot20Tmp.length(); j++) //retira espaço no inicio do preco
 			{
 				if (isalnum(precoLot20Tmp[j]))
 					break;
@@ -159,7 +159,7 @@ void Empresa::carregaFornecedores(string fichFornecedor)
 
 			getline(ssF, precoLot35Tmp, ',');
 
-			for (unsigned int j = 0; j <precoLot35Tmp.length(); j++) //retira espaço no inicio do nif
+			for (unsigned int j = 0; j <precoLot35Tmp.length(); j++) //retira espaço no inicio do preco
 			{
 				if (isalnum(precoLot35Tmp[j]))
 					break;
@@ -174,7 +174,7 @@ void Empresa::carregaFornecedores(string fichFornecedor)
 
 			getline(ssF, precoLot50Tmp, '\n');
 
-			for (unsigned int j = 0; j <precoLot50Tmp.length(); j++) //retira espaço no inicio do nif
+			for (unsigned int j = 0; j <precoLot50Tmp.length(); j++) //retira espaço no inicio do preco
 			{
 				if (isalnum(precoLot50Tmp[j]))
 					break;
@@ -200,7 +200,7 @@ void Empresa::carregaFornecedores(string fichFornecedor)
 	}
 }
 
-void Empresa::carregaOferta( string ficheiro_oferta)
+void Empresa::carregaOferta(string ficheiro_oferta)
 {
 	ifstream fichor(ficheiro_oferta);
 
@@ -208,98 +208,107 @@ void Empresa::carregaOferta( string ficheiro_oferta)
 	Oferta of;
 	Data data;
 	string linha_oferta;
-	string linha_sbarco,linha_sdest;
-	string linha_snif,linha_slot,linha_data;
-	string barco,destino;
-	int pos_nif,pos_barco,pos_destino,pos_distancia, pos_lotacao;
-	unsigned int nif_oferta,lotacao,distancia;
-	int pos_mes,pos_dia,pos_horainicio,pos_horafim,pos_mininicio,pos_minfim;
-	int mes,dia,horainicio,horafim,mininicio,minfim;
-	string linha_smes,linha_sdia,linha_shorain,linha_sminincio,linha_shorafim;
-	if(fichor.is_open())
+	string linha_sbarco, linha_sdest;
+	string linha_snif, linha_slot, linha_data;
+	string barco, destino;
+	int pos_nif, pos_barco, pos_destino, pos_distancia, pos_lotacao;
+	unsigned int nif_oferta, lotacao, distancia;
+	int pos_mes, pos_dia, pos_horainicio, pos_horafim, pos_mininicio, pos_minfim;
+	int mes, dia, horainicio, horafim, mininicio, minfim;
+	string linha_smes, linha_sdia, linha_shorain, linha_sminincio, linha_shorafim;
+	if (fichor.is_open())
 	{
 
-		while(getline(fichor,linha_oferta))
+		while (getline(fichor, linha_oferta))
 		{
-			pos_nif=linha_oferta.find(",",0);
+			pos_nif = linha_oferta.find(",", 0);
 
-			nif_oferta= stol( linha_oferta.substr(0,pos_nif));
+			nif_oferta = stol(linha_oferta.substr(0, pos_nif));
 
-			of.setId(nif_oferta);
-
-
-			linha_snif=linha_oferta.substr(pos_nif+2,linha_oferta.size()-1);
+			of.setNif(nif_oferta);
 
 
+			linha_snif = linha_oferta.substr(pos_nif + 2, linha_oferta.size() - 1);
 
-			pos_barco= linha_snif.find(",",0);
-			barco=linha_snif.substr(0,pos_barco);
+
+
+			pos_barco = linha_snif.find(",", 0);
+			barco = linha_snif.substr(0, pos_barco);
 
 
 
 			of.setBarco(barco);
 
-			linha_sbarco= linha_snif.substr(pos_barco+2,linha_snif.size()-1);
+			linha_sbarco = linha_snif.substr(pos_barco + 2, linha_snif.size() - 1);
 
-			pos_destino=linha_sbarco.find(",",0);
-			destino=linha_sbarco.substr(0,pos_destino);
+			pos_destino = linha_sbarco.find(",", 0);
+			destino = linha_sbarco.substr(0, pos_destino);
 
 
 			of.setDestino(destino);
 
 
-			linha_sdest= linha_sbarco.substr(pos_destino+2,linha_sbarco.size()-1);
+			linha_sdest = linha_sbarco.substr(pos_destino + 2, linha_sbarco.size() - 1);
 
 
-			pos_lotacao=linha_sdest.find(",",0);
-			lotacao=stoi(linha_sdest.substr(0,pos_lotacao));
+			pos_lotacao = linha_sdest.find(",", 0);
+			lotacao = stoi(linha_sdest.substr(0, pos_lotacao));
 
 			of.setLotacaoMax(lotacao);
-			linha_slot=linha_sdest.substr(pos_lotacao+2,linha_sdest.size()-1);
+			linha_slot = linha_sdest.substr(pos_lotacao + 2, linha_sdest.size() - 1);
 
-			pos_distancia=linha_slot.find(",",0);
-			distancia=stoi(linha_slot.substr(0,pos_distancia));
+			int pos_lotatual, lotatual;
+			string linha_slotatual;
+			pos_lotatual = linha_slot.find(",", 0);
+			lotatual = stoi(linha_slot.substr(0, pos_lotatual));
+
+			of.setLotacaoAtual(lotatual);
+			linha_slotatual = linha_slot.substr(pos_lotatual + 2, linha_slot.size() - 1);
+
+
+			pos_distancia = linha_slotatual.find(",", 0);
+			distancia = stoi(linha_slotatual.substr(0, pos_distancia));
 			of.setDistancia(distancia);
 
 
-			linha_data=linha_slot.substr(pos_distancia+2,linha_slot.size()-1);
+			linha_data = linha_slotatual.substr(pos_distancia + 2, linha_slotatual.size() - 1);
 
-			pos_mes=linha_data.find(",",0);
-			mes=stoi(linha_data.substr(0,pos_mes));
+			pos_mes = linha_data.find(",", 0);
+			mes = stoi(linha_data.substr(0, pos_mes));
 
 			data.setMes(mes);
-			linha_smes=linha_data.substr(pos_mes+2,linha_data.size()-1);
+			linha_smes = linha_data.substr(pos_mes + 2, linha_data.size() - 1);
 
-			pos_dia=linha_smes.find(",",0);
-			dia=stoi(linha_smes.substr(0,pos_dia));
+			pos_dia = linha_smes.find(",", 0);
+			dia = stoi(linha_smes.substr(0, pos_dia));
 
 			data.setDia(dia);
-			linha_sdia=linha_smes.substr(pos_dia+2,linha_smes.size()-1);
+			linha_sdia = linha_smes.substr(pos_dia + 2, linha_smes.size() - 1);
 
-			pos_horainicio=linha_sdia.find(":",0);
-			horainicio=stoi(linha_sdia.substr(0,pos_horainicio));
+			pos_horainicio = linha_sdia.find(":", 0);
+			horainicio = stoi(linha_sdia.substr(0, pos_horainicio));
 
 			data.setHoraInicio(horainicio);
-			linha_shorain=linha_sdia.substr(pos_horainicio+1,linha_sdia.size()-1);
+			linha_shorain = linha_sdia.substr(pos_horainicio + 1, linha_sdia.size() - 1);
 
-			pos_mininicio=linha_shorain.find(",",0);
-			mininicio=stoi(linha_shorain.substr(0,pos_mininicio));
+			pos_mininicio = linha_shorain.find(",", 0);
+			mininicio = stoi(linha_shorain.substr(0, pos_mininicio));
 
 			data.setMinutosInicio(mininicio);
-			linha_sminincio=linha_shorain.substr(pos_mininicio+2,linha_shorain.size()-1);
+			linha_sminincio = linha_shorain.substr(pos_mininicio + 2, linha_shorain.size() - 1);
 
 
-			pos_horafim=linha_sminincio.find(":",0);
-			horafim=stoi(linha_sminincio.substr(0,pos_horafim));
+			pos_horafim = linha_sminincio.find(":", 0);
+			horafim = stoi(linha_sminincio.substr(0, pos_horafim));
 
 			data.setHoraFim(horafim);
-			linha_shorafim=linha_sminincio.substr(pos_horafim+1,linha_sminincio.size()-1);
+			linha_shorafim = linha_sminincio.substr(pos_horafim + 1, linha_sminincio.size() - 1);
 
-			minfim=stoi(linha_shorafim);
+			minfim = stoi(linha_shorafim);
 
 			data.setMinutosFim(minfim);
 			of.setData(data);
-			//oferta.push_back(of);
+
 
 			for (unsigned int i = 0; i < fornecedores.size(); i++) {
 
@@ -317,28 +326,97 @@ void Empresa::carregaOferta( string ficheiro_oferta)
 void Empresa::carregaClientes(string fichClientes)
 {
 	istringstream ssC;
-	string line;
 	ifstream File;
 	File.open(fichClientes);
 	char comma;
 	double nif; 
-	string morada;
+	string morada, nifTmp;
 
-	
-	while (getline(File, line))
+	if (File.is_open())
 	{
-		Cliente clienteAux;
-		ssC.clear();
-		getline(ssC, nome, ',');
-		ssC >>nif>>comma;
-		getline(ssC, morada);
+		string line;
 
-		Cliente *c1 = new Cliente(nome,nif,morada);
-		
-		clientes.push_back(c1);
+		while (getline(File, line))
+		{
+			Fornecedor f;
+			ssC.clear();
+			nome.clear();
+			morada.clear();
+			nifTmp.clear();
+			nif = 0;
+			ssC.str(line);
 
-	}
-	
+			//////////
+			/* NOME */
+			//////////
+
+			getline(ssC, nome, ',');
+
+			for (unsigned int j = 0; j < nome.length(); j++) //retira espaço no inicio do nome
+			{
+				if (isalpha(nome[j]))
+					break;
+				if (nome[j] == ' ')
+				{
+					nome.erase(nome.begin() + j);
+					j--;
+				}
+			}
+
+			for (int j = nome.length() - 1; j >= 0; j--) // retira espaço no fim do nome
+			{
+				if (isalpha(nome[j]))
+					break;
+				if (nome[j] == ' ')
+				{
+					nome.erase(nome.begin() + j);
+					j--;
+				}
+
+			}
+
+			/////////
+			/* NIF */
+			/////////
+
+			getline(ssC, nifTmp, ',');
+
+			for (unsigned int j = 0; j < nifTmp.length(); j++) //retira espaço no inicio do nif
+			{
+				if (isalnum(nifTmp[j]))
+					break;
+				if (nifTmp[j] == ' ')
+				{
+					nifTmp.erase(nifTmp.begin() + j);
+					j--;
+				}
+			}
+
+			nif = stol(nifTmp);
+
+			////////////
+			/* MORADA */
+			////////////
+
+			getline(ssC, morada, '\n');
+
+			for (unsigned int j = 0; j < morada.length(); j++) //retira espaço no inicio da morada
+			{
+				if (isalpha(morada[j]))
+					break;
+				if (morada[j] == ' ')
+				{
+					morada.erase(morada.begin() + j);
+					j--;
+				}
+			}
+
+			Cliente *c1 = new Cliente(nome, nif, morada);
+			clientes.push_back(c1);
+
+		}
+	}		
+			
 }
 
 void Empresa::carregaClientesReg (string fichClientesR)
@@ -350,23 +428,111 @@ void Empresa::carregaClientesReg (string fichClientesR)
 	char comma;
 	double nif;
 	double pontos;
-	string morada;
+	string nome, morada, nifTmp, pontosTmp;
 
 
-	while (getline(File, line))
+	if (File.is_open())
 	{
-		Cliente clienteAux;
-		ssCR.clear();
-		getline(ssCR, nome, ',');
-		ssCR >> nif >> comma;
-		ssCR.clear();
-		getline(ssCR, morada, ',');
-		ssCR >> pontos;
+		string line;
 
-		Cliente *c1 = new ClienteReg(nome, nif, morada,pontos);
+		while (getline(File, line))
+		{
+			Fornecedor f;
+			ssCR.clear();
+			nome.clear();
+			morada.clear();
+			nifTmp.clear();
+			nif = 0;
+			ssCR.str(line);
 
-		clientes.push_back(c1);
+			//////////
+			/* NOME */
+			//////////
 
+			getline(ssCR, nome, ',');
+
+			for (unsigned int j = 0; j < nome.length(); j++) //retira espaço no inicio do nome
+			{
+				if (isalpha(nome[j]))
+					break;
+				if (nome[j] == ' ')
+				{
+					nome.erase(nome.begin() + j);
+					j--;
+				}
+			}
+
+			for (int j = nome.length() - 1; j >= 0; j--) // retira espaço no fim do nome
+			{
+				if (isalpha(nome[j]))
+					break;
+				if (nome[j] == ' ')
+				{
+					nome.erase(nome.begin() + j);
+					j--;
+				}
+
+			}
+
+			/////////
+			/* NIF */
+			/////////
+
+			getline(ssCR, nifTmp, ',');
+
+			for (unsigned int j = 0; j < nifTmp.length(); j++) //retira espaço no inicio do nif
+			{
+				if (isalnum(nifTmp[j]))
+					break;
+				if (nifTmp[j] == ' ')
+				{
+					nifTmp.erase(nifTmp.begin() + j);
+					j--;
+				}
+			}
+
+			nif = stol(nifTmp);
+
+			////////////
+			/* MORADA */
+			////////////
+
+			getline(ssCR, morada, ',');
+
+			for (unsigned int j = 0; j < morada.length(); j++) //retira espaço no inicio da morada
+			{
+				if (isalpha(morada[j]))
+					break;
+				if (morada[j] == ' ')
+				{
+					morada.erase(morada.begin() + j);
+					j--;
+				}
+			}
+
+			////////////
+			/* PONTOS */
+			////////////
+
+			getline(ssCR, pontosTmp, '\n');
+
+			for (unsigned int j = 0; j < pontosTmp.length(); j++) //retira espaço no inicio do nif
+			{
+				if (isalnum(pontosTmp[j]))
+					break;
+				if (pontosTmp[j] == ' ')
+				{
+					pontosTmp.erase(pontosTmp.begin() + j);
+					j--;
+				}
+			}
+
+			pontos = stol(pontosTmp);
+
+			Cliente *c1 = new ClienteReg(nome, nif, morada, pontos);
+			clientes.push_back(c1);
+
+		}
 	}
 }
 
@@ -484,6 +650,17 @@ bool Empresa::printOfertasByDestino(string destino) const {
 	return test;
 }
 
+void Empresa::visualizaOfertas(long double NIF)
+{
+	for (unsigned int i = 0; i < fornecedores.size(); i++)
+	{
+		if (fornecedores[i].getNIF() == NIF)
+		{
+			fornecedores.at(i).printOfertas();
+
+		}
+	}
+}
 
 /////////////////////////////////////////
 /* Metodos para fazer reservas */////////
@@ -495,7 +672,7 @@ void Empresa::atribuiReserva(long double fornecedorNIF, long double clienteNIF, 
 
 		if (fornecedores.at(i).getNIF() == fornecedorNIF) { //encontrou o fornecedor com o nif dado
 
-			if (fornecedores.at(i).getOfertas().at(numeroOferta - 1).getLotacao() == fornecedores.at(i).getOfertas().at(numeroOferta - 1).getLotacaoMax()) { //a lotacao do cruzeiro pretendido esta cheia
+			if (fornecedores.at(i).getOfertas().at(numeroOferta - 1).getLotacaoAtual() == fornecedores.at(i).getOfertas().at(numeroOferta - 1).getLotacaoMax()) { //a lotacao do cruzeiro pretendido esta cheia
 				throw CruzeiroCheio();
 			}
 			else {
@@ -558,15 +735,16 @@ void Empresa::guardaOfertas(string fichOfertas) {
 
 	ofstream ofertasFile(fichOfertas.c_str());
 
-	for (unsigned int i=0; i < fornecedores.size(); i++) {
+	for (unsigned int i = 0; i < fornecedores.size(); i++) {
 
-		for(unsigned int j = 0; j < fornecedores.at(i).getOfertas().size(); j++) {
+		for (unsigned int j = 0; j < fornecedores.at(i).getOfertas().size(); j++) {
 
-			ofertasFile << fornecedores.at(i).getNIF() << fornecedores.at(i).getOfertas().at(j).getBarco() << ", " << fornecedores.at(i).getOfertas().at(j).getDestino() << ", "
-					<< fornecedores.at(i).getOfertas().at(j).getLotacao() << ", " << fornecedores.at(i).getOfertas().at(j).getLotacaoMax() << ", "
-					<< fornecedores.at(i).getOfertas().at(j).getData().getHoraInicio() << ":00, " << fornecedores.at(i).getOfertas().at(j).getData().getHoraFim()
-					<< ":00, ";
-			if(i != (fornecedores.size()-1))
+			ofertasFile << fornecedores.at(i).getNIF() << ", " << fornecedores.at(i).getOfertas().at(j).getBarco() << ", " << fornecedores.at(i).getOfertas().at(j).getDestino() << ", "
+				<< fornecedores.at(i).getOfertas().at(j).getLotacaoMax() << ", " << fornecedores.at(i).getOfertas().at(j).getLotacaoAtual() << ", "
+				<< fornecedores.at(i).getOfertas().at(j).getDistancia() << ", " << fornecedores.at(i).getOfertas().at(j).getData().getMes() << ", " << fornecedores.at(i).getOfertas().at(j).getData().getDia() << ", "
+				<< fornecedores.at(i).getOfertas().at(j).getData().getHoraInicio() << ":" << fornecedores.at(i).getOfertas().at(j).getData().getMinutosInicio() << ", " << fornecedores.at(i).getOfertas().at(j).getData().getHoraFim()
+				<< ":" << fornecedores.at(i).getOfertas().at(j).getData().getMinutosFim();
+			if (i != (fornecedores.size() - 1))
 				ofertasFile << endl;
 
 		}
@@ -599,6 +777,8 @@ void Empresa::guardaClientes(string fichClientesR,string fichClientes)
 
 	}
 }
+
+
 
 /*void Empresa::visualizaOfertas(long double NIF)
 {

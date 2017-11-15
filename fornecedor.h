@@ -17,7 +17,7 @@ private:
 	unsigned int lucro;
 	unsigned int precoKm; //preco por km
 	vector<unsigned int> precoLot; //preco por cada escalao de lotacao; so ha 3 tipos: <20, <35 e <50
-	//vector<Data>datasIndisponiveis;
+								   //vector<Data>datasIndisponiveis;
 
 public:
 	Fornecedor();
@@ -27,9 +27,9 @@ public:
 	void setMorada(string morada);
 	void setPrecoKm(unsigned int precoKm);
 	void setPrecoLot(vector<unsigned int> precoLot);
-	int addOferta(Data data, string destino, string barco, unsigned int lotacaoMax); //necessario?
+	int addOferta(Data data, string destino, string barco, unsigned int lotacaoMax,unsigned int lotacaoAtual); 
 	int addOfertaInit(Oferta oferta);
-	int removeOferta(Data data, string destino, string barco, unsigned int lotacaoMax); //necessario? parametros errados?
+	int removeOferta(Data data, string destino, string barco, unsigned int lotacaoMax,unsigned int lotacaoAtual); 
 	string getNome() const;
 	unsigned int getLucro() const;
 	unsigned int getNIF() const;
@@ -37,7 +37,7 @@ public:
 	vector<Oferta> getOfertas() const;
 	vector<unsigned int> getPrecoLot() const;
 	unsigned int getPrecoKm() const;
-	void printOfertas() const ;
+	void printOfertas() const;
 	bool printOfertasByDestino(string destino) const; //retorna true se encontrar alguma oferta com o destino especificado
 	bool printOfertasByData(Data data) const; //retorna true se encontrar alguma oferta com a data especificada
 	void printInfo() const;
@@ -56,8 +56,8 @@ public:
 class OfertaInexistente {
 public:
 	unsigned int i;
-	OfertaInexistente(unsigned int i) {this->i=i;}
-	unsigned int getI() const {return i;}
+	OfertaInexistente(unsigned int i) { this->i = i; }
+	unsigned int getI() const { return i; }
 };
 
 

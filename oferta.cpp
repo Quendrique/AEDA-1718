@@ -5,13 +5,13 @@ Oferta::Oferta()
 
 }
 
-Oferta::Oferta(string barco, unsigned int lotacaoMax,unsigned int lotacaoAtual, string destino, Data data)
+Oferta::Oferta(string barco, unsigned int lotacaoMax, unsigned int lotacaoAtual, string destino, Data data)
 {
 	this->barco = barco;
 	this->lotacaoMax = lotacaoMax;
 	this->lotacaoAtual = lotacaoAtual;
 	this->destino = destino;
-	this->data=data;
+	this->data = data;
 }
 
 /*/////////////////////////
@@ -19,7 +19,7 @@ Oferta::Oferta(string barco, unsigned int lotacaoMax,unsigned int lotacaoAtual, 
 */////////////////////////
 void Oferta::setData(Data data)
 {
-this->data=data;
+	this->data = data;
 }
 
 void Oferta::setBarco(string barco)
@@ -27,7 +27,7 @@ void Oferta::setBarco(string barco)
 	this->barco = barco;
 }
 
-void Oferta::setNif(unsigned int id)
+void Oferta::setNif(unsigned int nif)
 {
 	this->nif = nif;
 }
@@ -124,4 +124,15 @@ void Oferta::addToLotacao()
 {
 	this->lotacaoAtual = lotacaoAtual + 1;
 }
+
+bool Oferta::operator<(const Oferta & f2) const
+{
+	return this->getNif() < f2.getNif();
+}
+
+bool Oferta::ordenaDist(const Oferta &f1, const Oferta &f2)
+{
+	return f1.getDistancia() < f2.getDistancia();
+}
+
 

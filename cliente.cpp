@@ -68,8 +68,8 @@ string Cliente::getMorada() const
 
 void Cliente::printInfo() const {
 	cout << "Nome: " << nome << endl
-			<< "NIF: " << NIF << endl
-			<< "Morada: " << morada << endl;
+		<< "NIF: " << NIF << endl
+		<< "Morada: " << morada << endl << endl;
 }
 
 void Cliente::printPontos() const {
@@ -85,15 +85,14 @@ double Cliente::getPontos() const
 Clientes Registados
 */
 
-ClienteReg::ClienteReg(string nome, unsigned int NIF, string morada, double pontos)
+ClienteReg::ClienteReg(string nome, unsigned int NIF, string morada, double pontos) : Cliente(nome, NIF, morada)
 {
-	Cliente(nome, NIF, morada);
-	this->pontos = 0;
+	this->pontos = pontos;
 }
 
 void ClienteReg::printInfo() const {
 	Cliente::printInfo();
-	cout<< "Pontos: " << pontos << endl;
+	cout << "Pontos: " << pontos << endl;
 }
 
 void ClienteReg::printPontos() const {

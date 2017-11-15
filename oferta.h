@@ -10,7 +10,7 @@ using namespace std;
 class Oferta {
 
 private:
-	string barco; 
+	string barco;
 	unsigned int lotacaoMax;
 	string destino;
 	unsigned int lotacaoAtual;
@@ -28,7 +28,7 @@ public:
 	void setData(Data data);
 	void setDistancia(unsigned int distancia);
 	void setNif(unsigned int nif);
-	
+
 	string getBarco() const;
 	Data getData() const;
 	unsigned int getNif() const;
@@ -38,6 +38,8 @@ public:
 	unsigned int getDistancia() const;
 
 	void addToLotacao();
+	bool operator<(const Oferta & f2) const;
+	bool ordenaDist(const Oferta & f1, const Oferta & f2);
 	bool operator ==(const Oferta &o2);
 
 };
