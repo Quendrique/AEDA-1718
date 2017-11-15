@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include "oferta.h";
 
 using namespace std;
 
@@ -13,15 +14,17 @@ protected:
 	string nome;
 	unsigned int NIF;
 	string morada;
+	vector<Oferta *> reservas;
 	
 
 public:
 	Cliente();
 	Cliente(string nome, unsigned int NIF, string morada);
-	Cliente(unsigned int NIF, double pontos);
 	void setNome(string nome);
 	void setNIF(unsigned int NIF);
 	void setMorada(string morada);
+	void addReserva(Oferta *reserva);
+	vector< Oferta *> getReservas()const;
 	string getNome() const;
 	unsigned int getNIF() const;
 	string getMorada() const;

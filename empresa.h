@@ -49,6 +49,7 @@ public:
 	bool checkClienteNIF(unsigned int NIF, Cliente *c1);
 	bool checkFornecedorNIF(unsigned int NIF, Fornecedor *f1);
 	void showPontosCliente(Cliente *c1);
+	void atribuiReserva(long double fornecedorNif, long double clienteNIF, int numeroOferta);
 };
 
 /////////////////////////
@@ -81,6 +82,18 @@ public:
 	unsigned int NIF;
 	FornecedorInexistente(unsigned int NIF) {this->NIF=NIF;}
 	unsigned int getNIF() const {return NIF;}
+};
+
+class CruzeiroCheio {
+	public:
+		CruzeiroCheio() {};
+		
+};
+
+class ReservaJaFeita {
+public:
+		ReservaJaFeita() {};
+		
 };
 
 class NotANumber {

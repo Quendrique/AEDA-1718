@@ -15,11 +15,6 @@ Cliente::Cliente(string nome, unsigned int NIF, string morada)
 	this->morada = morada;
 }
 
-Cliente::Cliente(unsigned int NIF, double pontos)
-{
-	this->NIF = NIF;
-	this->pontos = pontos;
-}
 
 void Cliente::setNome(string nome)
 {
@@ -34,6 +29,16 @@ void Cliente::setNIF(unsigned int NIF)
 void Cliente::setMorada(string morada)
 {
 	this->morada = morada;
+}
+
+void Cliente::addReserva(Oferta * reserva)
+{
+	reservas.push_back(reserva);
+}
+
+vector<Oferta*> Cliente::getReservas() const
+{
+	return reservas;
 }
 
 void ClienteReg::setPontos(double pontos)
@@ -73,6 +78,7 @@ void Cliente::printPontos() const {
 
 double Cliente::getPontos() const
 {
+	return 0;
 }
 
 /**
@@ -81,7 +87,7 @@ Clientes Registados
 
 ClienteReg::ClienteReg(string nome, unsigned int NIF, string morada, double pontos)
 {
-	Cliente(nome, NIF, morada,pontos);
+	Cliente(nome, NIF, morada);
 	this->pontos = 0;
 }
 

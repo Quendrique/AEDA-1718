@@ -413,6 +413,53 @@ bool Empresa::printOfertasByDestino(string destino) const {
 }
 
 
+/////////////////////////////////////////
+/* Metodos para fazer reservas */////////
+////////////////////////////////////////
+
+void Empresa::atribuiReserva(long double fornecedorNIF, long double clienteNIF, int numeroOferta) {
+
+	for (unsigned int i = 0; i < fornecedores.size(); i++) {
+
+		if (fornecedores.at(i).getNIF() == fornecedorNIF) { //encontrou o fornecedor com o nif dado
+
+			if (fornecedores.at(i).getOfertas().at(numeroOferta - 1).getLotacao() == fornecedores.at(i).getOfertas().at(numeroOferta - 1).getLotacaoMax()) { //a lotacao do cruzeiro pretendido esta cheia
+				throw CruzeiroCheio();
+			}
+			else {
+
+				fornecedores.at(i).getOfertas().at(numeroOferta - 1).addToLotacao(); // se a lotacao nao estiver cheia, adiciona 1 a lotacao atual do respetivo cruzeiro
+
+				for (unsigned int j = 0; j < clientes.size(); j++) {
+
+					if (clientes.at(j)->getNIF() == clienteNIF) { //encontrou o cliente que esta a fazer a reserva
+
+						for (unsigned int l = 0; l < clientes.at(j)->getReservas().size(); l++) {
+
+							if (*(clientes.at(j)->getReservas().at(l)) == fornecedores.at(i).getOfertas().at(numeroOferta - 1)) { //a reserva ja foi feita
+								throw ReservaJaFeita();
+							}
+
+						}
+
+						clientes.at(i)->addReserva(&(fornecedores.at(i).getOfertas().at(numeroOferta - 1)));
+
+					}
+
+				}
+
+			}
+
+
+		}
+
+
+	}
+
+
+
+}
+
 
 /////////////////////////////////////////////////
 /* Metodos para guardar informacao em ficheiro */
