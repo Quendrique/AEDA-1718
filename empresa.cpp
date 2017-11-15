@@ -260,7 +260,7 @@ void Empresa::carregaClientes(string fichClientes)
 		clienteAux.setPontos(pontos);
 
 
-		clientes *c1 = new Cliente(nif, pontos);
+		Cliente *c1 = new Cliente(nif, pontos);
 		clientes.push_back(c1);
 
 	}
@@ -426,7 +426,7 @@ void Empresa::guardaClientes(string fichClientes)
 	ofstream ClientesFile(fichClientes);
 	for (int i = 0; i < clientes.size(); i++)
 	{
-		ClientesFile << clientes[i].getNIF() << "," << clientes[i].getPontos(); //são apontadores! alterar!
+		ClientesFile << clientes[i]->getNIF() << "," << clientes[i]->getPontos(); //são apontadores! alterar!
 
 		if (i != (clientes.size() - 1))
 			ClientesFile << endl;
