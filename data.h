@@ -25,8 +25,8 @@ public:
 	void setMes(unsigned int mes);
 	void setHoraInicio(unsigned int horaInicio);
 	void setHoraFim(unsigned int horaFim);
-	void setMinutosInicio(unsigned int horaInicio);
-	void setMinutosFim(unsigned int horaFim);
+	void setMinutosInicio(unsigned int minutoInicio);
+	void setMinutosFim(unsigned int minutoFim);
 	unsigned int getDia() const;
 	unsigned int getMes() const;
 	unsigned int getHoraInicio() const;
