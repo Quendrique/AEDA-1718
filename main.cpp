@@ -22,7 +22,7 @@ void clear_screen() // em linux, o comando system() nao aceita o argumento "cls"
 int main () 
 {
 	unsigned int NIF;// NIF usado para identificacao do cliente ou do fornecedor
-	string FornecedoresFileName, OfertasFileName, ClientesFileName;
+	string FornecedoresFileName, OfertasFileName, ClientesFileName, ClientesRegFileName;
 
 
 	cout << "               __Bemvindo a empresa Porto Rivers__             " << endl << endl;
@@ -30,20 +30,29 @@ int main ()
 	//Inserir o nome dos ficheiros de texto
 
 	cout << "Por favor insira o nome dos ficheiros" << endl;
+
 	cout << "Fornecedores: ";
 	cin >> FornecedoresFileName;
 	cout << endl;
+
 	cout << "Ofertas: ";
 	cin >> OfertasFileName;
 	cout << endl;
-	cout << "Clientes: ";
+
+	cout << "Clientes registados: ";
+	cin >> ClientesRegFileName;
+	cout << endl;
+
+	cout << "Clientes não registados: ";
 	cin >>ClientesFileName;
 	cout << endl;
 
-	Empresa PortoRivers(FornecedoresFileName, OfertasFileName, ClientesFileName);
+	Empresa PortoRivers(FornecedoresFileName, OfertasFileName, ClientesFileName, ClientesRegFileName);
+
 	PortoRivers.carregaFornecedores(FornecedoresFileName);
 	PortoRivers.carregaOferta(OfertasFileName);
-	//PortoRivers.carregaCliente(ClientesFileName);
+	PortoRivers.carregaClientes(ClientesFileName);
+	PortoRivers.carregaClientesReg(ClientesRegFileName);
 
 	clear_screen(); // limpa a janela de comando
 
@@ -73,8 +82,10 @@ int main ()
 		cout << "+-----------------------------------------------------+" << endl;
 		cout << "|   0.Sair                                            |" << endl;
 		cout << "+-----------------------------------------------------+" << endl;
+		
 		cout << "opção: ";
 		cin >> option;
+
 		while(cin.fail()) {// input nao e um numero
 
 		    cin.clear();
@@ -387,11 +398,11 @@ int main ()
 				
 				int option_visualiza_g;
 				cout << "+-----------------------------------------------------+" << endl;
-				cout << "| O que pretende visualizar:                         |" << endl;
+				cout << "| O que pretende visualizar:                          |" << endl;
 				cout << "+-----------------------------------------------------+" << endl;
 				cout << "|   1. Fornecedores                                   |" << endl;
 				cout << "+-----------------------------------------------------+" << endl;
-				cout << "|   2. Clientes                                       |" << endl;
+				cout << "|   2. Clientes Registados                            |" << endl;
 				cout << "+-----------------------------------------------------+" << endl;
 
 				cout << "opcao: ";
@@ -448,9 +459,11 @@ int main ()
 		}
 
 		case 4: //guardar a informção nos ficheiros de texto
-			/*
-			Chamar a função que guarda a informação nos ficheiros de texto
-			*/
+			
+			PortoRivers.guardaClientes(ClientesRegFileName, ClientesFileName);
+			PortoRivers.guardaFornecedores(FornecedoresFileName);
+			PortoRivers.guardaOfertas(OfertasFileName);
+
 			break;
 
 

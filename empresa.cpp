@@ -1,10 +1,11 @@
 #include "empresa.h"
 
-Empresa::Empresa(string fichFornecedores,string fichOfertas,string fichClientes)
+Empresa::Empresa(string fichFornecedores,string fichOfertas,string fichClientes,string fichClientesReg)
 {
 	this->fichFornecedores = fichFornecedores;
 	this->fichOfertas = fichOfertas;
 	this->fichClientes = fichClientes;
+	this->fichClientesReg = fichClientesReg;
 }
 
 Empresa::Empresa(string nome, vector<Fornecedor> fornecedores, vector<Cliente*> clientes)
@@ -248,23 +249,53 @@ void Empresa::carregaClientes(string fichClientes)
 	ifstream File;
 	File.open(fichClientes);
 	char comma;
-	double nif;
-	double pontos;
+	double nif; 
+	string morada;
+
 	
 	while (getline(File, line))
 	{
 		Cliente clienteAux;
 		ssC.clear();
-		ssC >> nif >> comma >> pontos;
-		clienteAux.setNIF(nif);
-		clienteAux.setPontos(pontos);
+		getline(ssC, nome, ',');
+		ssC >>nif>>comma;
+		getline(ssC, morada);
 
-
-		Cliente *c1 = new Cliente(nif, pontos);
+		Cliente *c1 = new Cliente(nome,nif,morada);
+		
 		clientes.push_back(c1);
 
 	}
 	
+}
+
+void Empresa::carregaClientesReg (string fichClientesR)
+{
+	istringstream ssCR;
+	string line;
+	ifstream File;
+	File.open(fichClientesR);
+	char comma;
+	double nif;
+	double pontos;
+	string morada;
+
+
+	while (getline(File, line))
+	{
+		Cliente clienteAux;
+		ssCR.clear();
+		getline(ssCR, nome, ',');
+		ssCR >> nif >> comma;
+		ssCR.clear();
+		getline(ssCR, morada, ',');
+		ssCR >> pontos;
+
+		Cliente *c1 = new ClienteReg(nome, nif, morada,pontos);
+
+		clientes.push_back(c1);
+
+	}
 }
 
 
@@ -421,19 +452,31 @@ void Empresa::guardaOfertas(string fichOfertas) {
 	}
 
 }
-void Empresa::guardaClientes(string fichClientes)
+
+void Empresa::guardaClientes(string fichClientesR,string fichClientes)
 {
+	ofstream ClientesFileR(fichClientesR);
 	ofstream ClientesFile(fichClientes);
+
 	for (int i = 0; i < clientes.size(); i++)
 	{
-		ClientesFile << clientes[i]->getNIF() << "," << clientes[i]->getPontos(); //são apontadores! alterar!
-
-		if (i != (clientes.size() - 1))
-			ClientesFile << endl;
+		if (clientes.at(i)->isRegistado())
+		{
+			ClientesFileR << clientes[i]->getNome() << "," << clientes[i]->getNIF() << "," << clientes[i]->getMorada() << clientes[i]->getPontos();
+			
+			if (i != (clientes.size() - 1))
+				ClientesFileR << endl;
+		}
+		else
+		{
+			ClientesFile << clientes[i]->getNome() << "," << clientes[i]->getNIF() << "," << clientes[i]->getMorada();
+			
+			if (i != (clientes.size() - 1))
+				ClientesFileR << endl;
+		}
 
 	}
 }
-
 
 /*void Empresa::visualizaOfertas(long double NIF)
 {
