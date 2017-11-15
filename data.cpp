@@ -47,12 +47,12 @@ void Data::setHoraFim(unsigned int horaFim)
 	this->horaFim=horaFim;
 }
 
-void Data::setMinutosInicio(unsigned int horaInicio)
+void Data::setMinutosInicio(unsigned int minutosInicio)
 {
 	this->minutosInicio=minutosInicio;
 
 }
-void Data::setMinutosFim(unsigned int horaFim)
+void Data::setMinutosFim(unsigned int minutosFim)
 {
 	this->minutosFim=minutosFim;
 
