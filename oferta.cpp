@@ -4,61 +4,92 @@ Oferta::Oferta()
 {
 
 }
-Oferta::Oferta(string barco, unsigned int lotacaoMax, string destino, Data data)
+
+Oferta::Oferta(string barco, unsigned int lotacaoMax,unsigned int lotacaoAtual, string destino, Data data)
 {
 	this->barco = barco;
 	this->lotacaoMax = lotacaoMax;
+	this->lotacaoAtual = lotacaoAtual;
 	this->destino = destino;
 	this->data=data;
 }
+
+/*/////////////////////////
+/////////SET //////////////
+*/////////////////////////
 void Oferta::setData(Data data)
 {
 this->data=data;
 }
-string Oferta::getBarco() const
-{
-	return barco;
-}
-unsigned int Oferta::getLotacaoMax() const
-{
-	return lotacaoMax;
-}
-string Oferta::getDestino() const
-{
-	return destino;
-}
-unsigned int Oferta::getId() const
-{
-	return id;
-}
-unsigned int Oferta::getLotacao() const
-{
-	return lotacao;
-}
-unsigned int Oferta::getDistancia() const
-{
-	return distancia;
-}
+
 void Oferta::setBarco(string barco)
 {
 	this->barco = barco;
 }
-void Oferta::setId(unsigned int id)
+
+void Oferta::setNif(unsigned int id)
 {
-	this->id=id;
+	this->nif = nif;
 }
+
 void Oferta::setLotacaoMax(unsigned int lotacaoMax)
 {
 	this->lotacaoMax = lotacaoMax;
 }
+
+void Oferta::setLotacaoAtual(unsigned int lotacaoAtual)
+{
+	this->lotacaoAtual = lotacaoAtual;
+}
+
 void Oferta::setDestino(string destino)
 {
 	this->destino = destino;
 }
+
 void Oferta::setDistancia(unsigned int distancia)
 {
-	this->distancia=distancia;
+	this->distancia = distancia;
 }
+
+
+/*/////////////////////////
+/////////GET //////////////
+*/////////////////////////
+
+string Oferta::getBarco() const
+{
+	return barco;
+}
+
+unsigned int Oferta::getLotacaoMax() const
+{
+	return lotacaoMax;
+}
+
+string Oferta::getDestino() const
+{
+	return destino;
+}
+
+unsigned int Oferta::getLotacaoAtual() const
+{
+	return lotacaoAtual;
+}
+
+unsigned int Oferta::getNif() const
+{
+	return nif;
+}
+
+unsigned int Oferta::getDistancia() const
+{
+	return distancia;
+}
+
+Data Oferta::getData() const { return data; }
+
+
 bool Oferta::operator ==(const Oferta &o2)
 {
 	if (this->barco == o2.barco)
@@ -88,8 +119,9 @@ bool Oferta::operator ==(const Oferta &o2)
 	}
 	return false;
 }
+
 void Oferta::addToLotacao()
 {
-	this->lotacao = lotacao + 1;
+	this->lotacaoAtual = lotacaoAtual + 1;
 }
-Data Oferta::getData() const { return data; }
+

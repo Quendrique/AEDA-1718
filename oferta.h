@@ -10,30 +10,33 @@ using namespace std;
 class Oferta {
 
 private:
-	string barco; //nao estou a utilizar a class barco ainda
-	unsigned int lotacaoMax; //deixa de ser necessario se utilizarmos a classe barco
+	string barco; 
+	unsigned int lotacaoMax;
 	string destino;
-	unsigned int lotacao;
+	unsigned int lotacaoAtual;
 	unsigned int distancia;
 	Data data;
-	unsigned int id; //TEMPORARIO
+	unsigned int nif;
 
 public:
 	Oferta();
-	Oferta(string barco, unsigned int lotacaoMax, string destino, Data data);
+	Oferta(string barco, unsigned int lotacaoMax, unsigned int lotacaoAtual, string destino, Data data);
 	void setBarco(string barco);
 	void setLotacaoMax(unsigned int lotacaoMax);
+	void setLotacaoAtual(unsigned int lotacaoAtual);
 	void setDestino(string destino);
 	void setData(Data data);
 	void setDistancia(unsigned int distancia);
-	void setId(unsigned int id);
+	void setNif(unsigned int nif);
+	
 	string getBarco() const;
 	Data getData() const;
-	unsigned int getId() const;
+	unsigned int getNif() const;
 	unsigned int getLotacaoMax() const;
 	string getDestino() const;
-	unsigned int getLotacao() const;
+	unsigned int getLotacaoAtual() const;
 	unsigned int getDistancia() const;
+
 	void addToLotacao();
 	bool operator ==(const Oferta &o2);
 
