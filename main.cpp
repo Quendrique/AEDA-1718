@@ -1,6 +1,5 @@
 #include <iostream>
 
-#include "barco.h"
 #include "cliente.h"
 #include"empresa.h"
 #include "fornecedor.h"
@@ -22,27 +21,31 @@ void clear_screen() // em linux, o comando system() nao aceita o argumento "cls"
 
 int main () 
 {
-	unsigned int NIF; // NIF usado para identificacao do cliente ou do fornecedor
+	unsigned int NIF;// NIF usado para identificacao do cliente ou do fornecedor
+	string FornecedoresFileName, OfertasFileName, ClientesFileName;
+
 
 	cout << "               __Bemvindo a empresa Porto Rivers__             " << endl << endl;
 
 	//Inserir o nome dos ficheiros de texto
 
 	cout << "Por favor insira o nome dos ficheiros" << endl;
-	/*
-	PROCESS IT..
-	*/
+	cout << "Fornecedores: ";
+	cin >> FornecedoresFileName;
+	cout << endl;
+	cout << "Ofertas: ";
+	cin >> OfertasFileName;
+	cout << endl;
+	cout << "Clientes: ";
+	cin >>ClientesFileName;
+	cout << endl;
 
-	Empresa e1;
-	e1.carregaFornecedores("C:\\Users\\up201604414\\Documents\\AEDA-PROJ1\\fornecedores.txt");
-	e1.carregaOferta("C:\\Users\\up201604414\\Documents\\AEDA-PROJ1\\ofertas.txt");
+	Empresa PortoRivers(FornecedoresFileName, OfertasFileName, ClientesFileName);
+	PortoRivers.carregaFornecedores(FornecedoresFileName);
+	PortoRivers.carregaOferta(OfertasFileName);
+	//PortoRivers.carregaCliente(ClientesFileName);
 
 	clear_screen(); // limpa a janela de comando
-
-	/*
-	Chamar ler ficheiro de linhas e condutores
-	...
-	*/
 
 	int option;
 	while (true)
@@ -76,8 +79,10 @@ int main ()
 
 		    cin.clear();
 		    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		    cout << "Por favor insira um numero: ";
+		    //cout << "Por favor insira um numero: ";
 		    cin >> option;
+			cin.get();
+			cin.get();
 		}
 		clear_screen(); // limpa a janela de comando
 
@@ -109,7 +114,7 @@ int main ()
 				if (NIF == 0) break;
 
 				try {
-					clienteExiste = e1.checkClienteNIF(NIF, c1); //funcao que procura o NIF inserido no vetor de clientes, atira excecao se nao existir
+					clienteExiste = PortoRivers.checkClienteNIF(NIF, c1); //funcao que procura o NIF inserido no vetor de clientes, atira excecao se nao existir
 				}
 				catch (ClienteInexistente &e) {
 					cout << "Cliente com o NIF " << e.getNIF() << " nao existe" << endl;
@@ -129,20 +134,24 @@ int main ()
 			cout << "+-----------------------------------------------------+" << endl;
 			cout << "|   3.Cancelar reserva                                |" << endl;
 			cout << "+-----------------------------------------------------+" << endl;
+			
 			cout << "opcao: ";
 			cin >> option_utilizador;
+
 			while (cin.fail()) {// input nao e um numero
 
 				cin.clear();
 				cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-				cout << "Por favor insira um numero: ";
+				cout << "Por favor insira a opcao: ";
 				cin >> option_utilizador;
 			}
 			clear_screen();
 
+
 			switch (option_utilizador)
 			{
 			case 1: { // consultar pontos
+				
 				c1->printPontos();
 				cout << "Prima Enter para continuar";
 				getchar();
@@ -165,8 +174,10 @@ int main ()
 				cout << "+-----------------------------------------------------+" << endl;
 				cout << "|   3.Consultar lista de ofertas                      |" << endl;
 				cout << "+-----------------------------------------------------+" << endl;
+				
 				cout << "opcao: ";
 				cin >> option_utilizador_reserva;
+				
 				while (cin.fail()) {// input nao e um numero
 
 					cin.clear();
@@ -185,7 +196,7 @@ int main ()
 					cout << "Insira o destino que deseja pesquisar: ";
 					getline(cin, destino);
 
-					if(e1.printOfertasByDestino(destino)) {
+					if(PortoRivers.printOfertasByDestino(destino)) {
 
 						cout << "Insira o NIF do fornecedor ao qual a oferta corresponde (0 para cancelar): ";
 						cin >> nif_reserva;
@@ -245,6 +256,7 @@ int main ()
 		break;
 
 		case 2: {
+
 			int opcao_fornecedor;
 			bool fornecedorExiste;
 			fornecedorExiste = false;
@@ -265,7 +277,7 @@ int main ()
 				if (NIF == 0) break;
 
 				try {
-					fornecedorExiste = e1.checkFornecedorNIF(NIF, f1); //funcao que procura o NIF inserido no vetor de clientes, atira excecao se nao existir
+					fornecedorExiste = PortoRivers.checkFornecedorNIF(NIF, f1); //funcao que procura o NIF inserido no vetor de clientes, atira excecao se nao existir
 				}
 				catch (FornecedorInexistente &e) {
 					cout << "Fornecedor com o NIF " << e.getNIF() << " nao existe" << endl;
@@ -286,7 +298,9 @@ int main ()
 			cout << "+-----------------------------------------------------+" << endl;
 			cout << "|   3.Remover oferta                                  |" << endl;
 			cout << "+-----------------------------------------------------+" << endl;
+			
 			cin >> opcao_fornecedor;
+			
 			while (cin.fail()) {// input nao e um numero
 
 				cin.clear();
@@ -299,6 +313,7 @@ int main ()
 			switch (opcao_fornecedor)
 			{
 			case 1: //visualizar as ofertas do formcecedor em causa
+
 				break;
 
 			case 2: // acrescentar oferta
@@ -356,6 +371,7 @@ int main ()
 
 			cout << "opcao: ";
 			cin >> option_gestor;
+
 			while (cin.fail()) {// input nao e um numero
 
 				cin.clear();
@@ -368,6 +384,7 @@ int main ()
 			switch (option_gestor)
 			{
 			case 1: //visualizar dados
+				
 				int option_visualiza_g;
 				cout << "+-----------------------------------------------------+" << endl;
 				cout << "| O que pretende visualizar:                         |" << endl;
@@ -379,6 +396,7 @@ int main ()
 
 				cout << "opcao: ";
 				cin >> option_visualiza_g;
+				
 				while (cin.fail()) {// input nao e um numero
 
 					cin.clear();
@@ -392,7 +410,7 @@ int main ()
 				{
 				case 1: // mostra informacao sobre todos os fornecedores
 
-					e1.printFornecedores();
+					PortoRivers.printFornecedores();
 					cout << "Prima enter para continuar" << endl;
 					getchar();
 					clear_screen();
@@ -400,7 +418,7 @@ int main ()
 
 				case 2: // mostra informacao sobre todos os clientes (registados ou nao)
 
-					e1.printClientes();
+					PortoRivers.printClientes();
 					cout << "Prima enter para continuar" << endl;
 					getchar();
 					clear_screen();
@@ -412,7 +430,7 @@ int main ()
 
 			case 2: //gerir saldo
 
-				e1.printLucrosTotais();
+				PortoRivers.printLucrosTotais();
 				cout << "Prima enter para continuar" << endl;
 				getchar();
 				clear_screen();

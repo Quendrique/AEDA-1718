@@ -1,7 +1,10 @@
 #include "empresa.h"
 
-Empresa::Empresa()
+Empresa::Empresa(string fichFornecedores,string fichOfertas,string fichClientes)
 {
+	this->fichFornecedores = fichFornecedores;
+	this->fichOfertas = fichOfertas;
+	this->fichClientes = fichClientes;
 }
 
 Empresa::Empresa(string nome, vector<Fornecedor> fornecedores, vector<Cliente*> clientes)
@@ -238,6 +241,32 @@ void Empresa::carregaOferta( string ficheiro_oferta)
 
 }
 
+void Empresa::carregaClientes(string fichClientes)
+{
+	istringstream ssC;
+	string line;
+	ifstream File;
+	File.open(fichClientes);
+	char comma;
+	double nif;
+	double pontos;
+	
+	while (getline(File, line))
+	{
+		Cliente clienteAux;
+		ssC.clear();
+		ssC >> nif >> comma >> pontos;
+		clienteAux.setNIF(nif);
+		clienteAux.setPontos(pontos);
+
+
+		clientes *c1 = new Cliente(nif, pontos);
+		clientes.push_back(c1);
+
+	}
+	
+}
+
 
 /////////////////////////////////////
 /* Metodos de imprimir informações */
@@ -259,7 +288,8 @@ void Empresa::printClientes() const {
 }
 
 void Empresa::printFornecedores() const {
-	for (unsigned int i=0; i < fornecedores.size(); i++) {
+	for (unsigned int i=0; i < fornecedores.size(); i++) 
+	{
 		fornecedores.at(i).printInfo();
 	}
 }
@@ -302,7 +332,7 @@ void Empresa::removeFornecedor(unsigned int  fornecedorRemoveNIF) {
 	for (unsigned int i = 0; i < fornecedores.size(); i++)
 		if (fornecedores.at(i).getNIF() == fornecedorRemoveNIF)
 		{
-
+			// ACABAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		}
 }
 
@@ -391,3 +421,26 @@ void Empresa::guardaOfertas(string fichOfertas) {
 	}
 
 }
+void Empresa::guardaClientes(string fichClientes)
+{
+	ofstream ClientesFile(fichClientes);
+	for (int i = 0; i < clientes.size(); i++)
+	{
+		ClientesFile << clientes[i].getNIF() << "," << clientes[i].getPontos(); //são apontadores! alterar!
+
+		if (i != (clientes.size() - 1))
+			ClientesFile << endl;
+
+	}
+}
+
+
+/*void Empresa::visualizaOfertas(long double NIF)
+{
+	for (unsigned int i = 0; i < fornecedores.size(); i++)
+	{
+		if(fornecedores[i].getNIF()==NIF)
+
+
+	}
+}*/

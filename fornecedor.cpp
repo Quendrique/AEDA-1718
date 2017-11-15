@@ -139,14 +139,18 @@ bool Fornecedor::printOfertasByData(Data data) const {
 void Fornecedor::printInfo() const {
 
 	cout << "Fornecedor: " << this->nome << endl
-			<< "NIF: " << this->NIF << endl
-			<< "Morada: " << this->morada << endl
-			<< "Lucro: " << this->lucro << endl
-			<< "Preco por kilometro: " << this->precoKm << endl
-			<< "Preco por escalao de lotacao maxima:" << endl
-			<< " - 20 pessoas: " << this->precoLot.at(0) << endl
+		<< "NIF: " << this->NIF << endl
+		<< "Morada: " << this->morada << endl
+		<< "Lucro: " << this->lucro << endl
+		<< "Preco por kilometro: " << this->precoKm << endl
+		<< "Preco por escalao de lotacao maxima:" << endl;
+	if (this->precoLot.size() > 3)
+	{
+		cout << " - 20 pessoas: " << this->precoLot.at(0) << endl
 			<< " - 35 pessoas: " << this->precoLot.at(1) << endl
 			<< " - 50 pessoas: " << this->precoLot.at(2) << endl << endl;
+	}
+	exit(0);
 }
 
 int Fornecedor::calculaLucro() {

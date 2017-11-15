@@ -13,13 +13,17 @@ protected:
 	string nome;
 	unsigned int NIF;
 	string morada;
+	double pontos;
 
 public:
 	Cliente();
-	Cliente(string nome, unsigned int NIF, string morada);
+	Cliente(string nome, unsigned int NIF, string morada,double pontos);
+	Cliente(unsigned int NIF, double pontos);
 	void setNome(string nome);
 	void setNIF(unsigned int NIF);
 	void setMorada(string morada);
+	void setPontos(double pontos);
+	double getPontos();
 	string getNome() const;
 	unsigned int getNIF() const;
 	string getMorada() const;
@@ -36,7 +40,7 @@ private:
 	unsigned int pontos;
 
 public:
-	ClienteReg(string nome, unsigned int NIF, string morada);
+	ClienteReg(string nome, unsigned int NIF, string morada,double pontos);
 	void printInfo() const;
 	void printPontos() const;
 };

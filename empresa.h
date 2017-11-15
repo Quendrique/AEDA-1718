@@ -16,10 +16,13 @@ class Empresa {
 private:
 	vector<Fornecedor> fornecedores;
 	vector<Cliente*> clientes;
+	string fichFornecedores;
+	string fichOfertas;
+	string fichClientes;
 	string nome;
 
 public:
-	Empresa();
+	Empresa(string fichFornecedores, string fichOfertas, string fichClientes);
 	Empresa(string nome, vector<Fornecedor> fornecedores, vector<Cliente*> clientes);
 	void addFornecedor(Fornecedor fornecedorNew);
 	void addCliente(Cliente * clienteNew);
@@ -30,8 +33,12 @@ public:
 	string getNome () const;
 	void carregaFornecedores(string fichFornecedor); //extrai o conteudo do ficheiro de fornecedores
 	void carregaOferta( string ficheiro_oferta);//extrai o conteudo do ficheiro de ofertas
+	void carregaClientes(string fichClientes);
+	void visualizaOfertas(long double NIF);
+
 	void guardaFornecedores(string fichFornecedores); //guarda o que esta no vetor no ficheiro de texto
 	void guardaOfertas(string fichOfertas); // ""
+	void guardaClientes(string fichClientes);
 	void printLucrosTotais() const;
 	void printClientes() const;
 	void printFornecedores() const;

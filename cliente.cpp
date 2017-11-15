@@ -8,11 +8,18 @@ Cliente::Cliente()
 {
 }
 
-Cliente::Cliente(string nome, unsigned int NIF, string morada)
+Cliente::Cliente(string nome, unsigned int NIF, string morada,double pontos)
 {
 	this->nome = nome;
 	this->NIF = NIF;
 	this->morada = morada;
+	this->pontos = pontos;
+}
+
+Cliente::Cliente(unsigned int NIF, double pontos)
+{
+	this->NIF = NIF;
+	this->pontos = pontos;
 }
 
 void Cliente::setNome(string nome)
@@ -28,6 +35,16 @@ void Cliente::setNIF(unsigned int NIF)
 void Cliente::setMorada(string morada)
 {
 	this->morada = morada;
+}
+
+void Cliente::setPontos(double pontos)
+{
+	this->pontos = pontos;
+}
+
+double Cliente::getPontos()
+{
+	return pontos;
 }
 
 string Cliente::getNome() const
@@ -52,16 +69,16 @@ void Cliente::printInfo() const {
 }
 
 void Cliente::printPontos() const {
-	;
+	cout << " Este cliente não está registado, só os clientes registados podem usufruir dos pontos!" << endl;
 }
 
 /**
 Clientes Registados
 */
 
-ClienteReg::ClienteReg(string nome, unsigned int NIF, string morada)
+ClienteReg::ClienteReg(string nome, unsigned int NIF, string morada, double pontos)
 {
-	Cliente(nome, NIF, morada);
+	Cliente(nome, NIF, morada,pontos);
 	this->pontos = 0;
 }
 
