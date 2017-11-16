@@ -52,7 +52,7 @@ int main ()
 	// TEMPORARIO - FILE PATHS PARA FICHEIROS
 
 	PortoRivers.carregaFornecedores("C:\\Users\\up201604414\\Documents\\AEDA\\fornecedores.txt");
-	//PortoRivers.carregaOferta("C:\\Users\\up201604414\\Documents\\AEDA\\ofertas.txt");
+	PortoRivers.carregaOferta("C:\\Users\\up201604414\\Documents\\AEDA\\ofertas.txt");
 	PortoRivers.carregaClientes("C:\\Users\\up201604414\\Documents\\AEDA\\clientest.txt");
 	PortoRivers.carregaClientesReg("C:\\Users\\up201604414\\Documents\\AEDA\\clientesR.txt");
 
@@ -454,19 +454,108 @@ int main ()
 
 				break;
 
-			case 2: //gerir saldo
+			case 2: {//gerir saldo
 
 				PortoRivers.printLucrosTotais();
 				cout << "Prima enter para continuar" << endl;
 				getchar();
 				clear_screen();
+			}
 				break;
 
-			case 3: //adicionar um novo fornecedor ao vetor de forncecedores
+			case 3: {
 
+				string nomeFornecedor, moradaFornecedor;
+				unsigned int precoKm, precoLot20, precoLot35, precoLot50;
+				long double nifFornecedor;
+
+				cout << "Insira o nome do fornecedor a adicionar: ";
+				cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+				getline(cin, nomeFornecedor);
+				cout << "Insira no NIF do fornecedor a adicionar: ";
+				cin >> nifFornecedor;
+				while (cin.fail()) {// input nao e um numero
+
+					cin.clear();
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					cout << "Por favor insira um numero: ";
+					cin >> nifFornecedor;
+				}
+
+				try {
+					PortoRivers.checkFornecedorNIF(nifFornecedor);
+				}
+				catch (FornecedorExistente &f) {
+					cout << "Fornecedor com o NIF " << f.getNIF() << " ja existe" << endl;
+					cin.get();
+					cin.get();
+					clear_screen();
+					break;
+				}
+
+				cout << "Insira a morada do fornecedor a adicionar (cidade): ";
+				cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				getline(cin, moradaFornecedor);
+
+				cout << "Insira o preco por km de viagem estabelecido: ";
+				cin >> precoKm;
+				while (cin.fail()) {// input nao e um numero
+
+					cin.clear();
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					cout << "Por favor insira um numero: ";
+					cin >> precoKm;
+				}
+
+				cout << "Insira o preco do escalao de lotacao ate 20 lugares: ";
+				cin >> precoLot20;
+				while (cin.fail()) {// input nao e um numero
+
+					cin.clear();
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					cout << "Por favor insira um numero: ";
+					cin >> precoKm;
+				}
+
+				cout << "Insira o preco do escalao de lotacao ate 35 lugares: ";
+				cin >> precoLot35;
+				while (cin.fail()) {// input nao e um numero
+
+					cin.clear();
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					cout << "Por favor insira um numero: ";
+					cin >> precoKm;
+				}
+
+				cout << "Insira o preco do escalao de lotacao ate 50 lugares: ";
+				cin >> precoLot50;
+				while (cin.fail()) {// input nao e um numero
+
+					cin.clear();
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					cout << "Por favor insira um numero: ";
+					cin >> precoKm;
+				}
+
+
+
+				Fornecedor *f1 = new Fornecedor(nomeFornecedor, nifFornecedor, moradaFornecedor);
+				vector<unsigned int> precoLot = { precoLot20, precoLot35, precoLot50 };
+				f1->setPrecoLot(precoLot);
+				f1->setPrecoKm(precoKm);
+				PortoRivers.addFornecedor(*f1);
+
+				cout << "Fornecedor adicionado com sucesso" << endl << endl;
+				cin.get();
+				cin.get();
+				clear_screen();
+			}
 				break;
 
-			case 4: //remove forneceedor do vetor de fornecedores
+			case 4: { //remove forneceedor do vetor de fornecedores
+
+			}
 				break;
 			}
 			break;
@@ -477,7 +566,7 @@ int main ()
 			
 			PortoRivers.guardaClientes(ClientesRegFileName, ClientesFileName);
 			PortoRivers.guardaFornecedores("C:\\Users\\up201604414\\Documents\\AEDA\\fornecedores.txt"); //file path so para testes
-			PortoRivers.guardaOfertas(OfertasFileName);
+			PortoRivers.guardaOfertas("C:\\Users\\up201604414\\Documents\\AEDA\\ofertas.txt");  //file path so para testes
 
 			break;
 

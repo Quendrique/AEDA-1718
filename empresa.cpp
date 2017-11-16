@@ -622,7 +622,7 @@ bool Empresa::checkClienteNIF(unsigned int NIF, Cliente *c1) {
 
 }
 
-bool Empresa::checkFornecedorNIF(unsigned int NIF, Fornecedor *f1) {
+bool Empresa::checkFornecedorNIF(unsigned int NIF, Fornecedor *f1) { //verifica o NIF e atribui a f1 o apontador para o fornecedor correspondente
 
 	for (unsigned int i=0; i < fornecedores.size(); i++) {
 		if (fornecedores.at(i).getNIF() == NIF) {
@@ -634,6 +634,21 @@ bool Empresa::checkFornecedorNIF(unsigned int NIF, Fornecedor *f1) {
 		throw FornecedorInexistente(NIF);
 
 }
+
+
+bool Empresa::checkFornecedorNIF(unsigned int NIF) { //so verifica se existe o fornecedor em questao 
+
+	for (unsigned int i = 0; i < fornecedores.size(); i++) {
+		if (fornecedores.at(i).getNIF() == NIF) {
+			throw FornecedorExistente(NIF);
+		}
+	}
+
+	return false;
+
+}
+
+
 
 /////////////////////////////////////////
 /* Metodos para consulta de informacao */
