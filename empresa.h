@@ -44,13 +44,15 @@ public:
 	void printLucrosTotais() const;
 	void printClientes() const;
 	void printFornecedores() const;
+	bool checkFornecedorNIFBool(long double NIF);
 	bool printOfertasByDestino(string destino) const;
 	bool printOfertasByData() const;
 	bool checkClienteNIF(unsigned int NIF, Cliente *c1);
-	bool checkFornecedorNIF(unsigned int NIF, Fornecedor *f1);
-	bool checkFornecedorNIF(unsigned int NIF);
+	bool checkFornecedorNIF(unsigned int NIF, Fornecedor *f1); //verifica se existe o fornecedor com o NIF especificado e atribui o apontador correspondente a f1
+	void checkFornecedorNIF(long double NIF); // so verifica se o fornecedor em questao existe, atira uma excecao se for esse o caso 
 	void showPontosCliente(Cliente *c1);
 	void atribuiReserva(long double fornecedorNif, long double clienteNIF, int numeroOferta);
+	void removerFornecedor(long double NIF);
 };
 
 /////////////////////////

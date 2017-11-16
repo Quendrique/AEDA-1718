@@ -636,7 +636,7 @@ bool Empresa::checkFornecedorNIF(unsigned int NIF, Fornecedor *f1) { //verifica 
 }
 
 
-bool Empresa::checkFornecedorNIF(unsigned int NIF) { //so verifica se existe o fornecedor em questao 
+void Empresa::checkFornecedorNIF(long double NIF) { //so verifica se existe o fornecedor em questao 
 
 	for (unsigned int i = 0; i < fornecedores.size(); i++) {
 		if (fornecedores.at(i).getNIF() == NIF) {
@@ -644,9 +644,19 @@ bool Empresa::checkFornecedorNIF(unsigned int NIF) { //so verifica se existe o f
 		}
 	}
 
-	return false;
-
 }
+
+bool Empresa::checkFornecedorNIFBool(long double NIF) {
+
+	for (unsigned int i = 0; i < fornecedores.size(); i++) {
+		if (fornecedores.at(i).getNIF() == NIF) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
 
 
 
@@ -720,6 +730,25 @@ void Empresa::atribuiReserva(long double fornecedorNIF, long double clienteNIF, 
 
 	}
 
+
+
+}
+
+void Empresa::removerFornecedor(long double NIF) {
+
+	if (!checkFornecedorNIFBool(NIF)) {
+		throw FornecedorInexistente(NIF);
+	}
+
+	for (unsigned int i = 0; i < clientes.size(); i++) {
+		clientes.at(i)->removeReservaByFornecedor(NIF);
+	}
+
+	for (unsigned int i = 0; i < fornecedores.size(); i++) {
+		if (fornecedores.at(i).getNIF() == NIF) {
+			fornecedores.erase(fornecedores.begin() + i);
+		}
+	}
 
 
 }

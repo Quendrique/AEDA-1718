@@ -81,6 +81,16 @@ double Cliente::getPontos() const
 	return 0;
 }
 
+void Cliente::removeReservaByFornecedor(long double fornecedorNIF)
+{
+	for (unsigned int i = 0; i < reservas.size(); i++) {
+
+		if (reservas.at(i)->getNif() == fornecedorNIF) {
+			reservas.erase(reservas.begin() + i);
+		}
+	}
+}
+
 /**
 Clientes Registados
 */

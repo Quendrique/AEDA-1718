@@ -33,6 +33,7 @@ public:
 	virtual void printPontos() const;
 	virtual bool isRegistado() { return false; }
 	virtual double getPontos() const;
+	void removeReservaByFornecedor(long double fornecedorNIF);
 
 };
 

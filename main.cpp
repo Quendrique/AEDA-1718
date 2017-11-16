@@ -515,7 +515,7 @@ int main ()
 					cin.clear();
 					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 					cout << "Por favor insira um numero: ";
-					cin >> precoKm;
+					cin >> precoLot20;
 				}
 
 				cout << "Insira o preco do escalao de lotacao ate 35 lugares: ";
@@ -525,7 +525,7 @@ int main ()
 					cin.clear();
 					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 					cout << "Por favor insira um numero: ";
-					cin >> precoKm;
+					cin >> precoLot35;
 				}
 
 				cout << "Insira o preco do escalao de lotacao ate 50 lugares: ";
@@ -535,7 +535,7 @@ int main ()
 					cin.clear();
 					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 					cout << "Por favor insira um numero: ";
-					cin >> precoKm;
+					cin >> precoLot50;
 				}
 
 
@@ -555,6 +555,33 @@ int main ()
 
 			case 4: { //remove forneceedor do vetor de fornecedores
 
+				long double nifFornecedor;
+
+				cout << "Insira o NIF do fornecedor que deseja remover: ";
+				cin >> nifFornecedor;
+				while (cin.fail()) {// input nao e um numero
+
+					cin.clear();
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					cout << "Por favor insira um numero: ";
+					cin >> nifFornecedor;
+				}
+				
+				try {
+					PortoRivers.removerFornecedor(nifFornecedor);
+				}
+				catch (FornecedorInexistente &f) {
+					cout << "Fornecedor com o NIF " << f.getNIF() << " nao existe" << endl;
+					cin.get();
+					cin.get();
+					clear_screen();
+					break;
+				}
+
+				cout << "Fornecedor removido com sucesso" << endl;
+				cin.get();
+				cin.get();
+				clear_screen();
 			}
 				break;
 			}
