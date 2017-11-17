@@ -70,8 +70,8 @@ unsigned int Fornecedor::getPrecoKm() const
 /* metodos */
 ////////////
 
-int Fornecedor::addOferta(Data data, string destino, string barco, unsigned int lotacaoMax,unsigned int lotacaoAtual) {
-	Oferta * o1 = new Oferta(barco, lotacaoMax,lotacaoAtual, destino, data);
+int Fornecedor::addOferta(unsigned int nif,Data data, string destino, string barco, unsigned int distancia, unsigned int lotacaoMax,unsigned int lotacaoAtual) {
+	Oferta * o1 = new Oferta(nif,barco, lotacaoMax,lotacaoAtual, destino ,distancia, data);
 
 	for (unsigned int i = 0; i < ofertas.size(); i++) {
 		if (ofertas[i] == *o1)
@@ -91,8 +91,8 @@ int Fornecedor::addOfertaInit(Oferta oferta) {
 	return 0;
 }
 
-int Fornecedor::removeOferta(Data data, string destino, string barco, unsigned int lotacaoMax, unsigned int lotacaoAtual) {
-	Oferta o1(barco, lotacaoMax,lotacaoAtual, destino, data);
+int Fornecedor::removeOferta(unsigned int nif,Data data, string destino, unsigned int distancia, string barco, unsigned int lotacaoMax, unsigned int lotacaoAtual) {
+	Oferta o1( nif,barco, lotacaoMax,lotacaoAtual, destino,distancia, data);
 
 	for (unsigned int i = 0; i < ofertas.size(); i++) {
 		if (ofertas[i] == o1) {
