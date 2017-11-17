@@ -340,7 +340,9 @@ int main ()
 				PortoRivers.visualizaOfertas(NIF);
 				break;
 
-			case 2: // acrescentar oferta
+			case 2:
+				PortoRivers.addOfertas(NIF);	
+					
 				//adicionar uma nova oferta
 				break;
 
