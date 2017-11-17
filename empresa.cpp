@@ -587,7 +587,180 @@ void Empresa::addFornecedor(Fornecedor fornecedorNew) {
 
 	fornecedores.push_back(fornecedorNew);
 }
+void Empresa::addOfertas(unsigned int NIF)
+{
+	int distancia, lotacaoMax, mes, dia;
+	string destino, barco, horainicio, horafim;
+	Data data;
+	cout << "Indroduza a distancia: ";
+	cin >> distancia;
+	cout << endl;
+	while (cin.fail()) {// input nao e um numero
 
+		cin.clear();
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cout << "Por favor insira um numero: ";
+		cin >> distancia;
+	}
+	int x1 = 0;
+	while (x1 == 0)
+	{
+		cout << "Indroduza o destino: ";
+		cin >> destino;
+		cout << endl;
+		cin.ignore(100, '\n');
+		if (destino.compare("Regua") == 0 || destino.compare("Pinhao") == 0 || destino.compare("Barca d'Alva") == 0)
+		{
+			x1 = 1;
+		}
+		else
+		{
+			cout << "Destino nao existente! " << endl;
+			cout << "Indroduza novamente! " << endl;
+		}
+		// iate, barco rabelo ou veleiro
+		//Régua, Pinhão ou Barca d’Alva
+
+	}
+
+	x1 = 0;
+	cout << "Indroduza a lotacao maxima: ";
+	cin >> lotacaoMax;
+	while (cin.fail()) {// input nao e um numero
+
+		cin.clear();
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cout << "Por favor insira um numero: ";
+		cin >> lotacaoMax;
+	}
+		while (x1 == 0)
+		{
+			cout << "Indroduza o tipo de barco: ";
+			cin >> barco;
+			cout << endl;
+			cin.ignore(100, '\n');
+			if (barco.compare("barco rabelo") == 0 || barco.compare("veleiro") == 0 || barco.compare("iate") == 0)
+			{
+				x1 = 1;
+			}
+			else
+			{
+				cout << "Barco nao existente! " << endl;
+				cout << "Indroduza novamente! " << endl;
+			}
+			// iate, barco rabelo ou veleiro
+			//Régua, Pinhão ou Barca d’Alva
+
+		}
+		cout << "Indroduza o mês: ";
+		cin >> mes;
+		cout << endl;
+		while (cin.fail() || mes > 12 || mes < 1) {// input nao e um numero
+
+			cin.clear();
+			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			cout << "Por favor insira um numero de 1 a 12: ";
+			cin >> mes;
+
+		}
+		cout << "Indroduza o dia: ";
+		cin >> dia;
+		cout << endl;
+		while (cin.fail() || dia > 31 || dia < 1) {// input nao e um numero
+
+			cin.clear();
+			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			cout << "Por favor insira um numero de 1 a 31: ";
+			cin >> dia;
+
+		}
+		int x = 1;
+		while (x == 1)
+		{
+
+			unsigned int pos = 0;
+			cout << "Indroduza a hora de partida(horas:minutos): ";
+			cin >> horainicio;
+
+			cin.ignore(100, '\n');
+			pos = horainicio.find(":", 0);
+
+			if (pos == std::string::npos )
+			{
+				cin.clear();
+				cout << "Imput invalido!" << endl << "Indroduza novamente: ";
+			}
+			else
+			{
+				x = 0;
+			}
+			if(isdigit(horainicio[0]) && isdigit(horainicio[1]) && isdigit(horainicio[3]) && isdigit(horainicio[4]) && pos == 2)
+			{
+				x = 0;
+			}
+		else
+		{
+			cout << "Imput invalido!" << endl << "Indroduza novamente: ";
+		}
+	}	
+		
+
+		x = 1;
+		while (x == 1)
+		{
+
+			unsigned int pos = 0;
+			cout << "Indroduza a hora de chegada(horas:minutos): ";
+			cin >> horafim;
+
+			cin.ignore(100, '\n');
+			pos = horafim.find(":", 0);
+
+			if (pos == std::string::npos)
+			{
+				cin.clear();
+				cout << "Imput invalido!" << endl << "Indroduza novamente: " << endl;
+			}
+			else
+			{
+				x = 0;
+			}
+			if (isdigit(horainicio[0]) && isdigit(horainicio[1]) && isdigit(horainicio[3]) && isdigit(horainicio[4]) && pos == 2)
+			{
+				x = 0;
+			}
+			else
+			{
+				cout << "Imput invalido!" << endl << "Indroduza novamente: ";
+			}
+		}
+
+
+
+
+		unsigned int pos1, pos2, horaini, minini, horafim1, minfim;
+
+		pos1 = horainicio.find(":", 0);
+		pos2 = horafim.find(":", 0);
+		horaini = stoi(horainicio.substr(0, pos1));
+		horafim1 = stoi(horafim.substr(0, pos2));
+
+		minini = stoi(horainicio.substr(pos1 + 1, horainicio.size() - pos1));
+		minfim = stoi(horafim.substr(pos2 + 1, horafim.size() - pos2));
+
+		data.setHoraFim(horafim1);
+		data.setHoraInicio(horaini);
+		data.setMinutosFim(minfim);
+		data.setMinutosInicio(minini);
+		data.setDia(dia);
+		data.setMes(mes);
+		for (unsigned int i = 0; i < fornecedores.size(); i++) {
+			if (fornecedores.at(i).getNIF() == NIF) {
+				fornecedores.at(i).addOferta(NIF, data, destino, barco, distancia, lotacaoMax, 0);
+
+			}
+		}
+	}
 
 ////////////////////////////////////////////////
 /* Metodos de remover clientes e fornecedores */
