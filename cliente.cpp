@@ -91,6 +91,19 @@ void Cliente::removeReservaByFornecedor(long double fornecedorNIF)
 	}
 }
 
+void Cliente::printReservas() const
+{
+	for (unsigned int i = 0; i < reservas.size(); i++) {
+
+		cout << "Fornecedor: " << reservas.at(i)->getNif() << endl
+			<< "Barco: " << reservas.at(i)->getBarco() << endl
+			<< "Lotacao maxima: " << reservas.at(i)->getLotacaoMax() << endl
+			<< "Lotacao atual: " << reservas.at(i)->getLotacaoAtual() << endl
+			<< "Destino: " << reservas.at(i)->getDistancia() << endl
+			<< "Data: " << reservas.at(i)->getData().printData() << endl << endl;
+	}
+}
+
 /**
 Clientes Registados
 */
