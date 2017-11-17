@@ -28,8 +28,8 @@ public:
 	void addFornecedor(Fornecedor fornecedorNew);
 	void addCliente(Cliente * clienteNew);
 	void addOfertas(unsigned int NIF);
-	void removeFornecedor(unsigned int fornecedorRemoveNIF);
-	void removeCliente(unsigned int clienteRemoveNIF);
+	void removeFornecedor(unsigned long fornecedorRemoveNIF);
+	void removeCliente(unsigned long clienteRemoveNIF);
 	Cliente * getCliente() const;
 	vector<Fornecedor> getFornecedor() const;
 	string getNome () const;
@@ -37,7 +37,7 @@ public:
 	void carregaOferta( string ficheiro_oferta);//extrai o conteudo do ficheiro de ofertas
 	void carregaClientes(string fichClientes);
 	void carregaClientesReg(string fichClientesR);
-	void visualizaOfertas(long double NIF);
+	void visualizaOfertas(unsigned long NIF);
 
 	void guardaFornecedores(string fichFornecedores); //guarda o que esta no vetor no ficheiro de texto
 	void guardaOfertas(string fichOfertas); // ""
@@ -45,15 +45,16 @@ public:
 	void printLucrosTotais() const;
 	void printClientes() const;
 	void printFornecedores() const;
-	bool checkFornecedorNIFBool(long double NIF);
+	bool checkFornecedorNIFBool(unsigned long NIF);
 	bool printOfertasByDestino(string destino) const;
 	bool printOfertasByData() const;
-	bool checkClienteNIF(unsigned int NIF, Cliente *c1);
-	bool checkFornecedorNIF(unsigned int NIF, Fornecedor *f1); //verifica se existe o fornecedor com o NIF especificado e atribui o apontador correspondente a f1
-	void checkFornecedorNIF(long double NIF); // so verifica se o fornecedor em questao existe, atira uma excecao se for esse o caso 
+	bool checkClienteNIF(unsigned long NIF, Cliente **c1);
+	bool checkFornecedorNIF(unsigned long NIF, Fornecedor **f1); //verifica se existe o fornecedor com o NIF especificado e atribui o apontador correspondente a f1
+	void checkFornecedorNIF(unsigned long NIF); // so verifica se o fornecedor em questao existe, atira uma excecao se for esse o caso 
 	void showPontosCliente(Cliente *c1);
-	void atribuiReserva(long double fornecedorNif, long double clienteNIF, int numeroOferta);
-	void removerFornecedor(long double NIF);
+	void atribuiReserva(unsigned long fornecedorNif, unsigned long clienteNIF, int numeroOferta);
+	void removerFornecedor(unsigned long NIF);
+	void printReservasByCliente(unsigned long NIF) const;
 };
 
 /////////////////////////
@@ -103,6 +104,11 @@ public:
 class NotANumber {
 public:
 	NotANumber() {}
+};
+
+class IndexOutOfBounds {
+public:
+	IndexOutOfBounds() {}
 };
 
 #endif /* EMPRESA_H_ */

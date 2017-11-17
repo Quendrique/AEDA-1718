@@ -51,10 +51,10 @@ int main ()
 
 	// TEMPORARIO - FILE PATHS PARA FICHEIROS
 
-	PortoRivers.carregaFornecedores("C:\\Users\\up201604414\\Documents\\AEDA\\fornecedores.txt");
-	PortoRivers.carregaOferta("C:\\Users\\up201604414\\Documents\\AEDA\\ofertas.txt");
-	PortoRivers.carregaClientes("C:\\Users\\up201604414\\Documents\\AEDA\\clientest.txt");
-	PortoRivers.carregaClientesReg("C:\\Users\\up201604414\\Documents\\AEDA\\clientesR.txt");
+	PortoRivers.carregaFornecedores("C:\\Users\\Admin\\Documents\\Faculdade\\2\\AEDA\\Projeto1\\fornecedores.txt");
+	PortoRivers.carregaOferta("C:\\Users\\Admin\\Documents\\Faculdade\\2\\AEDA\\Projeto1\\ofertas.txt");
+	PortoRivers.carregaClientes("C:\\Users\\Admin\\Documents\\Faculdade\\2\\AEDA\\Projeto1\\clientest.txt");
+	PortoRivers.carregaClientesReg("C:\\Users\\Admin\\Documents\\Faculdade\\2\\AEDA\\Projeto1\\clientesR.txt");
 
 	clear_screen(); // limpa a janela de comando
 
@@ -127,7 +127,7 @@ int main ()
 				if (NIF == 0) break;
 
 				try {
-					clienteExiste = PortoRivers.checkClienteNIF(NIF, c1); //funcao que procura o NIF inserido no vetor de clientes, atira excecao se nao existir
+					clienteExiste = PortoRivers.checkClienteNIF(NIF, &c1); //funcao que procura o NIF inserido no vetor de clientes, atira excecao se nao existir
 				}
 				catch (ClienteInexistente &e) {
 					cout << "Cliente com o NIF " << e.getNIF() << " nao existe" << endl;
@@ -147,6 +147,8 @@ int main ()
 			cout << "+-----------------------------------------------------+" << endl;
 			cout << "|   3.Cancelar reserva                                |" << endl;
 			cout << "+-----------------------------------------------------+" << endl;
+			cout << "|   4.Consultar reservas                              |" << endl;
+			cout << "+-----------------------------------------------------+" << endl;
 			
 			cout << "opcao: ";
 			cin >> option_utilizador;
@@ -163,11 +165,11 @@ int main ()
 
 			switch (option_utilizador)
 			{
-			case 1: { // consultar pontos
+			case 1: { // consultar pontos CRASHES - PRECISA DE SER CORRIGIDO 
 				
 				c1->printPontos();
-				cout << "Prima Enter para continuar";
-				getchar();
+				cin.get();
+				cin.get();
 				clear_screen();
 			}
 					break;
@@ -185,7 +187,7 @@ int main ()
 				cout << "+-----------------------------------------------------+" << endl;
 				cout << "|   2.Procurar por data                               |" << endl;
 				cout << "+-----------------------------------------------------+" << endl;
-				cout << "|   3.Consultar lista de ofertas                      |" << endl;
+				cout << "|   3.Consultar lista de oferta                       |" << endl;
 				cout << "+-----------------------------------------------------+" << endl;
 				
 				cout << "opcao: ";
@@ -200,81 +202,124 @@ int main ()
 
 					//verificacao do cin
 				}
+				cin.clear();
+				cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 				clear_screen();
 
-				switch(option_utilizador_reserva) {
+				switch (option_utilizador_reserva) {
 				case 1: {
 
 					string destino;
 					cout << "Insira o destino que deseja pesquisar: ";
 					getline(cin, destino);
 
-					if(PortoRivers.printOfertasByDestino(destino)) {
+					//INCLUIR EXCECAO DESTINO INEXISTENTE
 
-						cout << "Insira o NIF do fornecedor ao qual a oferta corresponde (0 para cancelar): ";
+					PortoRivers.printOfertasByDestino(destino);
+
+					cout << "Insira o NIF do fornecedor ao qual a oferta corresponde (0 para cancelar): ";
+					cin >> nif_reserva;
+					while (cin.fail()) {// input nao e um numero
+
+						cin.clear();
+						cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+						cout << "Por favor insira um numero: ";
 						cin >> nif_reserva;
-						while (cin.fail()) {// input nao e um numero
-
-							cin.clear();
-							cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-							cout << "Por favor insira um numero: ";
-							cin >> nif_reserva;
-						}
-
-						if (nif_reserva == 0)
-							break;
-
-						cout << "Insira o numero da oferta (0 para cancelar): ";
-						cin >> numero_oferta;
-						while (cin.fail()) {// input nao e um numero
-
-							cin.clear();
-							cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-							cout << "Por favor insira um numero: ";
-							cin >> numero_oferta;
-						}
-
-						if (numero_oferta == 0)
-							break;
-
-						try {
-							PortoRivers.atribuiReserva(nif_reserva, NIF, numero_oferta);
-						} 
-						catch (ReservaJaFeita &r) {
-							cout << "Esta reserva ja foi feita" << endl;
-							break;
-						}
-						catch (CruzeiroCheio &c) {
-							cout << "O cruzeiro já atingiu a capacidade maxima" << endl;
-							break;
-						}
-
 					}
+
+					cin.clear();
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+					if (nif_reserva == 0)
+						break;
+
+					cout << "Insira o numero da oferta (0 para cancelar): ";
+					cin >> numero_oferta;
+					while (cin.fail()) {// input nao e um numero
+
+						cin.clear();
+						cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+						cout << "Por favor insira um numero: ";
+						cin >> numero_oferta;
+					}
+
+					cin.clear();
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+					if (numero_oferta == 0)
+						break;
+
+					try {
+						PortoRivers.atribuiReserva(nif_reserva, NIF, numero_oferta);
+					}
+					catch (ReservaJaFeita &r) {
+						cout << "Esta reserva ja foi feita" << endl;
+						cin.get();
+						clear_screen();
+						break;
+					}
+					catch (CruzeiroCheio &c) {
+						cout << "O cruzeiro já atingiu a capacidade maxima" << endl;
+						cin.get();
+						clear_screen();
+						break;
+					}
+					catch (IndexOutOfBounds &i) {
+						cout << "A numero da oferta que indicou nao corresponde a nenhuma oferta existente para este fornecedor" << endl;
+						cin.get();
+						clear_screen();
+						break;
+					}
+					catch (FornecedorInexistente &f) {
+						cout << "Fornecedor com o NIF " << f.getNIF() << " nao existe" << endl;
+						cin.get();
+						clear_screen();
+						break;
+					}
+
+					cout << "Reserva feita com sucesso" << endl;
+					cin.get();
+					clear_screen();
 
 				}
 
-				break;
+						break;
 
 				case 2: {
 
 				}
-				break;
+						break;
 
 				case 3: {
 
 				}
-				break;
+						break;
+
 				}
-
-
 
 				break;
 
 			case 3: //cancelar reserva
 				//chamar a função que apaga a reserva no vetor de reservas e trata da taxa (saldo da empresa= saldo-taxa de cancelamento )
 				break;
-			}
 
+			case 4: {
+
+				try {
+					PortoRivers.printReservasByCliente(NIF);
+				}
+				catch (SemReservas &r) {
+					cout << "Nao tem reservas planeadas" << endl;
+				}
+
+				cin.get();
+				cin.get();
+				clear_screen();
+
+			}
+					break;
+
+			}
 		}
 		break;
 
@@ -300,7 +345,7 @@ int main ()
 				if (NIF == 0) break;
 
 				try {
-					fornecedorExiste = PortoRivers.checkFornecedorNIF(NIF, f1); //funcao que procura o NIF inserido no vetor de clientes, atira excecao se nao existir
+					fornecedorExiste = PortoRivers.checkFornecedorNIF(NIF, &f1); //funcao que procura o NIF inserido no vetor de clientes, atira excecao se nao existir
 				}
 				catch (FornecedorInexistente &e) {
 					cout << "Fornecedor com o NIF " << e.getNIF() << " nao existe" << endl;
@@ -338,12 +383,13 @@ int main ()
 			case 1: //visualizar as ofertas do formcecedor em causa
 
 				PortoRivers.visualizaOfertas(NIF);
+				cin.get();
+				cin.get();
+				clear_screen();
 				break;
 
-			case 2:
-				PortoRivers.addOfertas(NIF);	
-					
-				//adicionar uma nova oferta
+			case 2: // acrescentar oferta
+				PortoRivers.addOfertas(NIF);
 				break;
 
 			case 3: { //remover oferta

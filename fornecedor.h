@@ -11,7 +11,7 @@ using namespace std;
 class Fornecedor {
 private:
 	string nome;
-	long double NIF;
+	unsigned long NIF;
 	string morada;
 	vector<Oferta> ofertas;
 	unsigned int lucro;
@@ -21,20 +21,21 @@ private:
 
 public:
 	Fornecedor();
-	Fornecedor(string nome, long double NIF, string morada);
+	Fornecedor(string nome, unsigned long NIF, string morada);
 	void setNome(string nome);
-	void setNIF(unsigned int NIF);
+	void setNIF(unsigned long NIF);
 	void setMorada(string morada);
 	void setPrecoKm(unsigned int precoKm);
 	void setPrecoLot(vector<unsigned int> precoLot);
-	int addOferta(unsigned int nif, Data data, string destino, string barco, unsigned int distancia, unsigned int lotacaoMax, unsigned int lotacaoAtual);//new 
+	int addOferta(unsigned int nif, Data data, string destino, string barco, unsigned int distancia, unsigned int lotacaoMax, unsigned int lotacaoAtual);
 	int addOfertaInit(Oferta oferta);
-	int removeOferta(unsigned int nif,Data data, string destino, unsigned int distancia, string barco, unsigned int lotacaoMax,unsigned int lotacaoAtual);
+	int removeOferta(unsigned int nif, Data data, string destino, unsigned int distancia, string barco, unsigned int lotacaoMax, unsigned int lotacaoAtual);;
 	string getNome() const;
 	unsigned int getLucro() const;
-	unsigned int getNIF() const;
+	unsigned long getNIF() const;
 	string getMorada() const;
 	vector<Oferta> getOfertas() const;
+	Oferta * getOfertaPointer(unsigned int i);
 	vector<unsigned int> getPrecoLot() const;
 	unsigned int getPrecoKm() const;
 	void printOfertas() const;

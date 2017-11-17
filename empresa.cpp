@@ -37,7 +37,7 @@ void Empresa::carregaFornecedores(string fichFornecedor)
 	char comma;
 	string nome, morada;
 	string nifTmp, precoKmTmp, precoLot20Tmp, precoLot35Tmp, precoLot50Tmp;
-	long double nif = 0;
+	unsigned long nif = 0;
 	unsigned int precoKm = 0, precoLot20=0, precoLot35 = 0, precoLot50 = 0;
 
 	if (forne.is_open())
@@ -329,7 +329,7 @@ void Empresa::carregaClientes(string fichClientes)
 	ifstream File;
 	File.open(fichClientes);
 	char comma;
-	double nif; 
+	unsigned long nif; 
 	string morada, nifTmp;
 
 	if (File.is_open())
@@ -426,7 +426,7 @@ void Empresa::carregaClientesReg (string fichClientesR)
 	ifstream File;
 	File.open(fichClientesR);
 	char comma;
-	double nif;
+	unsigned long nif;
 	double pontos;
 	string nome, morada, nifTmp, pontosTmp;
 
@@ -563,6 +563,17 @@ void Empresa::printFornecedores() const {
 	}
 }
 
+void Empresa::printReservasByCliente(unsigned long NIF) const {
+
+	for (unsigned int i = 0; i < clientes.size(); i++) {
+
+		if (clientes.at(i)->getNIF() == NIF) {
+			clientes.at(i)->printReservas();
+		}
+	}
+
+}
+
 //////////////////////////////////////////////////
 /* Metodos de adicionar clientes e fornecedores */
 //////////////////////////////////////////////////
@@ -578,15 +589,6 @@ void Empresa::addCliente(Cliente * clienteNew) {
 
 }
 
-void Empresa::addFornecedor(Fornecedor fornecedorNew) {
-	for (unsigned int i = 0; i < fornecedores.size(); i++) {
-		if (fornecedores.at(i).getNIF() == fornecedorNew.getNIF()) {
-			throw FornecedorExistente(fornecedores.at(i).getNIF());
-		}
-	}
-
-	fornecedores.push_back(fornecedorNew);
-}
 void Empresa::addOfertas(unsigned int NIF)
 {
 	int distancia, lotacaoMax, mes, dia;
@@ -633,144 +635,155 @@ void Empresa::addOfertas(unsigned int NIF)
 		cout << "Por favor insira um numero: ";
 		cin >> lotacaoMax;
 	}
-		while (x1 == 0)
+	while (x1 == 0)
+	{
+		cout << "Indroduza o tipo de barco: ";
+		cin >> barco;
+		cout << endl;
+		cin.ignore(100, '\n');
+		if (barco.compare("barco rabelo") == 0 || barco.compare("veleiro") == 0 || barco.compare("iate") == 0)
 		{
-			cout << "Indroduza o tipo de barco: ";
-			cin >> barco;
-			cout << endl;
-			cin.ignore(100, '\n');
-			if (barco.compare("barco rabelo") == 0 || barco.compare("veleiro") == 0 || barco.compare("iate") == 0)
-			{
-				x1 = 1;
-			}
-			else
-			{
-				cout << "Barco nao existente! " << endl;
-				cout << "Indroduza novamente! " << endl;
-			}
-			// iate, barco rabelo ou veleiro
-			//Régua, Pinhão ou Barca d’Alva
-
+			x1 = 1;
 		}
-		cout << "Indroduza o mês: ";
+		else
+		{
+			cout << "Barco nao existente! " << endl;
+			cout << "Indroduza novamente! " << endl;
+		}
+		// iate, barco rabelo ou veleiro
+		//Régua, Pinhão ou Barca d’Alva
+
+	}
+	cout << "Indroduza o mês: ";
+	cin >> mes;
+	cout << endl;
+	while (cin.fail() || mes > 12 || mes < 1) {// input nao e um numero
+
+		cin.clear();
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cout << "Por favor insira um numero de 1 a 12: ";
 		cin >> mes;
-		cout << endl;
-		while (cin.fail() || mes > 12 || mes < 1) {// input nao e um numero
 
-			cin.clear();
-			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			cout << "Por favor insira um numero de 1 a 12: ";
-			cin >> mes;
+	}
+	cout << "Indroduza o dia: ";
+	cin >> dia;
+	cout << endl;
+	while (cin.fail() || dia > 31 || dia < 1) {// input nao e um numero
 
-		}
-		cout << "Indroduza o dia: ";
+		cin.clear();
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cout << "Por favor insira um numero de 1 a 31: ";
 		cin >> dia;
-		cout << endl;
-		while (cin.fail() || dia > 31 || dia < 1) {// input nao e um numero
 
-			cin.clear();
-			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			cout << "Por favor insira um numero de 1 a 31: ";
-			cin >> dia;
+	}
+	int x = 1;
+	while (x == 1)
+	{
 
-		}
-		int x = 1;
-		while (x == 1)
+		unsigned int pos = 0;
+		cout << "Indroduza a hora de partida(horas:minutos): ";
+		cin >> horainicio;
+
+		cin.ignore(100, '\n');
+		pos = horainicio.find(":", 0);
+
+		if (pos == std::string::npos)
 		{
-
-			unsigned int pos = 0;
-			cout << "Indroduza a hora de partida(horas:minutos): ";
-			cin >> horainicio;
-
-			cin.ignore(100, '\n');
-			pos = horainicio.find(":", 0);
-
-			if (pos == std::string::npos )
-			{
-				cin.clear();
-				cout << "Imput invalido!" << endl << "Indroduza novamente: ";
-			}
-			else
-			{
-				x = 0;
-			}
-			if(isdigit(horainicio[0]) && isdigit(horainicio[1]) && isdigit(horainicio[3]) && isdigit(horainicio[4]) && pos == 2)
-			{
-				x = 0;
-			}
+			cin.clear();
+			cout << "Imput invalido!" << endl << "Indroduza novamente: ";
+		}
+		else
+		{
+			x = 0;
+		}
+		if (isdigit(horainicio[0]) && isdigit(horainicio[1]) && isdigit(horainicio[3]) && isdigit(horainicio[4]) && pos == 2)
+		{
+			x = 0;
+		}
 		else
 		{
 			cout << "Imput invalido!" << endl << "Indroduza novamente: ";
 		}
-	}	
-		
+	}
 
-		x = 1;
-		while (x == 1)
+
+	x = 1;
+	while (x == 1)
+	{
+
+		unsigned int pos = 0;
+		cout << "Indroduza a hora de chegada(horas:minutos): ";
+		cin >> horafim;
+
+		cin.ignore(100, '\n');
+		pos = horafim.find(":", 0);
+
+		if (pos == std::string::npos)
 		{
-
-			unsigned int pos = 0;
-			cout << "Indroduza a hora de chegada(horas:minutos): ";
-			cin >> horafim;
-
-			cin.ignore(100, '\n');
-			pos = horafim.find(":", 0);
-
-			if (pos == std::string::npos)
-			{
-				cin.clear();
-				cout << "Imput invalido!" << endl << "Indroduza novamente: " << endl;
-			}
-			else
-			{
-				x = 0;
-			}
-			if (isdigit(horainicio[0]) && isdigit(horainicio[1]) && isdigit(horainicio[3]) && isdigit(horainicio[4]) && pos == 2)
-			{
-				x = 0;
-			}
-			else
-			{
-				cout << "Imput invalido!" << endl << "Indroduza novamente: ";
-			}
+			cin.clear();
+			cout << "Imput invalido!" << endl << "Indroduza novamente: " << endl;
 		}
-
-
-
-
-		unsigned int pos1, pos2, horaini, minini, horafim1, minfim;
-
-		pos1 = horainicio.find(":", 0);
-		pos2 = horafim.find(":", 0);
-		horaini = stoi(horainicio.substr(0, pos1));
-		horafim1 = stoi(horafim.substr(0, pos2));
-
-		minini = stoi(horainicio.substr(pos1 + 1, horainicio.size() - pos1));
-		minfim = stoi(horafim.substr(pos2 + 1, horafim.size() - pos2));
-
-		data.setHoraFim(horafim1);
-		data.setHoraInicio(horaini);
-		data.setMinutosFim(minfim);
-		data.setMinutosInicio(minini);
-		data.setDia(dia);
-		data.setMes(mes);
-		for (unsigned int i = 0; i < fornecedores.size(); i++) {
-			if (fornecedores.at(i).getNIF() == NIF) {
-				fornecedores.at(i).addOferta(NIF, data, destino, barco, distancia, lotacaoMax, 0);
-
-			}
+		else
+		{
+			x = 0;
+		}
+		if (isdigit(horainicio[0]) && isdigit(horainicio[1]) && isdigit(horainicio[3]) && isdigit(horainicio[4]) && pos == 2)
+		{
+			x = 0;
+		}
+		else
+		{
+			cout << "Imput invalido!" << endl << "Indroduza novamente: ";
 		}
 	}
+
+
+
+
+	unsigned int pos1, pos2, horaini, minini, horafim1, minfim;
+
+	pos1 = horainicio.find(":", 0);
+	pos2 = horafim.find(":", 0);
+	horaini = stoi(horainicio.substr(0, pos1));
+	horafim1 = stoi(horafim.substr(0, pos2));
+
+	minini = stoi(horainicio.substr(pos1 + 1, horainicio.size() - pos1));
+	minfim = stoi(horafim.substr(pos2 + 1, horafim.size() - pos2));
+
+	data.setHoraFim(horafim1);
+	data.setHoraInicio(horaini);
+	data.setMinutosFim(minfim);
+	data.setMinutosInicio(minini);
+	data.setDia(dia);
+	data.setMes(mes);
+	for (unsigned int i = 0; i < fornecedores.size(); i++) {
+		if (fornecedores.at(i).getNIF() == NIF) {
+			fornecedores.at(i).addOferta(NIF, data, destino, barco, distancia, lotacaoMax, 0);
+
+		}
+	}
+}
+
+void Empresa::addFornecedor(Fornecedor fornecedorNew) {
+	for (unsigned int i = 0; i < fornecedores.size(); i++) {
+		if (fornecedores.at(i).getNIF() == fornecedorNew.getNIF()) {
+			throw FornecedorExistente(fornecedores.at(i).getNIF());
+		}
+	}
+
+	fornecedores.push_back(fornecedorNew);
+}
+
 
 ////////////////////////////////////////////////
 /* Metodos de remover clientes e fornecedores */
 ////////////////////////////////////////////////
 
-void Empresa::removeCliente(unsigned int clienteRemoveNIF) {
+void Empresa::removeCliente(unsigned long clienteRemoveNIF) {
 
 }
 
-void Empresa::removeFornecedor(unsigned int  fornecedorRemoveNIF) {
+void Empresa::removeFornecedor(unsigned long  fornecedorRemoveNIF) {
 	for (unsigned int i = 0; i < fornecedores.size(); i++)
 		if (fornecedores.at(i).getNIF() == fornecedorRemoveNIF)
 		{
@@ -782,11 +795,11 @@ void Empresa::removeFornecedor(unsigned int  fornecedorRemoveNIF) {
 /* Metodos para verificar a existencia de clientes e fornecedores */
 ////////////////////////////////////////////////////////////////////
 
-bool Empresa::checkClienteNIF(unsigned int NIF, Cliente *c1) {
+bool Empresa::checkClienteNIF(unsigned long NIF, Cliente **c1) {
 
 	for (unsigned int i=0; i < clientes.size(); i++) {
 		if (clientes.at(i)->getNIF() == NIF) {
-			c1 = clientes.at(i);
+			*c1 = clientes.at(i);
 			return true;
 		}
 	}
@@ -795,11 +808,11 @@ bool Empresa::checkClienteNIF(unsigned int NIF, Cliente *c1) {
 
 }
 
-bool Empresa::checkFornecedorNIF(unsigned int NIF, Fornecedor *f1) { //verifica o NIF e atribui a f1 o apontador para o fornecedor correspondente
+bool Empresa::checkFornecedorNIF(unsigned long NIF, Fornecedor **f1) { //verifica o NIF e atribui a f1 o apontador para o fornecedor correspondente
 
 	for (unsigned int i=0; i < fornecedores.size(); i++) {
 		if (fornecedores.at(i).getNIF() == NIF) {
-			f1 = &(fornecedores.at(i));
+			*f1 = &(fornecedores.at(i));
 			return true;
 		}
 	}
@@ -809,7 +822,7 @@ bool Empresa::checkFornecedorNIF(unsigned int NIF, Fornecedor *f1) { //verifica 
 }
 
 
-void Empresa::checkFornecedorNIF(long double NIF) { //so verifica se existe o fornecedor em questao 
+void Empresa::checkFornecedorNIF(unsigned long NIF) { //so verifica se existe o fornecedor em questao 
 
 	for (unsigned int i = 0; i < fornecedores.size(); i++) {
 		if (fornecedores.at(i).getNIF() == NIF) {
@@ -819,7 +832,7 @@ void Empresa::checkFornecedorNIF(long double NIF) { //so verifica se existe o fo
 
 }
 
-bool Empresa::checkFornecedorNIFBool(long double NIF) {
+bool Empresa::checkFornecedorNIFBool(unsigned long NIF) {
 
 	for (unsigned int i = 0; i < fornecedores.size(); i++) {
 		if (fornecedores.at(i).getNIF() == NIF) {
@@ -848,7 +861,7 @@ bool Empresa::printOfertasByDestino(string destino) const {
 	return test;
 }
 
-void Empresa::visualizaOfertas(long double NIF)
+void Empresa::visualizaOfertas(unsigned long NIF)
 {
 	for (unsigned int i = 0; i < fornecedores.size(); i++)
 	{
@@ -864,18 +877,25 @@ void Empresa::visualizaOfertas(long double NIF)
 /* Metodos para fazer reservas */////////
 ////////////////////////////////////////
 
-void Empresa::atribuiReserva(long double fornecedorNIF, long double clienteNIF, int numeroOferta) {
+void Empresa::atribuiReserva(unsigned long fornecedorNIF, unsigned long clienteNIF, int numeroOferta) {
 
 	for (unsigned int i = 0; i < fornecedores.size(); i++) {
 
 		if (fornecedores.at(i).getNIF() == fornecedorNIF) { //encontrou o fornecedor com o nif dado
+
+			//EXCECAO PARA SE O NUMERO DE OFERTA FOR INFERIOR A 1 OU SUPERIOR AO NUMERO DE ELEMENTOS DO VETOR DE OFERTAS DO FORNECEDOR EM QUESTAO
+
+			if (numeroOferta < 1 || numeroOferta > fornecedores.at(i).getOfertas().size())
+				throw IndexOutOfBounds();
 
 			if (fornecedores.at(i).getOfertas().at(numeroOferta - 1).getLotacaoAtual() == fornecedores.at(i).getOfertas().at(numeroOferta - 1).getLotacaoMax()) { //a lotacao do cruzeiro pretendido esta cheia
 				throw CruzeiroCheio();
 			}
 			else {
 
-				fornecedores.at(i).getOfertas().at(numeroOferta - 1).addToLotacao(); // se a lotacao nao estiver cheia, adiciona 1 a lotacao atual do respetivo cruzeiro
+				Oferta *updateLotacao;
+				updateLotacao = fornecedores.at(i).getOfertaPointer(numeroOferta - 1);
+				updateLotacao->addToLotacao(); // se a lotacao nao estiver cheia, adiciona 1 a lotacao atual do respetivo cruzeiro NAO VAI MODIFICAR VALOR, GETOFERTAS SO DEVOLVE UMA COPIA DO VETOR
 
 				for (unsigned int j = 0; j < clientes.size(); j++) {
 
@@ -883,13 +903,15 @@ void Empresa::atribuiReserva(long double fornecedorNIF, long double clienteNIF, 
 
 						for (unsigned int l = 0; l < clientes.at(j)->getReservas().size(); l++) {
 
-							if (*(clientes.at(j)->getReservas().at(l)) == fornecedores.at(i).getOfertas().at(numeroOferta - 1)) { //a reserva ja foi feita
+							if (*(clientes.at(j)->getReservas().at(l)) == *(fornecedores.at(i).getOfertaPointer(numeroOferta - 1))) { //a reserva ja foi feita
 								throw ReservaJaFeita();
 							}
 
 						}
 
-						clientes.at(i)->addReserva(&(fornecedores.at(i).getOfertas().at(numeroOferta - 1)));
+						Oferta *o1;
+						o1 = fornecedores.at(i).getOfertaPointer(numeroOferta-1);
+						clientes.at(i)->addReserva(o1);
 
 					}
 
@@ -903,11 +925,12 @@ void Empresa::atribuiReserva(long double fornecedorNIF, long double clienteNIF, 
 
 	}
 
-
+	//EXCECAO PARA FORNECEDORE INEXISTENTE
+	throw FornecedorInexistente(fornecedorNIF);
 
 }
 
-void Empresa::removerFornecedor(long double NIF) {
+void Empresa::removerFornecedor(unsigned long NIF) {
 
 	if (!checkFornecedorNIFBool(NIF)) {
 		throw FornecedorInexistente(NIF);

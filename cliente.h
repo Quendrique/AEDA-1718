@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include "oferta.h";
+#include "oferta.h"
 
 using namespace std;
 
@@ -34,6 +34,7 @@ public:
 	virtual bool isRegistado() { return false; }
 	virtual double getPontos() const;
 	void removeReservaByFornecedor(long double fornecedorNIF);
+	void printReservas() const;
 
 };
 
@@ -50,6 +51,16 @@ public:
 	void printInfo() const;
 	void printPontos() const;
 	bool isRegistado() { return true; }
+};
+
+
+//////////////
+/* EXCECOES */
+//////////////
+
+class SemReservas {
+public:
+	SemReservas() {};
 };
 
 #endif /* CLIENTE_H_ */

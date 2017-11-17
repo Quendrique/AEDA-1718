@@ -5,15 +5,13 @@ Oferta::Oferta()
 
 }
 
-Oferta::Oferta(unsigned int nif,string barco, unsigned int lotacaoMax, unsigned int lotacaoAtual, string destino, unsigned int distancia, Data data)
+Oferta::Oferta(unsigned int nif, string barco, unsigned int lotacaoMax, unsigned int lotacaoAtual, string destino, unsigned int distancia, Data data)
 {
 	this->distancia = distancia;
 	this->nif = nif;
 	this->barco = barco;
 	this->lotacaoMax = lotacaoMax;
 	this->lotacaoAtual = lotacaoAtual;
-	this->destino = destino;
-	this->data = data;
 }
 
 /*/////////////////////////

@@ -20,7 +20,7 @@ private:
 
 public:
 	Oferta();
-	Oferta(unsigned int nif,string barco, unsigned int lotacaoMax, unsigned int lotacaoAtual, string destino, unsigned int distancia, Data data);
+	Oferta(unsigned int nif, string barco, unsigned int lotacaoMax, unsigned int lotacaoAtual, string destino, unsigned int distancia, Data data);
 	void setBarco(string barco);
 	void setLotacaoMax(unsigned int lotacaoMax);
 	void setLotacaoAtual(unsigned int lotacaoAtual);

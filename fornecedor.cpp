@@ -2,7 +2,7 @@
 
 Fornecedor::Fornecedor() {};
 
-Fornecedor::Fornecedor(string nome, long double NIF, string morada) {
+Fornecedor::Fornecedor(string nome, unsigned long NIF, string morada) {
 	this->nome = nome;
 	this->NIF = NIF;
 	this->morada = morada;
@@ -17,7 +17,7 @@ void Fornecedor::setNome(string nome) {
 	this->nome = nome;
 }
 
-void Fornecedor::setNIF(unsigned int NIF) {
+void Fornecedor::setNIF(unsigned long NIF) {
 	this->NIF = NIF;
 }
 
@@ -43,7 +43,7 @@ string Fornecedor::getNome() const {
 	return nome;
 }
 
-unsigned int Fornecedor::getNIF() const {
+unsigned long Fornecedor::getNIF() const {
 	return NIF;
 }
 
@@ -53,6 +53,10 @@ string Fornecedor::getMorada() const {
 
 vector<Oferta> Fornecedor::getOfertas() const {
 	return ofertas;
+}
+
+Oferta * Fornecedor::getOfertaPointer(unsigned int i) {
+	return &(ofertas.at(i));
 }
 
 vector<unsigned int> Fornecedor::getPrecoLot() const
@@ -70,8 +74,8 @@ unsigned int Fornecedor::getPrecoKm() const
 /* metodos */
 ////////////
 
-int Fornecedor::addOferta(unsigned int nif,Data data, string destino, string barco, unsigned int distancia, unsigned int lotacaoMax,unsigned int lotacaoAtual) {
-	Oferta * o1 = new Oferta(nif,barco, lotacaoMax,lotacaoAtual, destino ,distancia, data);
+int Fornecedor::addOferta(unsigned int nif, Data data, string destino, string barco, unsigned int distancia, unsigned int lotacaoMax, unsigned int lotacaoAtual) {
+	Oferta * o1 = new Oferta(nif, barco, lotacaoMax, lotacaoAtual, destino, distancia, data);
 
 	for (unsigned int i = 0; i < ofertas.size(); i++) {
 		if (ofertas[i] == *o1)
@@ -91,8 +95,8 @@ int Fornecedor::addOfertaInit(Oferta oferta) {
 	return 0;
 }
 
-int Fornecedor::removeOferta(unsigned int nif,Data data, string destino, unsigned int distancia, string barco, unsigned int lotacaoMax, unsigned int lotacaoAtual) {
-	Oferta o1( nif,barco, lotacaoMax,lotacaoAtual, destino,distancia, data);
+int Fornecedor::removeOferta(unsigned int nif, Data data, string destino, unsigned int distancia, string barco, unsigned int lotacaoMax, unsigned int lotacaoAtual) {
+	Oferta o1(nif, barco, lotacaoMax, lotacaoAtual, destino, distancia, data);
 
 	for (unsigned int i = 0; i < ofertas.size(); i++) {
 		if (ofertas[i] == o1) {
@@ -123,13 +127,16 @@ bool Fornecedor::printOfertasByDestino(string destino) const {
 
 	bool test = false;
 
+	cout << "Fornecedor: " << nome << "(NIF " << NIF << ")" << endl << endl;
+
 	for (unsigned int i = 0; i < ofertas.size(); i++) {
 
 		if (ofertas.at(i).getDestino() == destino) {
 
 			test = true;
 
-			cout << "Barco: " << ofertas.at(i).getBarco() << endl
+			cout << "Oferta " << i+1 << endl
+				<< "Barco: " << ofertas.at(i).getBarco() << endl
 				<< "Lotacao maxima: " << ofertas.at(i).getLotacaoMax() << endl
 				<< "Destino: " << ofertas.at(i).getDestino() << endl
 				<< "Data: " << ofertas.at(i).getData().printData() << endl
