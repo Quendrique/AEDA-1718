@@ -27,6 +27,7 @@ public:
 	Empresa(string nome, vector<Fornecedor> fornecedores, vector<Cliente*> clientes);
 	void addFornecedor(Fornecedor fornecedorNew);
 	void addCliente(Cliente * clienteNew);
+	void addOfertas(unsigned int NIF);
 	void removeFornecedor(unsigned int fornecedorRemoveNIF);
 	void removeCliente(unsigned int clienteRemoveNIF);
 	Cliente * getCliente() const;
