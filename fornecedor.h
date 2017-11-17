@@ -27,9 +27,9 @@ public:
 	void setMorada(string morada);
 	void setPrecoKm(unsigned int precoKm);
 	void setPrecoLot(vector<unsigned int> precoLot);
-	int addOferta(Data data, string destino, string barco, unsigned int lotacaoMax,unsigned int lotacaoAtual); 
+	int addOferta(unsigned int nif, Data data, string destino, string barco, unsigned int distancia, unsigned int lotacaoMax, unsigned int lotacaoAtual);//new 
 	int addOfertaInit(Oferta oferta);
-	int removeOferta(Data data, string destino, string barco, unsigned int lotacaoMax,unsigned int lotacaoAtual); 
+	int removeOferta(unsigned int nif,Data data, string destino, unsigned int distancia, string barco, unsigned int lotacaoMax,unsigned int lotacaoAtual);
 	string getNome() const;
 	unsigned int getLucro() const;
 	unsigned int getNIF() const;
