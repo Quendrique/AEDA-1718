@@ -47,7 +47,8 @@ public:
 	void printFornecedores() const;
 	bool checkFornecedorNIFBool(unsigned long NIF);
 	bool printOfertasByDestino(string destino) const;
-	bool printOfertasByData() const;
+	bool printOfertasByData(Data data) const;
+	void printOfertas() const;
 	bool checkClienteNIF(unsigned long NIF, Cliente **c1);
 	bool checkFornecedorNIF(unsigned long NIF, Fornecedor **f1); //verifica se existe o fornecedor com o NIF especificado e atribui o apontador correspondente a f1
 	void checkFornecedorNIF(unsigned long NIF); // so verifica se o fornecedor em questao existe, atira uma excecao se for esse o caso 

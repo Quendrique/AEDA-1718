@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "cliente.h"
-#include"empresa.h"
+#include "empresa.h"
 #include "fornecedor.h"
 #include "oferta.h"
 #include <cstdlib>
@@ -165,8 +165,8 @@ int main ()
 
 			switch (option_utilizador)
 			{
-			case 1: { // consultar pontos CRASHES - PRECISA DE SER CORRIGIDO 
-				
+			case 1: { // consultar pontos
+
 				c1->printPontos();
 				cin.get();
 				cin.get();
@@ -287,10 +287,148 @@ int main ()
 
 				case 2: {
 
+					Data data;
+
+					// PROCESSAR DATA ...
+
+					PortoRivers.printOfertasByData(data);
+
+					cout << "Insira o NIF do fornecedor ao qual a oferta corresponde (0 para cancelar): ";
+					cin >> nif_reserva;
+					while (cin.fail()) {// input nao e um numero
+
+						cin.clear();
+						cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+						cout << "Por favor insira um numero: ";
+						cin >> nif_reserva;
+					}
+
+					cin.clear();
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+					if (nif_reserva == 0)
+						break;
+
+					cout << "Insira o numero da oferta (0 para cancelar): ";
+					cin >> numero_oferta;
+					while (cin.fail()) {// input nao e um numero
+
+						cin.clear();
+						cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+						cout << "Por favor insira um numero: ";
+						cin >> numero_oferta;
+					}
+
+					cin.clear();
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+					if (numero_oferta == 0)
+						break;
+
+					try {
+						PortoRivers.atribuiReserva(nif_reserva, NIF, numero_oferta);
+					}
+					catch (ReservaJaFeita &r) {
+						cout << "Esta reserva ja foi feita" << endl;
+						cin.get();
+						clear_screen();
+						break;
+					}
+					catch (CruzeiroCheio &c) {
+						cout << "O cruzeiro já atingiu a capacidade maxima" << endl;
+						cin.get();
+						clear_screen();
+						break;
+					}
+					catch (IndexOutOfBounds &i) {
+						cout << "A numero da oferta que indicou nao corresponde a nenhuma oferta existente para este fornecedor" << endl;
+						cin.get();
+						clear_screen();
+						break;
+					}
+					catch (FornecedorInexistente &f) {
+						cout << "Fornecedor com o NIF " << f.getNIF() << " nao existe" << endl;
+						cin.get();
+						clear_screen();
+						break;
+					}
+
+					cout << "Reserva feita com sucesso" << endl;
+					cin.get();
+					clear_screen();
+
+
 				}
 						break;
 
 				case 3: {
+
+					PortoRivers.printOfertas();
+
+					cout << "Insira o NIF do fornecedor ao qual a oferta corresponde (0 para cancelar): ";
+					cin >> nif_reserva;
+					while (cin.fail()) {// input nao e um numero
+
+						cin.clear();
+						cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+						cout << "Por favor insira um numero: ";
+						cin >> nif_reserva;
+					}
+
+					cin.clear();
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+					if (nif_reserva == 0)
+						break;
+
+					cout << "Insira o numero da oferta (0 para cancelar): ";
+					cin >> numero_oferta;
+					while (cin.fail()) {// input nao e um numero
+
+						cin.clear();
+						cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+						cout << "Por favor insira um numero: ";
+						cin >> numero_oferta;
+					}
+
+					cin.clear();
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+					if (numero_oferta == 0)
+						break;
+
+					try {
+						PortoRivers.atribuiReserva(nif_reserva, NIF, numero_oferta);
+					}
+					catch (ReservaJaFeita &r) {
+						cout << "Esta reserva ja foi feita" << endl;
+						cin.get();
+						clear_screen();
+						break;
+					}
+					catch (CruzeiroCheio &c) {
+						cout << "O cruzeiro já atingiu a capacidade maxima" << endl;
+						cin.get();
+						clear_screen();
+						break;
+					}
+					catch (IndexOutOfBounds &i) {
+						cout << "A numero da oferta que indicou nao corresponde a nenhuma oferta existente para este fornecedor" << endl;
+						cin.get();
+						clear_screen();
+						break;
+					}
+					catch (FornecedorInexistente &f) {
+						cout << "Fornecedor com o NIF " << f.getNIF() << " nao existe" << endl;
+						cin.get();
+						clear_screen();
+						break;
+					}
+
+					cout << "Reserva feita com sucesso" << endl;
+					cin.get();
+					clear_screen();
+
 
 				}
 						break;
@@ -366,6 +504,8 @@ int main ()
 			cout << "+-----------------------------------------------------+" << endl;
 			cout << "|   3.Remover oferta                                  |" << endl;
 			cout << "+-----------------------------------------------------+" << endl;
+			cout << "|   4.Consultar saldo                                 |" << endl;
+			cout << "+-----------------------------------------------------+" << endl;
 			
 			cin >> opcao_fornecedor;
 			
@@ -420,6 +560,17 @@ int main ()
 				clear_screen();
 
 				}
+					break;
+			case 4: {
+
+				cout << "O seu lucro e de " << f1->calculaLucro() << " euros" << endl;
+				cin.clear();
+				cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				cin.get();
+				clear_screen();
+
+			}
+					break;
 			}
 
 		}

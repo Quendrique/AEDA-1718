@@ -110,7 +110,7 @@ int Fornecedor::removeOferta(unsigned int nif, Data data, string destino, unsign
 
 void Fornecedor::printOfertas() const {
 
-	cout << "**** " << nome << " ****" << endl;
+	cout << "**** " << nome << "(NIF " << NIF << ")" << " ****" << endl;
 
 	for (unsigned int i = 0; i < ofertas.size(); i++) {
 

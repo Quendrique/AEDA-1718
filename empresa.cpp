@@ -795,6 +795,13 @@ void Empresa::removeFornecedor(unsigned long  fornecedorRemoveNIF) {
 /* Metodos para verificar a existencia de clientes e fornecedores */
 ////////////////////////////////////////////////////////////////////
 
+void Empresa::printOfertas() const
+{
+	for (unsigned int i = 0; i < fornecedores.size(); i++) {
+		fornecedores.at(i).printOfertas();
+	}
+}
+
 bool Empresa::checkClienteNIF(unsigned long NIF, Cliente **c1) {
 
 	for (unsigned int i=0; i < clientes.size(); i++) {
@@ -856,6 +863,17 @@ bool Empresa::printOfertasByDestino(string destino) const {
 
 	for (unsigned int i = 0 ; i < fornecedores.size(); i++) {
 		test = fornecedores.at(i).printOfertasByDestino(destino);
+	}
+
+	return test;
+}
+
+bool Empresa::printOfertasByData(Data data) const
+{
+	bool test;
+
+	for (unsigned int i = 0; i < fornecedores.size(); i++) {
+		test = fornecedores.at(i).printOfertasByData(data);
 	}
 
 	return test;
