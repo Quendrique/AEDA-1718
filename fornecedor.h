@@ -44,9 +44,11 @@ public:
 	void printInfo() const;
 	//void updateLucro(unsigned int sum);
 	void removeOfertaMenu(unsigned int i);
-	int calculaLucro();
 	void printLucro() const;
 	void updateOferta(const Oferta &o1);
+
+	unsigned int calculaLucro();
+	unsigned int calculaTaxas() const;
 
 };
 

@@ -31,7 +31,7 @@ public:
 	void removeFornecedor(unsigned long fornecedorRemoveNIF);
 	void removeCliente(unsigned long clienteRemoveNIF);
 	Cliente * getCliente() const;
-	vector<Fornecedor> getFornecedor() const;
+	vector<Fornecedor> getFornecedores() const;
 	string getNome () const;
 	void carregaFornecedores(string fichFornecedor); //extrai o conteudo do ficheiro de fornecedores
 	void carregaOferta( string ficheiro_oferta);//extrai o conteudo do ficheiro de ofertas

@@ -120,6 +120,7 @@ bool Oferta::operator ==(const Oferta &o2)
 	return false;
 }
 
+
 void Oferta::addToLotacao()
 {
 	this->lotacaoAtual = lotacaoAtual + 1;

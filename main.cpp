@@ -51,10 +51,10 @@ int main ()
 
 	// TEMPORARIO - FILE PATHS PARA FICHEIROS
 
-	PortoRivers.carregaFornecedores("C:\\Users\\Admin\\Documents\\Faculdade\\2\\AEDA\\Projeto1\\fornecedores.txt");
-	PortoRivers.carregaOferta("C:\\Users\\Admin\\Documents\\Faculdade\\2\\AEDA\\Projeto1\\ofertas.txt");
-	PortoRivers.carregaClientes("C:\\Users\\Admin\\Documents\\Faculdade\\2\\AEDA\\Projeto1\\clientest.txt");
-	PortoRivers.carregaClientesReg("C:\\Users\\Admin\\Documents\\Faculdade\\2\\AEDA\\Projeto1\\clientesR.txt");
+	PortoRivers.carregaFornecedores("C:\\Users\\Admin\\Documents\\Faculdade\\2\\AEDA\\AEDA-1718\\fornecedores.txt");
+	PortoRivers.carregaOferta("C:\\Users\\Admin\\Documents\\Faculdade\\2\\AEDA\\AEDA-1718\\ofertas.txt");
+	PortoRivers.carregaClientes("C:\\Users\\Admin\\Documents\\Faculdade\\2\\AEDA\\AEDA-1718\\clientest.txt");
+	PortoRivers.carregaClientesReg("C:\\Users\\Admin\\Documents\\Faculdade\\2\\AEDA\\AEDA-1718\\clientesR.txt");
 
 	clear_screen(); // limpa a janela de comando
 
@@ -504,9 +504,14 @@ int main ()
 
 			case 2: {//gerir saldo
 
-				PortoRivers.printLucrosTotais();
+				//PortoRivers.printLucrosTotais();
+
+				for (unsigned int i = 0; i < PortoRivers.getFornecedores().size(); i++) {
+					cout << "O fornecedor " << PortoRivers.getFornecedores().at(i).getNIF() << " devera pagar uma taxa de " << PortoRivers.getFornecedores().at(i).calculaTaxas() << " euros" << endl;
+				}
 				cout << "Prima enter para continuar" << endl;
-				getchar();
+				cin.get();
+				cin.get();
 				clear_screen();
 			}
 				break;

@@ -15,7 +15,7 @@ Empresa::Empresa(string nome, vector<Fornecedor> fornecedores, vector<Cliente*> 
 	this->clientes = clientes;
 }
 
-vector<Fornecedor> Empresa::getFornecedor() const
+vector<Fornecedor> Empresa::getFornecedores() const
 {
 	return fornecedores;
 }

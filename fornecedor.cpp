@@ -193,34 +193,6 @@ void Fornecedor::printInfo() const {
 
 }
 
-int Fornecedor::calculaLucro() {
-
-	int sum = 0;
-	unsigned int lotacaoType;
-
-	for (unsigned int i = 0; i < ofertas.size(); i++) {
-
-		lotacaoType = ofertas.at(i).getLotacaoMax();
-
-		switch (lotacaoType) {
-
-		case 20:
-			sum += precoLot.at(0) * ofertas.at(i).getLotacaoAtual() + precoKm * ofertas.at(i).getDistancia();
-			break;
-		case 35:
-			sum += precoLot.at(1) * ofertas.at(i).getLotacaoAtual() + precoKm * ofertas.at(i).getDistancia();
-			break;
-		case 50:
-			sum += precoLot.at(2) * ofertas.at(i).getLotacaoAtual() + precoKm * ofertas.at(i).getDistancia();
-			break;
-		}
-	}
-
-	lucro = sum;
-	return sum;
-
-}
-
 void Fornecedor::printLucro() const {
 
 	cout << "**** " << nome << " ****" << endl << "Lucro: " << lucro << endl;
@@ -238,6 +210,79 @@ void Fornecedor::updateOferta(const Oferta &o1) {
 
 	}
 
+}
+
+unsigned int Fornecedor::calculaLucro()
+{
+	unsigned int precoOferta, precoLotOferta, lot;
+
+	for (unsigned int i = 0; i < ofertas.size(); i++) {
+
+		lot = ofertas.at(i).getLotacaoMax();
+
+		switch (lot) {
+		case 20:
+			precoLotOferta = precoLot.at(0);
+			break;
+		case 35:
+			precoLotOferta = precoLot.at(1);
+			break;
+		case 50:
+			precoLotOferta = precoLot.at(2);
+			break;
+		}
+
+		precoOferta = ofertas.at(i).getDistancia() * precoKm + precoLotOferta;
+		this->lucro += (precoOferta * ofertas.at(i).getLotacaoAtual());
+	}
+
+	return lucro;
+}
+
+unsigned int Fornecedor::calculaTaxas() const
+{
+
+	unsigned int taxa = 0, lot;
+	string barco;
+	
+	for (unsigned int i = 0; i < ofertas.size(); i++) {
+
+		if (ofertas.at(i).getLotacaoAtual() >= (ofertas.at(i).getLotacaoMax()/2)) {
+
+			lot = ofertas.at(i).getLotacaoMax();
+			barco = ofertas.at(i).getBarco();
+
+			switch (lot) {
+			case 20:
+				if (barco == "rabelo")
+					taxa += 25;
+				else if (barco == "iate")
+					taxa += 50;
+				else if (barco == "veleiro")
+					taxa += 75;
+				break;
+			case 35:
+				if (barco == "rabelo")
+					taxa += 30;
+				else if (barco == "iate")
+					taxa += 55;
+				else if (barco == "veleiro")
+					taxa += 80;
+				break;
+			case 50:
+				if (barco == "rabelo")
+					taxa += 35;
+				else if (barco == "iate")
+					taxa += 60;
+				else if (barco == "veleiro")
+					taxa += 85;
+				break;
+
+			}
+		}
+	}
+
+	return taxa;
 }
 
 void Fornecedor::removeOfertaMenu(unsigned int i) {
