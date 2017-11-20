@@ -16,12 +16,14 @@ private:
 	unsigned int lotacaoAtual;
 	unsigned int distancia;
 	Data data;
+	unsigned int preco;
 	unsigned int nif;
 
 public:
 	Oferta();
 	Oferta(unsigned int nif, string barco, unsigned int lotacaoMax, unsigned int lotacaoAtual, string destino, unsigned int distancia, Data data);
 	void setBarco(string barco);
+	void setPreco(int preco);
 	void setLotacaoMax(unsigned int lotacaoMax);
 	void setLotacaoAtual(unsigned int lotacaoAtual);
 	void setDestino(string destino);
@@ -30,6 +32,7 @@ public:
 	void setNif(unsigned int nif);
 
 	string getBarco() const;
+	int setPreco()const;
 	Data getData() const;
 	unsigned int getNif() const;
 	unsigned int getLotacaoMax() const;
