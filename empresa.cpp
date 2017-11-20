@@ -313,6 +313,19 @@ void Empresa::carregaOferta(string ficheiro_oferta)
 			for (unsigned int i = 0; i < fornecedores.size(); i++) {
 
 				if (fornecedores.at(i).getNIF() == nif_oferta) {
+					if (of.getLotacaoMax() < 20)
+					{
+						of.setPreco(of.getDistancia()*fornecedores.at(i).getPrecoKm() + fornecedores.at(i).getPrecoLot().at(0));
+					}
+					else if (of.getLotacaoMax() < 35)
+					{
+						of.setPreco(of.getDistancia()*fornecedores.at(i).getPrecoKm() + fornecedores.at(i).getPrecoLot().at(1));
+					}
+					else if(of.getLotacaoMax() < 50)
+					{
+						of.setPreco(of.getDistancia()*fornecedores.at(i).getPrecoKm() + fornecedores.at(i).getPrecoLot().at(2));
+					}
+
 					fornecedores.at(i).addOfertaInit(of);
 				}
 
