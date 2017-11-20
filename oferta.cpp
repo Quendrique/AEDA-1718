@@ -12,6 +12,7 @@ Oferta::Oferta(unsigned int nif, string barco, unsigned int lotacaoMax, unsigned
 	this->barco = barco;
 	this->lotacaoMax = lotacaoMax;
 	this->lotacaoAtual = lotacaoAtual;
+	this->preco = 0;
 }
 
 /*/////////////////////////
@@ -36,7 +37,10 @@ void Oferta::setLotacaoMax(unsigned int lotacaoMax)
 {
 	this->lotacaoMax = lotacaoMax;
 }
-
+void Oferta::setPreco(int preco)
+{
+	this->preco = preco;
+}
 void Oferta::setLotacaoAtual(unsigned int lotacaoAtual)
 {
 	this->lotacaoAtual = lotacaoAtual;
@@ -71,7 +75,10 @@ string Oferta::getDestino() const
 {
 	return destino;
 }
-
+int Oferta::getPreco()const
+{
+	return preco;
+}
 unsigned int Oferta::getLotacaoAtual() const
 {
 	return lotacaoAtual;
