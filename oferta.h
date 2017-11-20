@@ -32,7 +32,7 @@ public:
 	void setNif(unsigned int nif);
 
 	string getBarco() const;
-	int setPreco()const;
+	int getPreco()const;
 	Data getData() const;
 	unsigned int getNif() const;
 	unsigned int getLotacaoMax() const;
