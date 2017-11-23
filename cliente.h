@@ -34,6 +34,8 @@ public:
 	virtual bool isRegistado() { return false; }
 	virtual double getPontos() const;
 	void removeReservaByFornecedor(long double fornecedorNIF);
+	void removeReservaByIndex(unsigned int reserva);
+	void removeReservaByOferta(Oferta o1);
 	void printReservas() const;
 
 };

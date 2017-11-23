@@ -91,14 +91,21 @@ void Cliente::removeReservaByFornecedor(long double fornecedorNIF)
 	}
 }
 
+void Cliente::removeReservaByIndex(unsigned int reserva)
+{
+	reservas.at(reserva - 1)->removeFromLotacao();
+	reservas.erase(reservas.begin() + (reserva - 1));
+}
+
 void Cliente::printReservas() const
 {
 	if (reservas.size() == 0)
 	{
-		cout << "Não existe" << endl;
+		cout << "Nao existe" << endl;
 	}
 	for (unsigned int i = 0; i < reservas.size(); i++) {
 
+		cout << "Reserva " << i + 1 << endl;
 		cout << "Fornecedor: " << reservas.at(i)->getNif() << endl
 			<< "Barco: " << reservas.at(i)->getBarco() << endl
 			<< "Lotacao maxima: " << reservas.at(i)->getLotacaoMax() << endl

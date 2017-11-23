@@ -867,7 +867,25 @@ bool Empresa::checkFornecedorNIFBool(unsigned long NIF) {
 	return false;
 }
 
+///////////////////////////////////
+/* Metodos para remover reservas */
+///////////////////////////////////
 
+void Empresa::removeReserva(unsigned long clienteNIF, unsigned int reserva) {
+
+	for (unsigned int i = 0; i < clientes.size(); i++) {
+
+		if (clientes.at(i)->getNIF() == clienteNIF) {
+
+			clientes.at(i)->removeReservaByIndex(reserva);
+		}
+
+	}
+
+
+
+
+}
 
 
 /////////////////////////////////////////
@@ -908,9 +926,9 @@ void Empresa::visualizaOfertas(unsigned long NIF)
 	}
 }
 
-/////////////////////////////////////////
-/* Metodos para fazer reservas */////////
-////////////////////////////////////////
+/////////////////////////////////
+/* Metodos para fazer reservas */
+/////////////////////////////////
 
 void Empresa::atribuiReserva(unsigned long fornecedorNIF, unsigned long clienteNIF, int numeroOferta) {
 

@@ -41,6 +41,7 @@ public:
 	unsigned int getDistancia() const;
 
 	void addToLotacao();
+	void removeFromLotacao();
 	bool operator<(const Oferta & f2) const;
 	bool ordenaDist(const Oferta & f1, const Oferta & f2);
 	bool operator ==(const Oferta &o2);

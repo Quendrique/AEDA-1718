@@ -135,6 +135,11 @@ void Oferta::addToLotacao()
 	this->lotacaoAtual = lotacaoAtual + 1;
 }
 
+void Oferta::removeFromLotacao()
+{
+	this->lotacaoAtual -= 1;
+}
+
 bool Oferta::operator<(const Oferta & f2) const
 {
 	return this->getNif() < f2.getNif();

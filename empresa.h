@@ -30,6 +30,7 @@ public:
 	void addOfertas(unsigned int NIF);
 	void removeFornecedor(unsigned long fornecedorRemoveNIF);
 	void removeCliente(unsigned long clienteRemoveNIF);
+	void removerOferta(Oferta o1);
 	Cliente * getCliente() const;
 	vector<Fornecedor> getFornecedores() const;
 	string getNome () const;
@@ -46,6 +47,7 @@ public:
 	void printClientes() const;
 	void printFornecedores() const;
 	bool checkFornecedorNIFBool(unsigned long NIF);
+	void removeReserva(unsigned long clienteNIF, unsigned int reserva);
 	bool printOfertasByDestino(string destino) const;
 	bool printOfertasByData(Data data) const;
 	void printOfertas() const;

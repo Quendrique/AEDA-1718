@@ -21,7 +21,7 @@ void clear_screen() // em linux, o comando system() nao aceita o argumento "cls"
 
 int main () 
 {
-	long double NIF;// NIF usado para identificacao do cliente ou do fornecedor
+	unsigned long NIF;// NIF usado para identificacao do cliente ou do fornecedor
 	string FornecedoresFileName, OfertasFileName, ClientesFileName, ClientesRegFileName;
 
 
@@ -544,7 +544,28 @@ int main ()
 				break;
 
 			case 3: //cancelar reserva
-				//chamar a função que apaga a reserva no vetor de reservas e trata da taxa (saldo da empresa= saldo-taxa de cancelamento )
+				
+				unsigned int numero_reserva;
+
+				PortoRivers.printReservasByCliente(NIF);
+
+				cout << "Insira o numero da reserva que deseja remover:";
+				cin >> numero_reserva;
+				while (cin.fail()) {// input nao e um numero
+
+					cin.clear();
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					cout << "Por favor insira um numero: ";
+					cin >> numero_reserva;
+				}
+
+				PortoRivers.removeReserva(NIF, numero_reserva);
+
+				cout << "Reserva cancelada com sucesso" << endl;
+				cin.get();
+				cin.get();
+				clear_screen();
+
 				break;
 
 			case 4: {
@@ -608,9 +629,7 @@ int main ()
 			cout << "+-----------------------------------------------------+" << endl;
 			cout << "|   2.Acrescentar oferta                              |" << endl;
 			cout << "+-----------------------------------------------------+" << endl;
-			cout << "|   3.Remover oferta                                  |" << endl;
-			cout << "+-----------------------------------------------------+" << endl;
-			cout << "|   4.Consultar saldo                                 |" << endl;
+			cout << "|   3.Consultar saldo                                 |" << endl;
 			cout << "+-----------------------------------------------------+" << endl;
 			
 			cin >> opcao_fornecedor;
@@ -624,8 +643,7 @@ int main ()
 			}
 			clear_screen();
 
-			switch (opcao_fornecedor)
-			{
+			switch (opcao_fornecedor) {
 			case 1: //visualizar as ofertas do formcecedor em causa
 
 				PortoRivers.visualizaOfertas(NIF);
@@ -638,36 +656,7 @@ int main ()
 				PortoRivers.addOfertas(NIF);
 				break;
 
-			case 3: { //remover oferta
-
-				unsigned int i;
-
-				f1->printOfertas();
-				cout << "Insira o indice da oferta que deseja remover (0 para cancelar): ";
-				cin >> i;
-				while (cin.fail()) {// input nao e um numero
-
-					cin.clear();
-					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-					cout << "Por favor insira um numero: ";
-					cin >> i;
-				}
-
-				if (i == 0)
-					break;
-
-				try {
-					f1->removeOfertaMenu(i);
-				}
-				catch (OfertaInexistente &o) {
-					cout << "Oferta com o indice " << o.getI() << " nao existe" << endl;
-				}
-
-				clear_screen();
-
-				}
-					break;
-			case 4: {
+			case 3: { //consultar lucro
 
 				cout << "O seu lucro e de " << f1->calculaLucro() << " euros" << endl;
 				cin.clear();
@@ -675,8 +664,9 @@ int main ()
 				cin.get();
 				clear_screen();
 
-			}
+				}
 					break;
+
 			}
 
 		}

@@ -104,6 +104,7 @@ int Fornecedor::removeOferta(unsigned int nif, Data data, string destino, unsign
 			return 0;
 		}
 	}
+
 	return 1;
 }
 
