@@ -43,7 +43,7 @@ int main ()
 	cin >> ClientesRegFileName;
 	cout << endl;
 
-	cout << "Clientes nÃ£o registados: ";
+	cout << "Clientes não registados: ";
 	cin >>ClientesFileName;
 	cout << endl;
 
@@ -51,10 +51,10 @@ int main ()
 
 	// TEMPORARIO - FILE PATHS PARA FICHEIROS
 
-	PortoRivers.carregaFornecedores("C:\\Users\\Admin\\Documents\\Faculdade\\2\\AEDA\\AEDA-1718\\fornecedores.txt");
-	PortoRivers.carregaOferta("C:\\Users\\Admin\\Documents\\Faculdade\\2\\AEDA\\AEDA-1718\\ofertas.txt");
-	PortoRivers.carregaClientes("C:\\Users\\Admin\\Documents\\Faculdade\\2\\AEDA\\AEDA-1718\\clientest.txt");
-	PortoRivers.carregaClientesReg("C:\\Users\\Admin\\Documents\\Faculdade\\2\\AEDA\\AEDA-1718\\clientesR.txt");
+	PortoRivers.carregaFornecedores("C:\\Users\\up201604414\\Downloads\\AEDA-1718-master\\AEDA-1718-master\\fornecedores.txt");
+	PortoRivers.carregaOferta("C:\\Users\\up201604414\\Downloads\\AEDA-1718-master\\AEDA-1718-master\\ofertas.txt");
+	PortoRivers.carregaClientes("C:\\Users\\up201604414\\Downloads\\AEDA-1718-master\\AEDA-1718-master\\clientest.txt");
+	PortoRivers.carregaClientesReg("C:\\Users\\up201604414\\Downloads\\AEDA-1718-master\\AEDA-1718-master\\clientesR.txt");
 
 	clear_screen(); // limpa a janela de comando
 
@@ -80,12 +80,12 @@ int main ()
 		cout << "+-----------------------------------------------------+" << endl;
 		cout << "|   3.Entrar como gestor                              |" << endl;
 		cout << "+-----------------------------------------------------+" << endl;
-		cout << "|   4.Guardar informaÃ§Ã£o                              |" << endl;
+		cout << "|   4.Guardar informacao                              |" << endl;
 		cout << "+-----------------------------------------------------+" << endl;
 		cout << "|   0.Sair                                            |" << endl;
 		cout << "+-----------------------------------------------------+" << endl;
 		
-		cout << "opÃ§Ã£o: ";
+		cout << "opção: ";
 		cin >> option;
 
 		while(cin.fail()) {// input nao e um numero
@@ -259,7 +259,7 @@ int main ()
 						break;
 					}
 					catch (CruzeiroCheio &c) {
-						cout << "O cruzeiro jÃ¡ atingiu a capacidade maxima" << endl;
+						cout << "O cruzeiro já atingiu a capacidade maxima" << endl;
 						cin.get();
 						clear_screen();
 						break;
@@ -287,7 +287,113 @@ int main ()
 
 				case 2: {
 
-					Data data;
+					int  lotacaoMax, mes, dia;
+					string  horainicio, horafim;
+					cout << "Indroduza o mês: ";
+					cin >> mes;
+					cout << endl;
+					while (cin.fail() || mes > 12 || mes < 1) {// input nao e um numero
+
+						cin.clear();
+						cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+						cout << "Por favor insira um numero de 1 a 12: ";
+						cin >> mes;
+
+					}
+					cout << "Indroduza o dia: ";
+					cin >> dia;
+					cout << endl;
+					while (cin.fail() || dia > 31 || dia < 1) {// input nao e um numero
+
+						cin.clear();
+						cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+						cout << "Por favor insira um numero de 1 a 31: ";
+						cin >> dia;
+
+					}
+					int x = 1;
+					while (x == 1)
+					{
+
+						unsigned int pos = 0;
+						cout << "Indroduza a hora de partida(horas:minutos): ";
+						cin >> horainicio;
+
+						cin.ignore(100, '\n');
+						pos = horainicio.find(":", 0);
+
+						if (pos == std::string::npos)
+						{
+							cin.clear();
+							cout << "Imput invalido!" << endl << "Indroduza novamente: ";
+						}
+						else
+						{
+							x = 0;
+						}
+						if (isdigit(horainicio[0]) && isdigit(horainicio[1]) && isdigit(horainicio[3]) && isdigit(horainicio[4]) && pos == 2)
+						{
+							x = 0;
+						}
+						else
+						{
+							cout << "Imput invalido!" << endl << "Indroduza novamente: ";
+							x = 1;
+						}
+					}
+
+
+					x = 1;
+					while (x == 1)
+					{
+
+						unsigned int pos = 0;
+						cout << "Indroduza a hora de chegada(horas:minutos): ";
+						cin >> horafim;
+
+						cin.ignore(100, '\n');
+						pos = horafim.find(":", 0);
+
+						if (pos == std::string::npos)
+						{
+							cin.clear();
+							cout << "Imput invalido!" << endl << "Indroduza novamente: " << endl;
+						}
+						else
+						{
+							x = 0;
+						}
+						if (isdigit(horafim[0]) && isdigit(horafim[1]) && isdigit(horafim[3]) && isdigit(horafim[4]) && pos == 2)
+						{
+							x = 0;
+						}
+						else
+						{
+							cout << "Imput invalido!" << endl << "Indroduza novamente: ";
+							x = 1;
+						}
+					}
+
+
+                   Data data;
+
+					unsigned int pos1, pos2, horaini, minini, horafim1, minfim;
+
+					pos1 = horainicio.find(":", 0);
+					pos2 = horafim.find(":", 0);
+					horaini = stoi(horainicio.substr(0, pos1));
+					horafim1 = stoi(horafim.substr(0, pos2));
+
+					minini = stoi(horainicio.substr(pos1 + 1, horainicio.size() - pos1));
+					minfim = stoi(horafim.substr(pos2 + 1, horafim.size() - pos2));
+
+					data.setHoraFim(horafim1);
+					data.setHoraInicio(horaini);
+					data.setMinutosFim(minfim);
+					data.setMinutosInicio(minini);
+					data.setDia(dia);
+					data.setMes(mes);
+					
 
 					// PROCESSAR DATA ...
 
@@ -335,7 +441,7 @@ int main ()
 						break;
 					}
 					catch (CruzeiroCheio &c) {
-						cout << "O cruzeiro jÃ¡ atingiu a capacidade maxima" << endl;
+						cout << "O cruzeiro já atingiu a capacidade maxima" << endl;
 						cin.get();
 						clear_screen();
 						break;
@@ -407,7 +513,7 @@ int main ()
 						break;
 					}
 					catch (CruzeiroCheio &c) {
-						cout << "O cruzeiro jÃ¡ atingiu a capacidade maxima" << endl;
+						cout << "O cruzeiro já atingiu a capacidade maxima" << endl;
 						cin.get();
 						clear_screen();
 						break;
@@ -438,7 +544,7 @@ int main ()
 				break;
 
 			case 3: //cancelar reserva
-				//chamar a funÃ§Ã£o que apaga a reserva no vetor de reservas e trata da taxa (saldo da empresa= saldo-taxa de cancelamento )
+				//chamar a função que apaga a reserva no vetor de reservas e trata da taxa (saldo da empresa= saldo-taxa de cancelamento )
 				break;
 
 			case 4: {
@@ -793,12 +899,13 @@ int main ()
 
 		}
 
-		case 4: //guardar a informÃ§Ã£o nos ficheiros de texto
+		case 4: //guardar a informção nos ficheiros de texto
 			
 			PortoRivers.guardaClientes(ClientesRegFileName, ClientesFileName);
-			PortoRivers.guardaFornecedores("C:\\Users\\up201604414\\Documents\\AEDA\\fornecedores.txt"); //file path so para testes
-			PortoRivers.guardaOfertas("C:\\Users\\up201604414\\Documents\\AEDA\\ofertas.txt");  //file path so para testes
+			PortoRivers.guardaFornecedores("C:\\Users\\catam\\Desktop\\aedafinal\\aedafinal\\fornecedores.txt"); //file path so para testes
+			PortoRivers.guardaOfertas("C:\\Users\\catam\\Desktop\\aedafinal\\aedafinal\\ofertas.txt");  //file path so para testes
 
+		
 			break;
 
 

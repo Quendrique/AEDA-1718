@@ -114,7 +114,7 @@ void Fornecedor::printOfertas() const {
 
 	for (unsigned int i = 0; i < ofertas.size(); i++) {
 
-		cout << "Oferta " << i << ":" << endl
+		cout << "Oferta " << i+1 << ":" << endl
 			<< "Barco: " << ofertas.at(i).getBarco() << endl
 			<< "Lotacao maxima: " << ofertas.at(i).getLotacaoMax() << endl
 			<< "Destino: " << ofertas.at(i).getDestino() << endl
@@ -160,7 +160,7 @@ bool Fornecedor::printOfertasByData(Data data) const {
 
 			test = true;
 
-			cout << "Oferta " << i << ":" << endl
+			cout << "Oferta " << i+1 << ":" << endl
 				<< "Barco: " << ofertas.at(i).getBarco() << endl
 				<< "Lotacao maxima: " << ofertas.at(i).getLotacaoMax() << endl
 				<< "Destino: " << ofertas.at(i).getDestino() << endl

@@ -93,6 +93,10 @@ void Cliente::removeReservaByFornecedor(long double fornecedorNIF)
 
 void Cliente::printReservas() const
 {
+	if (reservas.size() == 0)
+	{
+		cout << "Não existe" << endl;
+	}
 	for (unsigned int i = 0; i < reservas.size(); i++) {
 
 		cout << "Fornecedor: " << reservas.at(i)->getNif() << endl

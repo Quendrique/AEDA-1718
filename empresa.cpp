@@ -60,7 +60,7 @@ void Empresa::carregaFornecedores(string fichFornecedor)
 
 			getline(ssF, nome, ',');
 
-			for (unsigned int j = 0; j < nome.length(); j++) //retira espaÃ§o no inicio do nome
+			for (unsigned int j = 0; j < nome.length(); j++) //retira espaço no inicio do nome
 			{
 				if (isalpha(nome[j]))
 					break;
@@ -71,7 +71,7 @@ void Empresa::carregaFornecedores(string fichFornecedor)
 				}
 			}
 
-			for (int j = nome.length() - 1; j >= 0; j--) // retira espaÃ§o no fim do nome
+			for (int j = nome.length() - 1; j >= 0; j--) // retira espaço no fim do nome
 			{
 				if (isalpha(nome[j]))
 					break;
@@ -89,7 +89,7 @@ void Empresa::carregaFornecedores(string fichFornecedor)
 
 			getline(ssF, nifTmp, ',');
 
-			for (unsigned int j = 0; j < nifTmp.length(); j++) //retira espaÃ§o no inicio do nif
+			for (unsigned int j = 0; j < nifTmp.length(); j++) //retira espaço no inicio do nif
 			{
 				if (isalnum(nifTmp[j]))
 					break;
@@ -108,7 +108,7 @@ void Empresa::carregaFornecedores(string fichFornecedor)
 
 			getline(ssF, morada, ',');
 
-			for (unsigned int j = 0; j < morada.length(); j++) //retira espaÃ§o no inicio da morada
+			for (unsigned int j = 0; j < morada.length(); j++) //retira espaço no inicio da morada
 			{
 				if (isalpha(morada[j]))
 					break;
@@ -125,7 +125,7 @@ void Empresa::carregaFornecedores(string fichFornecedor)
 
 			getline(ssF, precoKmTmp, ',');
 
-			for (unsigned int j = 0; j <precoKmTmp.length(); j++) //retira espaÃ§o no inicio do preco
+			for (unsigned int j = 0; j <precoKmTmp.length(); j++) //retira espaço no inicio do preco
 			{
 				if (isalnum(precoKmTmp[j]))
 					break;
@@ -144,7 +144,7 @@ void Empresa::carregaFornecedores(string fichFornecedor)
 
 			getline(ssF, precoLot20Tmp, ',');
 
-			for (unsigned int j = 0; j <precoLot20Tmp.length(); j++) //retira espaÃ§o no inicio do preco
+			for (unsigned int j = 0; j <precoLot20Tmp.length(); j++) //retira espaço no inicio do preco
 			{
 				if (isalnum(precoLot20Tmp[j]))
 					break;
@@ -159,7 +159,7 @@ void Empresa::carregaFornecedores(string fichFornecedor)
 
 			getline(ssF, precoLot35Tmp, ',');
 
-			for (unsigned int j = 0; j <precoLot35Tmp.length(); j++) //retira espaÃ§o no inicio do preco
+			for (unsigned int j = 0; j <precoLot35Tmp.length(); j++) //retira espaço no inicio do preco
 			{
 				if (isalnum(precoLot35Tmp[j]))
 					break;
@@ -174,7 +174,7 @@ void Empresa::carregaFornecedores(string fichFornecedor)
 
 			getline(ssF, precoLot50Tmp, '\n');
 
-			for (unsigned int j = 0; j <precoLot50Tmp.length(); j++) //retira espaÃ§o no inicio do preco
+			for (unsigned int j = 0; j <precoLot50Tmp.length(); j++) //retira espaço no inicio do preco
 			{
 				if (isalnum(precoLot50Tmp[j]))
 					break;
@@ -365,7 +365,7 @@ void Empresa::carregaClientes(string fichClientes)
 
 			getline(ssC, nome, ',');
 
-			for (unsigned int j = 0; j < nome.length(); j++) //retira espaÃ§o no inicio do nome
+			for (unsigned int j = 0; j < nome.length(); j++) //retira espaço no inicio do nome
 			{
 				if (isalpha(nome[j]))
 					break;
@@ -376,7 +376,7 @@ void Empresa::carregaClientes(string fichClientes)
 				}
 			}
 
-			for (int j = nome.length() - 1; j >= 0; j--) // retira espaÃ§o no fim do nome
+			for (int j = nome.length() - 1; j >= 0; j--) // retira espaço no fim do nome
 			{
 				if (isalpha(nome[j]))
 					break;
@@ -394,7 +394,7 @@ void Empresa::carregaClientes(string fichClientes)
 
 			getline(ssC, nifTmp, ',');
 
-			for (unsigned int j = 0; j < nifTmp.length(); j++) //retira espaÃ§o no inicio do nif
+			for (unsigned int j = 0; j < nifTmp.length(); j++) //retira espaço no inicio do nif
 			{
 				if (isalnum(nifTmp[j]))
 					break;
@@ -413,7 +413,7 @@ void Empresa::carregaClientes(string fichClientes)
 
 			getline(ssC, morada, '\n');
 
-			for (unsigned int j = 0; j < morada.length(); j++) //retira espaÃ§o no inicio da morada
+			for (unsigned int j = 0; j < morada.length(); j++) //retira espaço no inicio da morada
 			{
 				if (isalpha(morada[j]))
 					break;
@@ -464,7 +464,7 @@ void Empresa::carregaClientesReg (string fichClientesR)
 
 			getline(ssCR, nome, ',');
 
-			for (unsigned int j = 0; j < nome.length(); j++) //retira espaÃ§o no inicio do nome
+			for (unsigned int j = 0; j < nome.length(); j++) //retira espaço no inicio do nome
 			{
 				if (isalpha(nome[j]))
 					break;
@@ -475,7 +475,7 @@ void Empresa::carregaClientesReg (string fichClientesR)
 				}
 			}
 
-			for (int j = nome.length() - 1; j >= 0; j--) // retira espaÃ§o no fim do nome
+			for (int j = nome.length() - 1; j >= 0; j--) // retira espaço no fim do nome
 			{
 				if (isalpha(nome[j]))
 					break;
@@ -493,7 +493,7 @@ void Empresa::carregaClientesReg (string fichClientesR)
 
 			getline(ssCR, nifTmp, ',');
 
-			for (unsigned int j = 0; j < nifTmp.length(); j++) //retira espaÃ§o no inicio do nif
+			for (unsigned int j = 0; j < nifTmp.length(); j++) //retira espaço no inicio do nif
 			{
 				if (isalnum(nifTmp[j]))
 					break;
@@ -512,7 +512,7 @@ void Empresa::carregaClientesReg (string fichClientesR)
 
 			getline(ssCR, morada, ',');
 
-			for (unsigned int j = 0; j < morada.length(); j++) //retira espaÃ§o no inicio da morada
+			for (unsigned int j = 0; j < morada.length(); j++) //retira espaço no inicio da morada
 			{
 				if (isalpha(morada[j]))
 					break;
@@ -529,7 +529,7 @@ void Empresa::carregaClientesReg (string fichClientesR)
 
 			getline(ssCR, pontosTmp, '\n');
 
-			for (unsigned int j = 0; j < pontosTmp.length(); j++) //retira espaÃ§o no inicio do nif
+			for (unsigned int j = 0; j < pontosTmp.length(); j++) //retira espaço no inicio do nif
 			{
 				if (isalnum(pontosTmp[j]))
 					break;
@@ -551,7 +551,7 @@ void Empresa::carregaClientesReg (string fichClientesR)
 
 
 /////////////////////////////////////
-/* Metodos de imprimir informaÃ§Ãµes */
+/* Metodos de imprimir informações */
 /////////////////////////////////////
 
 void Empresa::printLucrosTotais() const {
@@ -635,7 +635,7 @@ void Empresa::addOfertas(unsigned int NIF)
 			cout << "Indroduza novamente! " << endl;
 		}
 		// iate, barco rabelo ou veleiro
-		//RÃ©gua, PinhÃ£o ou Barca dâ€™Alva
+		//Régua, Pinhão ou Barca d’Alva
 
 	}
 
@@ -666,10 +666,10 @@ void Empresa::addOfertas(unsigned int NIF)
 				cout << "Indroduza novamente! " << endl;
 			}
 			// iate, barco rabelo ou veleiro
-			//RÃ©gua, PinhÃ£o ou Barca dâ€™Alva
+			//Régua, Pinhão ou Barca d’Alva
 
 		}
-		cout << "Indroduza o mÃªs: ";
+		cout << "Indroduza o mês: ";
 		cin >> mes;
 		cout << endl;
 		while (cin.fail() || mes > 12 || mes < 1) {// input nao e um numero
@@ -946,7 +946,8 @@ void Empresa::atribuiReserva(unsigned long fornecedorNIF, unsigned long clienteN
 
 						Oferta *o1;
 						o1 = fornecedores.at(i).getOfertaPointer(numeroOferta-1);
-						clientes.at(i)->addReserva(o1);
+						clientes.at(j)->addReserva(o1);
+						return;
 
 					}
 

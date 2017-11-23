@@ -9,9 +9,11 @@ Oferta::Oferta(unsigned int nif, string barco, unsigned int lotacaoMax, unsigned
 {
 	this->distancia = distancia;
 	this->nif = nif;
+	this->destino = destino;
 	this->barco = barco;
 	this->lotacaoMax = lotacaoMax;
 	this->lotacaoAtual = lotacaoAtual;
+	this->data = data;
 	this->preco = 0;
 }
 
