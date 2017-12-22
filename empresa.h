@@ -6,16 +6,32 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
+#include <unordered_set>
 #include "cliente.h"
 #include "fornecedor.h"
 
 using namespace std;
+struct clientesInativosHash
+{
+	int operator() (const clientesInativos& cl) const
+	{
+		return cl.getNome().at(0) * 23;	// Random Hash function. Better than returning 0, am i right? :D
+	}
 
+	bool operator() (const clientesInativos& cl1, const clientesInativos& cl2) const
+	{
+		return (cl1.getNIF() == cl2.getNIF());
+	}
+};
+
+typedef unordered_set<clientesInativos, clientesInativosHash, clientesInativosHash> HashTabclientesInativos;
 class Empresa {
 
 private:
 	vector<Fornecedor> fornecedores;
 	vector<Cliente*> clientes;
+	Data data_atual;
+	HashTabclientesInativos ClientesInativos;
 	string fichFornecedores;
 	string fichOfertas;
 	string fichClientes;
