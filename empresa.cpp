@@ -24,7 +24,22 @@ string Empresa::getNome() const
 {
 	return nome;
 }
+void Empresa::changeClienteMorada(Cliente* cliente, string newMorada) {
+	// See if the user is in the table
+	auto it = ClientesInativos.find(clientesInativos(cliente));
 
+	if (it == ClientesInativos.end())	// He isn't
+		return;
+
+	// He is : Remove it ...
+	ClientesInativos.erase(it);
+
+	// ... change it ...
+	cliente->setMorada(newMorada);
+
+	// ... and re-add it!
+	ClientesInativos.insert(clientesInativos(cliente));
+}
 //////////////////////////////////////////////
 /* Metodos para ler informacao dos ficheiros*/
 //////////////////////////////////////////////
@@ -60,7 +75,7 @@ void Empresa::carregaFornecedores(string fichFornecedor)
 
 			getline(ssF, nome, ',');
 
-			for (unsigned int j = 0; j < nome.length(); j++) //retira espaÁo no inicio do nome
+			for (unsigned int j = 0; j < nome.length(); j++) //retira espa√ßo no inicio do nome
 			{
 				if (isalpha(nome[j]))
 					break;
@@ -71,7 +86,7 @@ void Empresa::carregaFornecedores(string fichFornecedor)
 				}
 			}
 
-			for (int j = nome.length() - 1; j >= 0; j--) // retira espaÁo no fim do nome
+			for (int j = nome.length() - 1; j >= 0; j--) // retira espa√ßo no fim do nome
 			{
 				if (isalpha(nome[j]))
 					break;
@@ -89,7 +104,7 @@ void Empresa::carregaFornecedores(string fichFornecedor)
 
 			getline(ssF, nifTmp, ',');
 
-			for (unsigned int j = 0; j < nifTmp.length(); j++) //retira espaÁo no inicio do nif
+			for (unsigned int j = 0; j < nifTmp.length(); j++) //retira espa√ßo no inicio do nif
 			{
 				if (isalnum(nifTmp[j]))
 					break;
@@ -108,7 +123,7 @@ void Empresa::carregaFornecedores(string fichFornecedor)
 
 			getline(ssF, morada, ',');
 
-			for (unsigned int j = 0; j < morada.length(); j++) //retira espaÁo no inicio da morada
+			for (unsigned int j = 0; j < morada.length(); j++) //retira espa√ßo no inicio da morada
 			{
 				if (isalpha(morada[j]))
 					break;
@@ -125,7 +140,7 @@ void Empresa::carregaFornecedores(string fichFornecedor)
 
 			getline(ssF, precoKmTmp, ',');
 
-			for (unsigned int j = 0; j <precoKmTmp.length(); j++) //retira espaÁo no inicio do preco
+			for (unsigned int j = 0; j <precoKmTmp.length(); j++) //retira espa√ßo no inicio do preco
 			{
 				if (isalnum(precoKmTmp[j]))
 					break;
@@ -144,7 +159,7 @@ void Empresa::carregaFornecedores(string fichFornecedor)
 
 			getline(ssF, precoLot20Tmp, ',');
 
-			for (unsigned int j = 0; j <precoLot20Tmp.length(); j++) //retira espaÁo no inicio do preco
+			for (unsigned int j = 0; j <precoLot20Tmp.length(); j++) //retira espa√ßo no inicio do preco
 			{
 				if (isalnum(precoLot20Tmp[j]))
 					break;
@@ -159,7 +174,7 @@ void Empresa::carregaFornecedores(string fichFornecedor)
 
 			getline(ssF, precoLot35Tmp, ',');
 
-			for (unsigned int j = 0; j <precoLot35Tmp.length(); j++) //retira espaÁo no inicio do preco
+			for (unsigned int j = 0; j <precoLot35Tmp.length(); j++) //retira espa√ßo no inicio do preco
 			{
 				if (isalnum(precoLot35Tmp[j]))
 					break;
@@ -174,7 +189,7 @@ void Empresa::carregaFornecedores(string fichFornecedor)
 
 			getline(ssF, precoLot50Tmp, '\n');
 
-			for (unsigned int j = 0; j <precoLot50Tmp.length(); j++) //retira espaÁo no inicio do preco
+			for (unsigned int j = 0; j <precoLot50Tmp.length(); j++) //retira espa√ßo no inicio do preco
 			{
 				if (isalnum(precoLot50Tmp[j]))
 					break;
@@ -365,7 +380,7 @@ void Empresa::carregaClientes(string fichClientes)
 
 			getline(ssC, nome, ',');
 
-			for (unsigned int j = 0; j < nome.length(); j++) //retira espaÁo no inicio do nome
+			for (unsigned int j = 0; j < nome.length(); j++) //retira espa√ßo no inicio do nome
 			{
 				if (isalpha(nome[j]))
 					break;
@@ -376,7 +391,7 @@ void Empresa::carregaClientes(string fichClientes)
 				}
 			}
 
-			for (int j = nome.length() - 1; j >= 0; j--) // retira espaÁo no fim do nome
+			for (int j = nome.length() - 1; j >= 0; j--) // retira espa√ßo no fim do nome
 			{
 				if (isalpha(nome[j]))
 					break;
@@ -394,7 +409,7 @@ void Empresa::carregaClientes(string fichClientes)
 
 			getline(ssC, nifTmp, ',');
 
-			for (unsigned int j = 0; j < nifTmp.length(); j++) //retira espaÁo no inicio do nif
+			for (unsigned int j = 0; j < nifTmp.length(); j++) //retira espa√ßo no inicio do nif
 			{
 				if (isalnum(nifTmp[j]))
 					break;
@@ -413,7 +428,7 @@ void Empresa::carregaClientes(string fichClientes)
 
 			getline(ssC, morada, '\n');
 
-			for (unsigned int j = 0; j < morada.length(); j++) //retira espaÁo no inicio da morada
+			for (unsigned int j = 0; j < morada.length(); j++) //retira espa√ßo no inicio da morada
 			{
 				if (isalpha(morada[j]))
 					break;
@@ -464,7 +479,7 @@ void Empresa::carregaClientesReg (string fichClientesR)
 
 			getline(ssCR, nome, ',');
 
-			for (unsigned int j = 0; j < nome.length(); j++) //retira espaÁo no inicio do nome
+			for (unsigned int j = 0; j < nome.length(); j++) //retira espa√ßo no inicio do nome
 			{
 				if (isalpha(nome[j]))
 					break;
@@ -475,7 +490,7 @@ void Empresa::carregaClientesReg (string fichClientesR)
 				}
 			}
 
-			for (int j = nome.length() - 1; j >= 0; j--) // retira espaÁo no fim do nome
+			for (int j = nome.length() - 1; j >= 0; j--) // retira espa√ßo no fim do nome
 			{
 				if (isalpha(nome[j]))
 					break;
@@ -493,7 +508,7 @@ void Empresa::carregaClientesReg (string fichClientesR)
 
 			getline(ssCR, nifTmp, ',');
 
-			for (unsigned int j = 0; j < nifTmp.length(); j++) //retira espaÁo no inicio do nif
+			for (unsigned int j = 0; j < nifTmp.length(); j++) //retira espa√ßo no inicio do nif
 			{
 				if (isalnum(nifTmp[j]))
 					break;
@@ -512,7 +527,7 @@ void Empresa::carregaClientesReg (string fichClientesR)
 
 			getline(ssCR, morada, ',');
 
-			for (unsigned int j = 0; j < morada.length(); j++) //retira espaÁo no inicio da morada
+			for (unsigned int j = 0; j < morada.length(); j++) //retira espa√ßo no inicio da morada
 			{
 				if (isalpha(morada[j]))
 					break;
@@ -529,7 +544,7 @@ void Empresa::carregaClientesReg (string fichClientesR)
 
 			getline(ssCR, pontosTmp, '\n');
 
-			for (unsigned int j = 0; j < pontosTmp.length(); j++) //retira espaÁo no inicio do nif
+			for (unsigned int j = 0; j < pontosTmp.length(); j++) //retira espa√ßo no inicio do nif
 			{
 				if (isalnum(pontosTmp[j]))
 					break;
@@ -551,7 +566,7 @@ void Empresa::carregaClientesReg (string fichClientesR)
 
 
 /////////////////////////////////////
-/* Metodos de imprimir informaÁıes */
+/* Metodos de imprimir informa√ß√µes */
 /////////////////////////////////////
 
 void Empresa::printLucrosTotais() const {
@@ -635,7 +650,7 @@ void Empresa::addOfertas(unsigned int NIF)
 			cout << "Indroduza novamente! " << endl;
 		}
 		// iate, barco rabelo ou veleiro
-		//RÈgua, Pinh„o ou Barca díAlva
+		//R√©gua, Pinh√£o ou Barca d¬íAlva
 
 	}
 
@@ -666,10 +681,10 @@ void Empresa::addOfertas(unsigned int NIF)
 				cout << "Indroduza novamente! " << endl;
 			}
 			// iate, barco rabelo ou veleiro
-			//RÈgua, Pinh„o ou Barca díAlva
+			//R√©gua, Pinh√£o ou Barca d¬íAlva
 
 		}
-		cout << "Indroduza o mÍs: ";
+		cout << "Indroduza o m√™s: ";
 		cin >> mes;
 		cout << endl;
 		while (cin.fail() || mes > 12 || mes < 1) {// input nao e um numero
