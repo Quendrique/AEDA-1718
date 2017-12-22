@@ -41,6 +41,7 @@ private:
 public:
 	Empresa(string fichFornecedores, string fichOfertas, string fichClientes, string fichClientesReg);
 	Empresa(string nome, vector<Fornecedor> fornecedores, vector<Cliente*> clientes);
+	void changeClienteMorada(Cliente* cliente, string newMorada); // added
 	void addFornecedor(Fornecedor fornecedorNew);
 	void addCliente(Cliente * clienteNew);
 	void addOfertas(unsigned int NIF);
