@@ -2,6 +2,12 @@
 
 Data::Data() {}
 
+Data::Data(unsigned int dia, unsigned int mes)
+{
+	this->dia = dia;
+	this->mes = mes;
+}
+
 Data::Data(unsigned int dia, unsigned int mes, unsigned int horaInicio, unsigned int horaFim, unsigned int minutosInicio, unsigned int minutosFim) {
 	this->dia = dia;
 	this->mes = mes;
@@ -64,4 +70,30 @@ bool Data::operator==(const Data &d2) const {
 		return true;
 	else
 		return false;
+}
+
+bool Data::operator<(const Data d2) const
+{
+	if (mes < d2.getMes()) 
+	{
+		return true;
+	}
+	else if (mes > d2.getMes()) 
+	{
+		return false;
+	}
+
+	else
+	{
+
+		if (dia < d2.getDia())
+		{
+			return true;
+		}
+		else if (dia > d2.getDia())
+		{
+			return false;
+		}
+	}
+
 }

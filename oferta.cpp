@@ -17,6 +17,11 @@ Oferta::Oferta(unsigned int nif, string barco, unsigned int lotacaoMax, unsigned
 	this->preco = 0;
 }
 
+Data Oferta::getUltimaData()const
+{
+	return ultima_data;
+}
+
 /*/////////////////////////
 /////////SET //////////////
 */////////////////////////
@@ -33,6 +38,11 @@ void Oferta::setBarco(string barco)
 void Oferta::setNif(unsigned int nif)
 {
 	this->nif = nif;
+}
+
+bool Oferta::operator<(const Oferta o2) const
+{
+	return this->ultima_data < o2.getUltimaData();
 }
 
 void Oferta::setLotacaoMax(unsigned int lotacaoMax)

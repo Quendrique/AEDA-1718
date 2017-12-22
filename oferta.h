@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "data.h"
+#include <queue>
 
 using namespace std;
 
@@ -18,6 +19,8 @@ private:
 	Data data;
 	unsigned int preco;
 	unsigned int nif;
+	Data ultima_data;
+	priority_queue<Oferta> menos_popular;
 
 public:
 	Oferta();
@@ -30,7 +33,9 @@ public:
 	void setData(Data data);
 	void setDistancia(unsigned int distancia);
 	void setNif(unsigned int nif);
+	bool operator < (const Oferta o2) const;
 
+	Data getUltimaData() const;
 	string getBarco() const;
 	int getPreco()const;
 	Data getData() const;

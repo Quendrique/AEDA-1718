@@ -20,6 +20,7 @@ private:
 
 public:
 	Data();
+	Data(unsigned int dia, unsigned int mes);
 	Data(unsigned int dia, unsigned int mes, unsigned int horaInicio, unsigned int horaFim,unsigned int minutosInicio, unsigned int minutosFim);
 	void setDia(unsigned int dia);
 	void setMes(unsigned int mes);
@@ -35,6 +36,7 @@ public:
 	unsigned int getMinutosFim() const;
 	string printData() const;
 	bool operator ==(const Data &d2)const;
+	bool operator < (const Data d2)const;
 
 };
 
