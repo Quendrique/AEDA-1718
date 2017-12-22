@@ -15,7 +15,11 @@ Cliente::Cliente(string nome, unsigned int NIF, string morada)
 	this->morada = morada;
 }
 
+clientesInativos::clientesInativos(Cliente* clienterprt)
+{
+	this->clienterprt = clienterprt;
 
+}
 void Cliente::setNome(string nome)
 {
 	this->nome = nome;
@@ -73,7 +77,7 @@ void Cliente::printInfo() const {
 }
 
 void Cliente::printPontos() const {
-	cout << " Este cliente não está registado, só os clientes registados podem usufruir dos pontos!" << endl;
+	cout << " Este cliente nÃ£o estÃ¡ registado, sÃ³ os clientes registados podem usufruir dos pontos!" << endl;
 }
 
 double Cliente::getPontos() const
@@ -131,4 +135,23 @@ void ClienteReg::printInfo() const {
 
 void ClienteReg::printPontos() const {
 	cout << "Tem " << pontos << " acumulados" << endl;
+}
+/**
+Clientes Inativos
+*/
+string clientesInativos::getNome() const
+{
+	return this->clienterprt->nome;
+}
+string clientesInativos::getMorada() const
+{
+	return this->clienterprt->morada;
+}
+unsigned int clientesInativos::getNIF() const
+{
+	return this->clienterprt->NIF;
+}
+void clientesInativos::setMorada(string morada)
+{
+	this->clienterprt->morada = morada;
 }
