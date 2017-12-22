@@ -18,6 +18,7 @@ protected:
 	
 
 public:
+	friend class clientesInativos;
 	Cliente();
 	Cliente(string nome, unsigned int NIF, string morada);
 	void setNome(string nome);
@@ -54,7 +55,20 @@ public:
 	void printPontos() const;
 	bool isRegistado() { return true; }
 };
+class clientesInativos
+{
+	Cliente* clienterprt;
+public:
+	clientesInativos(Cliente* clienterprt);
+	string getNome() const;
+	string getMorada() const;
+	unsigned int getNIF() const;
+	void setMorada(string morada);
+	//~clientesInativos();
 
+private:
+
+};
 
 //////////////
 /* EXCECOES */
