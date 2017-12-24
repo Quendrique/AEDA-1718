@@ -39,7 +39,7 @@ private:
 	string nome;
 
 public:
-	Empresa(string fichFornecedores, string fichOfertas, string fichClientes, string fichClientesReg);
+        Empresa(string fichFornecedores, string fichOfertas, string fichClientes, string fichClientesReg, Data data_Atual); // alterei
 	Empresa(string nome, vector<Fornecedor> fornecedores, vector<Cliente*> clientes);
 	void changeClienteMorada(Cliente* cliente, string newMorada); // added
 	void addFornecedor(Fornecedor fornecedorNew);
@@ -48,9 +48,11 @@ public:
 	void removeFornecedor(unsigned long fornecedorRemoveNIF);
 	void removeCliente(unsigned long clienteRemoveNIF);
 	void removerOferta(Oferta o1);
+	bool compareData(Data data_cliente); // alterei
 	Cliente * getCliente() const;
 	vector<Fornecedor> getFornecedores() const;
 	string getNome () const;
+	void setData_atual(int dia, int mes);// acrescentei
 	void carregaFornecedores(string fichFornecedor); //extrai o conteudo do ficheiro de fornecedores
 	void carregaOferta( string ficheiro_oferta);//extrai o conteudo do ficheiro de ofertas
 	void carregaClientes(string fichClientes);
