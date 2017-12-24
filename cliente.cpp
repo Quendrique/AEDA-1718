@@ -8,12 +8,15 @@ Cliente::Cliente()
 {
 }
 
-Cliente::Cliente(string nome, unsigned int NIF, string morada)
+Cliente::Cliente(string nome, unsigned int NIF, string morada) //alterei
 {
 	this->nome = nome;
 	this->NIF = NIF;
 	this->morada = morada;
+	this->inativo = 0;//partimos do principio que esta ativo
+	//this->ultima_reserva = ainda por completar;
 }
+
 
 clientesInativos::clientesInativos(Cliente* clienterprt)
 {
