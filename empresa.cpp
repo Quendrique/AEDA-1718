@@ -24,6 +24,35 @@ string Empresa::getNome() const
 {
 	return nome;
 }
+void Empresa::setData_atual(int dia, int mes) // acrecentei
+{
+	Data d(dia, mes);
+	this->data_atual = d;
+}
+bool Empresa::compareData(Data data_cliente) // não sei se está completamente correto
+{
+	int dias;
+	
+	if (abs(this->data_atual.getMes() - data_cliente.getMes() == 1))
+	{
+		if (data_atual.getMes() > data_cliente.getMes())
+		{
+			dias = (30 - data_cliente.getDia()) + data_atual.getMes();
+			
+		}
+		else // não pode acontecer ma esta aqui na mesma
+		{
+			dias = (30 - data_atual.getDia()) + data_cliente.getDia();
+		}
+		if (dias >= 30)
+		{
+			return true;
+		}
+	}
+	return false;
+	
+
+}
 void Empresa::changeClienteMorada(Cliente* cliente, string newMorada) {
 	// See if the user is in the table
 	auto it = ClientesInativos.find(clientesInativos(cliente));
