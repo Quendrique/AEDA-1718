@@ -23,6 +23,7 @@ int main ()
 {
 	unsigned long NIF;// NIF usado para identificacao do cliente ou do fornecedor
 	string FornecedoresFileName, OfertasFileName, ClientesFileName, ClientesRegFileName;
+	int mes_Atual, dia_Atual;
 
 
 	cout << "               __Bemvindo a empresa Porto Rivers__             " << endl << endl;
@@ -43,12 +44,18 @@ int main ()
 	cin >> ClientesRegFileName;
 	cout << endl;
 
-	cout << "Clientes não registados: ";
+	cout << "Clientes nÃ£o registados: ";
 	cin >>ClientesFileName;
 	cout << endl;
-
-	Empresa PortoRivers(FornecedoresFileName, OfertasFileName, ClientesFileName, ClientesRegFileName);
-
+cout << "Insira o dia:";
+	cin >> dia_Atual;
+	cout << endl;
+	cout << "Insira o mes:";
+	cin >> mes_Atual;
+	cout << endl;
+	Data d(dia_Atual, mes_Atual);
+	Empresa PortoRivers(FornecedoresFileName, OfertasFileName, ClientesFileName, ClientesRegFileName,d);
+	
 	// TEMPORARIO - FILE PATHS PARA FICHEIROS
 
 	PortoRivers.carregaFornecedores("C:\\Users\\up201604414\\Downloads\\AEDA-1718-master\\AEDA-1718-master\\fornecedores.txt");
@@ -85,7 +92,7 @@ int main ()
 		cout << "|   0.Sair                                            |" << endl;
 		cout << "+-----------------------------------------------------+" << endl;
 		
-		cout << "opção: ";
+		cout << "opÃ§Ã£o: ";
 		cin >> option;
 
 		while(cin.fail()) {// input nao e um numero
@@ -259,7 +266,7 @@ int main ()
 						break;
 					}
 					catch (CruzeiroCheio &c) {
-						cout << "O cruzeiro já atingiu a capacidade maxima" << endl;
+						cout << "O cruzeiro jÃ¡ atingiu a capacidade maxima" << endl;
 						cin.get();
 						clear_screen();
 						break;
@@ -289,7 +296,7 @@ int main ()
 
 					int  lotacaoMax, mes, dia;
 					string  horainicio, horafim;
-					cout << "Indroduza o mês: ";
+					cout << "Indroduza o mÃªs: ";
 					cin >> mes;
 					cout << endl;
 					while (cin.fail() || mes > 12 || mes < 1) {// input nao e um numero
@@ -441,7 +448,7 @@ int main ()
 						break;
 					}
 					catch (CruzeiroCheio &c) {
-						cout << "O cruzeiro já atingiu a capacidade maxima" << endl;
+						cout << "O cruzeiro jÃ¡ atingiu a capacidade maxima" << endl;
 						cin.get();
 						clear_screen();
 						break;
@@ -513,7 +520,7 @@ int main ()
 						break;
 					}
 					catch (CruzeiroCheio &c) {
-						cout << "O cruzeiro já atingiu a capacidade maxima" << endl;
+						cout << "O cruzeiro jÃ¡ atingiu a capacidade maxima" << endl;
 						cin.get();
 						clear_screen();
 						break;
@@ -889,7 +896,7 @@ int main ()
 
 		}
 
-		case 4: //guardar a informção nos ficheiros de texto
+		case 4: //guardar a informÃ§Ã£o nos ficheiros de texto
 			
 			PortoRivers.guardaClientes(ClientesRegFileName, ClientesFileName);
 			PortoRivers.guardaFornecedores("C:\\Users\\catam\\Desktop\\aedafinal\\aedafinal\\fornecedores.txt"); //file path so para testes
