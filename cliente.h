@@ -12,6 +12,8 @@ class Cliente {
 
 protected:
 	string nome;
+	unsigned int inativo; //alterei guardar no ficheiro de texto?!
+	Data ultima_reserva; // acrecentei
 	unsigned int NIF;
 	string morada;
 	vector<Oferta *> reservas;
