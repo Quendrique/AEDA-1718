@@ -1,11 +1,12 @@
 #include "empresa.h"
 
-Empresa::Empresa(string fichFornecedores,string fichOfertas,string fichClientes,string fichClientesReg)
+Empresa::Empresa(string fichFornecedores,string fichOfertas,string fichClientes,string fichClientesReg, Data data_Atual)
 {
 	this->fichFornecedores = fichFornecedores;
 	this->fichOfertas = fichOfertas;
 	this->fichClientes = fichClientes;
 	this->fichClientesReg = fichClientesReg;
+	this->data_atual = data_Atual;
 }
 
 Empresa::Empresa(string nome, vector<Fornecedor> fornecedores, vector<Cliente*> clientes)
@@ -1127,3 +1128,42 @@ void Empresa::guardaClientes(string fichClientesR,string fichClientes)
 
 	}
 }*/
+
+//priority queue
+int Empresa:: Descontos()
+{
+	priority_queue<Oferta> temp;
+	int i = 0;
+	int j = 0;
+
+	//primeira oferta -> 50%
+	Oferta o1 = temp.top();
+	temp.pop();
+
+	cout << "!!! Ofertas com Desconto !!!" << endl;
+	cout << "Oferta com 50% de desconto: " << endl;
+	cout << " Antes: " << o1.getPreco() << "  Depois: " << o1.getPreco() - 0.5*o1.getPreco() << endl;
+	cout << "Ofertas com 20% de desconto: " << endl;
+
+	temp.pop();
+
+	//ciclo para as 3 ofertas seguintes com 20% de desconto
+	while (i<3)
+	{
+		cout << "Antes:" << temp.top().getPreco() << "  Depois: " << temp.top().getPreco() - 0.2*temp.top().getPreco() << endl;
+		temp.pop();
+		i++;
+	}
+
+	//ciclo para as 3 ofertas seguintes com 5% de desconto
+	
+	cout << "Ofertas com 5% de desconto: " << endl;
+	while (j < 3)
+	{
+		cout << "Antes:" << temp.top().getPreco() << "  Depois: " << temp.top().getPreco() - 0.05*temp.top().getPreco() << endl;
+		temp.pop();
+		j++;
+
+	}
+
+}

@@ -113,7 +113,9 @@ cout << "Insira o dia:";
 			return 0;
 			break;
 
-		case 1: { //entrar como utilizador
+		case 1: 
+		{ 
+			//entrar como utilizador
 			int option_utilizador;
 			bool clienteExiste;
 			clienteExiste = false;
@@ -156,6 +158,9 @@ cout << "Insira o dia:";
 			cout << "+-----------------------------------------------------+" << endl;
 			cout << "|   4.Consultar reservas                              |" << endl;
 			cout << "+-----------------------------------------------------+" << endl;
+			cout << "|   5.Consultar ofertas com desconto                  |" << endl;
+			cout << "+-----------------------------------------------------+" << endl;
+
 			
 			cout << "opcao: ";
 			cin >> option_utilizador;
@@ -196,10 +201,10 @@ cout << "Insira o dia:";
 				cout << "+-----------------------------------------------------+" << endl;
 				cout << "|   3.Consultar lista de oferta                       |" << endl;
 				cout << "+-----------------------------------------------------+" << endl;
-				
+
 				cout << "opcao: ";
 				cin >> option_utilizador_reserva;
-				
+
 				while (cin.fail()) {// input nao e um numero
 
 					cin.clear();
@@ -382,7 +387,7 @@ cout << "Insira o dia:";
 					}
 
 
-                   Data data;
+					Data data;
 
 					unsigned int pos1, pos2, horaini, minini, horafim1, minfim;
 
@@ -400,7 +405,7 @@ cout << "Insira o dia:";
 					data.setMinutosInicio(minini);
 					data.setDia(dia);
 					data.setMes(mes);
-					
+
 
 					// PROCESSAR DATA ...
 
@@ -551,7 +556,7 @@ cout << "Insira o dia:";
 				break;
 
 			case 3: //cancelar reserva
-				
+
 				unsigned int numero_reserva;
 
 				PortoRivers.printReservasByCliente(NIF);
@@ -590,6 +595,10 @@ cout << "Insira o dia:";
 
 			}
 					break;
+			case 5: //mostrar descontos
+
+				PortoRivers.Descontos();
+				break;
 
 			}
 		}

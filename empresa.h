@@ -32,6 +32,7 @@ private:
 	vector<Cliente*> clientes;
 	Data data_atual;
 	HashTabclientesInativos ClientesInativos;
+	priority_queue<Oferta> cruzeiros_populares;
 	string fichFornecedores;
 	string fichOfertas;
 	string fichClientes;
@@ -39,7 +40,11 @@ private:
 	string nome;
 
 public:
-        Empresa(string fichFornecedores, string fichOfertas, string fichClientes, string fichClientesReg, Data data_Atual); // alterei
+	//prioritty_queue
+
+	int Descontos();
+	//....
+    Empresa(string fichFornecedores, string fichOfertas, string fichClientes, string fichClientesReg, Data data_Atual); // alterei
 	Empresa(string nome, vector<Fornecedor> fornecedores, vector<Cliente*> clientes);
 	void changeClienteMorada(Cliente* cliente, string newMorada); // added
 	void addFornecedor(Fornecedor fornecedorNew);
