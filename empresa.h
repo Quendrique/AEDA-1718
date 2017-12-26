@@ -65,6 +65,7 @@ public:
 	void carregaOferta( string ficheiro_oferta);//extrai o conteudo do ficheiro de ofertas
 	void carregaClientes(string fichClientes);
 	void carregaClientesReg(string fichClientesR);
+	void carregaReservas(string ficheiro_reservas);
 	void visualizaOfertas(unsigned long NIF);
 
 	void guardaFornecedores(string fichFornecedores); //guarda o que esta no vetor no ficheiro de texto
