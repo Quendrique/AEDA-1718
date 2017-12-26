@@ -262,7 +262,7 @@ cout << "Insira o dia:";
 						break;
 
 					try {
-						PortoRivers.atribuiReserva(nif_reserva, NIF, numero_oferta);
+						PortoRivers.atribuiReserva(nif_reserva, NIF, numero_oferta, d);
 					}
 					catch (ReservaJaFeita &r) {
 						cout << "Esta reserva ja foi feita" << endl;
@@ -444,7 +444,7 @@ cout << "Insira o dia:";
 						break;
 
 					try {
-						PortoRivers.atribuiReserva(nif_reserva, NIF, numero_oferta);
+						PortoRivers.atribuiReserva(nif_reserva, NIF, numero_oferta,d);
 					}
 					catch (ReservaJaFeita &r) {
 						cout << "Esta reserva ja foi feita" << endl;
@@ -516,7 +516,7 @@ cout << "Insira o dia:";
 						break;
 
 					try {
-						PortoRivers.atribuiReserva(nif_reserva, NIF, numero_oferta);
+						PortoRivers.atribuiReserva(nif_reserva, NIF, numero_oferta,d);
 					}
 					catch (ReservaJaFeita &r) {
 						cout << "Esta reserva ja foi feita" << endl;

@@ -5,6 +5,7 @@
 #include <vector>
 #include <iostream>
 #include "oferta.h"
+#include "reservas.h"
 
 using namespace std;
 
@@ -16,7 +17,8 @@ protected:
 	Data ultima_reserva; // acrecentei
 	unsigned int NIF;
 	string morada;
-	vector<Oferta *> reservas;
+	vector<Reserva> reservas;
+	size_t contadorReservas;
 	
 
 public:
@@ -26,11 +28,13 @@ public:
 	void setNome(string nome);
 	void setNIF(unsigned int NIF);
 	void setMorada(string morada);
-	void addReserva(Oferta *reserva);
-	vector< Oferta *> getReservas()const;
+	void addReserva(Reserva reserva);
+	vector<Reserva> getReservas()const;
 	string getNome() const;
 	unsigned int getNIF() const;
 	string getMorada() const;
+	void updateContadorReservas();
+	size_t getContadorReservas();
 	virtual void printInfo() const;
 	bool operator ==(const Cliente &c2);
 	virtual void printPontos() const;

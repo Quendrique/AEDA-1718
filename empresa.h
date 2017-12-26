@@ -9,6 +9,8 @@
 #include <unordered_set>
 #include "cliente.h"
 #include "fornecedor.h"
+#include "reservas.h"
+#include "BST.h"
 
 using namespace std;
 struct clientesInativosHash
@@ -33,6 +35,7 @@ private:
 	Data data_atual;
 	HashTabclientesInativos ClientesInativos;
 	priority_queue<Oferta> cruzeiros_populares;
+	BST<Reserva> reservas; 
 	string fichFornecedores;
 	string fichOfertas;
 	string fichClientes;
@@ -40,7 +43,7 @@ private:
 	string nome;
 
 public:
-	//prioritty_queue
+	//priority_queue
 
 	int Descontos();
 	//....
@@ -79,9 +82,14 @@ public:
 	bool checkFornecedorNIF(unsigned long NIF, Fornecedor **f1); //verifica se existe o fornecedor com o NIF especificado e atribui o apontador correspondente a f1
 	void checkFornecedorNIF(unsigned long NIF); // so verifica se o fornecedor em questao existe, atira uma excecao se for esse o caso 
 	void showPontosCliente(Cliente *c1);
-	void atribuiReserva(unsigned long fornecedorNif, unsigned long clienteNIF, int numeroOferta);
+	void atribuiReserva(unsigned long fornecedorNif, unsigned long clienteNIF, int numeroOferta, Data dataReserva);
 	void removerFornecedor(unsigned long NIF);
 	void printReservasByCliente(unsigned long NIF) const;
+
+	//BST
+
+	void inicializaBST(); //depois de as reservas serem carregadas, esta funcao e chamada
+	void printFaturas(); //percorre a bst e imprime as "faturas" uma a uma 
 };
 
 /////////////////////////

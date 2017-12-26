@@ -750,7 +750,7 @@ void Empresa::addOfertas(unsigned int NIF)
 			if (pos == std::string::npos )
 			{
 				cin.clear();
-				cout << "Imput invalido!" << endl << "Indroduza novamente: ";
+				cout << "input invalido!" << endl << "Indroduza novamente: ";
 			}
 			else
 			{
@@ -762,7 +762,7 @@ void Empresa::addOfertas(unsigned int NIF)
 			}
 		else
 		{
-			cout << "Imput invalido!" << endl << "Indroduza novamente: ";
+			cout << "input invalido!" << endl << "Indroduza novamente: ";
 			x = 1;
 		}
 	}	
@@ -782,7 +782,7 @@ void Empresa::addOfertas(unsigned int NIF)
 			if (pos == std::string::npos)
 			{
 				cin.clear();
-				cout << "Imput invalido!" << endl << "Indroduza novamente: " << endl;
+				cout << "input invalido!" << endl << "Indroduza novamente: " << endl;
 			}
 			else
 			{
@@ -794,7 +794,7 @@ void Empresa::addOfertas(unsigned int NIF)
 			}
 			else
 			{
-				cout << "Imput invalido!" << endl << "Indroduza novamente: ";
+				cout << "input invalido!" << endl << "Indroduza novamente: ";
 				x = 1;
 			}
 		}
@@ -975,7 +975,9 @@ void Empresa::visualizaOfertas(unsigned long NIF)
 /* Metodos para fazer reservas */
 /////////////////////////////////
 
-void Empresa::atribuiReserva(unsigned long fornecedorNIF, unsigned long clienteNIF, int numeroOferta) {
+void Empresa::atribuiReserva(unsigned long fornecedorNIF, unsigned long clienteNIF, int numeroOferta, Data dataReserva) {
+
+	string nomeCliente;
 
 	for (unsigned int i = 0; i < fornecedores.size(); i++) {
 
@@ -999,9 +1001,11 @@ void Empresa::atribuiReserva(unsigned long fornecedorNIF, unsigned long clienteN
 
 					if (clientes.at(j)->getNIF() == clienteNIF) { //encontrou o cliente que esta a fazer a reserva
 
+						nomeCliente = clientes.at(j)->getNome();
+
 						for (unsigned int l = 0; l < clientes.at(j)->getReservas().size(); l++) {
 
-							if (*(clientes.at(j)->getReservas().at(l)) == *(fornecedores.at(i).getOfertaPointer(numeroOferta - 1))) { //a reserva ja foi feita
+							if (*(clientes.at(j)->getReservas().at(l).getOferta()) == *(fornecedores.at(i).getOfertaPointer(numeroOferta - 1))) { //a reserva ja foi feita
 								throw ReservaJaFeita();
 							}
 
@@ -1009,7 +1013,8 @@ void Empresa::atribuiReserva(unsigned long fornecedorNIF, unsigned long clienteN
 
 						Oferta *o1;
 						o1 = fornecedores.at(i).getOfertaPointer(numeroOferta-1);
-						clientes.at(j)->addReserva(o1);
+						Reserva r1(dataReserva, clienteNIF, nomeCliente, o1);
+						clientes.at(j)->addReserva(r1);
 						return;
 
 					}
@@ -1163,6 +1168,25 @@ int Empresa:: Descontos()
 		cout << "Antes:" << temp.top().getPreco() << "  Depois: " << temp.top().getPreco() - 0.05*temp.top().getPreco() << endl;
 		temp.pop();
 		j++;
+
+	}
+
+}
+
+/////////
+/* BST */
+/////////
+
+void Empresa::printFaturas() {
+
+	cout << "/* FATURAS */" << endl;
+
+	BSTItrIn<Reserva> it(reservas);
+
+	while (!it.isAtEnd()) {
+
+		cout << "Nome do cliente: " << it.retrieve.getNomeCliente() << endl;
+
 
 	}
 
