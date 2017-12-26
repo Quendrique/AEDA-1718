@@ -62,7 +62,7 @@ cout << "Insira o dia:";
 	PortoRivers.carregaOferta("C:\\Users\\up201604414\\Downloads\\AEDA-1718-master\\AEDA-1718-master\\ofertas.txt");
 	PortoRivers.carregaClientes("C:\\Users\\up201604414\\Downloads\\AEDA-1718-master\\AEDA-1718-master\\clientest.txt");
 	PortoRivers.carregaClientesReg("C:\\Users\\up201604414\\Downloads\\AEDA-1718-master\\AEDA-1718-master\\clientesR.txt");
-
+        PortoRivers.carregaReservas("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\trabalho aeda2\\reservas.txt");
 	clear_screen(); // limpa a janela de comando
 
 	int option;
