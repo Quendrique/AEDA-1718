@@ -593,6 +593,155 @@ void Empresa::carregaClientesReg (string fichClientesR)
 		}
 	}
 }
+void Empresa::carregaReservas(string ficheiro_reservas)
+{
+	ifstream fichor(ficheiro_reservas);
+
+	Data data_reserva;
+	unsigned long nif_cliente_reserva;
+	string nomeCliente_reserva;
+	
+	//Oferta* of;
+	Reserva rese;
+
+
+	
+	Oferta of;
+	Data data;
+	string linha_reserva;
+	string linha_sbarco, linha_sdest;
+	string linha_snif, linha_slot, linha_data;
+	string barco, destino;
+	int pos_nif, pos_barco, pos_destino, pos_distancia, pos_lotacao,pos_nif_cliente_reserva, pos_nome_cli;
+	unsigned int nif_oferta, lotacao, distancia;
+	int pos_mes, pos_dia, pos_horainicio, pos_horafim, pos_mininicio, pos_minfim;
+	int mes, dia, horainicio, horafim, mininicio, minfim;
+	string linha_smes, linha_sdia, linha_shorain, linha_sminincio, linha_shorafim,linhas_sem_nome;
+	string linhas_snif_c;
+	if (fichor.is_open())
+	{
+
+		while (getline(fichor, linha_reserva))
+		{
+			pos_nif_cliente_reserva = linha_reserva.find("-", 0);
+			nif_cliente_reserva=stol(linha_reserva.substr(0, pos_nif_cliente_reserva));
+
+			linhas_snif_c= linha_reserva.substr(pos_nif_cliente_reserva + 1, linha_reserva.size() - 1);
+
+			pos_nome_cli = linhas_snif_c.find("-", 0);
+			nomeCliente_reserva = linhas_snif_c.substr(0, pos_nome_cli);
+		
+			linhas_sem_nome= linhas_snif_c.substr(pos_nome_cli + 1, linhas_snif_c.size() - 1);
+
+			pos_nif = linhas_sem_nome.find(",", 0);
+
+			nif_oferta = stol(linhas_sem_nome.substr(0, pos_nif));
+
+			linha_snif = linhas_sem_nome.substr(pos_nif + 2, linhas_sem_nome.size() - 1);
+
+			pos_barco = linha_snif.find(",", 0);
+    		barco = linha_snif.substr(0, pos_barco);
+
+			linha_sbarco = linha_snif.substr(pos_barco + 2, linha_snif.size() - 1);
+			pos_destino = linha_sbarco.find(",", 0);
+			destino = linha_sbarco.substr(0, pos_destino);
+			linha_sdest = linha_sbarco.substr(pos_destino + 2, linha_sbarco.size() - 1);
+			pos_lotacao = linha_sdest.find(",", 0);
+			lotacao = stoi(linha_sdest.substr(0, pos_lotacao));
+		
+			linha_slot = linha_sdest.substr(pos_lotacao + 2, linha_sdest.size() - 1);
+			int pos_lotatual, lotatual;
+			string linha_slotatual;
+			pos_lotatual = linha_slot.find(",", 0);
+			lotatual = stoi(linha_slot.substr(0, pos_lotatual));
+			
+			linha_slotatual = linha_slot.substr(pos_lotatual + 2, linha_slot.size() - 1);
+
+
+			pos_distancia = linha_slotatual.find(",", 0);
+			distancia = stoi(linha_slotatual.substr(0, pos_distancia));
+		
+			linha_data = linha_slotatual.substr(pos_distancia + 2, linha_slotatual.size() - 1);
+			pos_mes = linha_data.find(",", 0);
+			mes = stoi(linha_data.substr(0, pos_mes));
+			data.setMes(mes);
+			linha_smes = linha_data.substr(pos_mes + 2, linha_data.size() - 1);
+			pos_dia = linha_smes.find(",", 0);
+			dia = stoi(linha_smes.substr(0, pos_dia));
+			data.setDia(dia);
+			linha_sdia = linha_smes.substr(pos_dia + 2, linha_smes.size() - 1);
+			pos_horainicio = linha_sdia.find(":", 0);
+			horainicio = stoi(linha_sdia.substr(0, pos_horainicio));
+			data.setHoraInicio(horainicio);
+			linha_shorain = linha_sdia.substr(pos_horainicio + 1, linha_sdia.size() - 1);
+			pos_mininicio = linha_shorain.find(",", 0);
+			mininicio = stoi(linha_shorain.substr(0, pos_mininicio));
+			data.setMinutosInicio(mininicio);
+			linha_sminincio = linha_shorain.substr(pos_mininicio + 2, linha_shorain.size() - 1);
+			pos_horafim = linha_sminincio.find(":", 0);
+			horafim = stoi(linha_sminincio.substr(0, pos_horafim));
+			data.setHoraFim(horafim);
+			linha_shorafim = linha_sminincio.substr(pos_horafim + 1, linha_sminincio.size() - 1);
+			int pos_minfim;
+			pos_minfim= linha_sminincio.find("-", 0);
+			minfim = stoi(linha_shorafim.substr(0, pos_minfim));
+			data.setMinutosFim(minfim);
+			int pos_data_dia,pos_data_mes;
+			int dia_reserva, mes_reserva;
+			string linhas_minfim, linhas_sem_dia;
+			linhas_minfim= linha_shorafim.substr(pos_horafim , linha_shorafim.size() - 1);
+			pos_data_dia = linhas_minfim.find("-", 0);
+			dia_reserva = stol(linhas_minfim.substr(0, pos_data_dia));
+			linhas_sem_dia = linhas_minfim.substr(pos_data_dia +1, linhas_minfim.size() - 1);
+			mes_reserva =stol( linhas_sem_dia);
+
+            // Reserva rese; setNif
+			rese.setNif(nif_cliente_reserva);
+			// Reserva rese; setNome
+			rese.setNomeCliente(nomeCliente_reserva);
+			// oferta of
+			of.setNif(nif_oferta);
+			// oferta of
+			of.setBarco(barco);
+            // oferta of
+			of.setDestino(destino);
+			// oferta of
+			of.setLotacaoMax(lotacao);
+            // oferta of
+			of.setLotacaoAtual(lotatual);
+	        // oferta of
+			of.setDistancia(distancia);
+            // oferta of
+			of.setData(data);
+			// Reserva rese setData
+			rese.setData(dia_reserva, mes_reserva);
+			for (unsigned int i = 0; i < fornecedores.size(); i++) {
+
+				if (fornecedores.at(i).getNIF() == nif_oferta) {
+					if (of.getLotacaoMax() < 20)
+					{
+						of.setPreco(of.getDistancia()*fornecedores.at(i).getPrecoKm() + fornecedores.at(i).getPrecoLot().at(0));
+					}
+					else if (of.getLotacaoMax() < 35)
+					{
+						of.setPreco(of.getDistancia()*fornecedores.at(i).getPrecoKm() + fornecedores.at(i).getPrecoLot().at(1));
+					}
+					else if (of.getLotacaoMax() < 50)
+					{
+						of.setPreco(of.getDistancia()*fornecedores.at(i).getPrecoKm() + fornecedores.at(i).getPrecoLot().at(2));
+					}
+
+					fornecedores.at(i).addOfertaInit(of);
+				}
+
+			}
+			// falta for o Oferta* na reserva
+		
+
+		}
+	}
+
+}
 
 
 /////////////////////////////////////
