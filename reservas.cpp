@@ -1,5 +1,6 @@
 #include "reservas.h"
-
+Reserva::Reserva(){
+}
 Reserva::Reserva(Data data, unsigned long nif, string nomeCliente, Oferta* oferta) {
 	this->data = data;
 	this->nif = nif;
