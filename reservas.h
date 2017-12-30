@@ -13,6 +13,7 @@ private:
 	string nomeCliente;
 	Oferta* oferta;
 public:
+	Reserva();
 	Reserva(Data data, unsigned long nif, string nomeCliente, Oferta* oferta);
 	Data getData() const;
 	unsigned long getNif() const;
