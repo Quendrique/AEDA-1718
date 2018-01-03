@@ -14,7 +14,7 @@ Cliente::Cliente(string nome, unsigned int NIF, string morada) //alterei
 	this->NIF = NIF;
 	this->morada = morada;
 	this->inativo = 0;//partimos do principio que esta ativo
-	//this->ultima_reserva = ainda por completar;
+	this->ultima_reserva = Data(1, 1);
 	this->contadorReservas = 0; 
 }
 
@@ -37,6 +37,10 @@ void Cliente::setNIF(unsigned int NIF)
 void Cliente::setMorada(string morada)
 {
 	this->morada = morada;
+}
+
+void Cliente::setUltimaReserva(Data data) {
+	this->ultima_reserva = data;
 }
 
 void Cliente::addReserva(Reserva reserva)
@@ -74,6 +78,10 @@ string Cliente::getMorada() const
 	return morada;
 }
 
+Data Cliente::getUltimaReserva() const {
+	return ultima_reserva;
+}
+
 void Cliente::updateContadorReservas() {
 	this->contadorReservas = reservas.size();
 }
@@ -97,20 +105,25 @@ double Cliente::getPontos() const
 	return 0;
 }
 
-void Cliente::removeReservaByFornecedor(long double fornecedorNIF)
+Reserva Cliente::removeReservaByFornecedor(long double fornecedorNIF)
 {
+
 	for (unsigned int i = 0; i < reservas.size(); i++) {
 
 		if (reservas.at(i).getOferta()->getNif() == fornecedorNIF) {
+			Reserva to_return = reservas.at(i);
 			reservas.erase(reservas.begin() + i);
+			return to_return;
 		}
 	}
 }
 
-void Cliente::removeReservaByIndex(unsigned int reserva)
+Reserva Cliente::removeReservaByIndex(unsigned int reserva)
 {
 	reservas.at(reserva - 1).getOferta()->removeFromLotacao();
+	Reserva to_return = reservas.at(reserva-1);
 	reservas.erase(reservas.begin() + (reserva - 1));
+	return to_return;
 }
 
 void Cliente::printReservas() const
@@ -122,11 +135,11 @@ void Cliente::printReservas() const
 	for (unsigned int i = 0; i < reservas.size(); i++) {
 
 		cout << "Reserva " << i + 1 << endl;
-		cout << "Fornecedor: " << reservas.at(i).getOferta()->getNif() << endl
+		cout << "Fornecedor: " << reservas.at(i).getFornecedor() << endl
 			<< "Barco: " << reservas.at(i).getOferta()->getBarco() << endl
 			<< "Lotacao maxima: " << reservas.at(i).getOferta()->getLotacaoMax() << endl
 			<< "Lotacao atual: " << reservas.at(i).getOferta()->getLotacaoAtual() << endl
-			<< "Destino: " << reservas.at(i).getOferta()->getDistancia() << endl
+			<< "Destino: " << reservas.at(i).getOferta()->getDestino() << endl
 			<< "Data: " << reservas.at(i).getOferta()->getData().printData() << endl << endl;
 	}
 }

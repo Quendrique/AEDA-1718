@@ -607,9 +607,6 @@ void Empresa::carregaReservas(string ficheiro_reservas)
 	
 	//Oferta* of;
 	Reserva rese;
-
-
-	
 	Oferta of;
 	Data data;
 	string linha_reserva;
@@ -750,6 +747,29 @@ void Empresa::carregaReservas(string ficheiro_reservas)
 				}
 
 			}
+
+			//colocar a reserva no cliente correto e modificar a data da sua ultima reserva 
+
+			for (unsigned int k = 0; k < clientes.size(); k++) {
+				
+				cout << clientes.at(k)->getNIF() << endl;
+				cin.get();
+				cin.get();
+				
+
+				if (clientes.at(k)->getNIF() == nif_cliente_reserva) {
+
+					clientes.at(k)->addReserva(rese);
+
+					if (clientes.at(k)->getUltimaReserva() < rese.getData())
+						clientes.at(k)->setUltimaReserva(rese.getData());
+
+					break;
+
+				}
+					
+			}
+
 		}
 	}
 
@@ -1083,16 +1103,19 @@ void Empresa::removeReserva(unsigned long clienteNIF, unsigned int reserva) {
 
 		if (clientes.at(i)->getNIF() == clienteNIF) {
 
-			clientes.at(i)->removeReservaByIndex(reserva);
+			Reserva tmp = clientes.at(i)->removeReservaByIndex(reserva);
+			Reserva tmp_2 = reservas.find(tmp);
+
+			cout << tmp_2.getNomeCliente() << endl;
+			cin.get();
+			cin.get();
+
+			return;
 		}
 
 	}
 
-
-
-
 }
-
 
 /////////////////////////////////////////
 /* Metodos para consulta de informacao */
@@ -1197,12 +1220,15 @@ void Empresa::atribuiReserva(unsigned long fornecedorNIF, unsigned long clienteN
 
 void Empresa::removerFornecedor(unsigned long NIF) {
 
+	Reserva tmp;
+
 	if (!checkFornecedorNIFBool(NIF)) {
 		throw FornecedorInexistente(NIF);
 	}
 
 	for (unsigned int i = 0; i < clientes.size(); i++) {
-		clientes.at(i)->removeReservaByFornecedor(NIF);
+		tmp = clientes.at(i)->removeReservaByFornecedor(NIF);
+		reservas.remove(tmp);
 	}
 
 	for (unsigned int i = 0; i < fornecedores.size(); i++) {
@@ -1210,8 +1236,6 @@ void Empresa::removerFornecedor(unsigned long NIF) {
 			fornecedores.erase(fornecedores.begin() + i);
 		}
 	}
-
-
 }
 
 
@@ -1351,9 +1375,10 @@ void Empresa::printFaturas() {
 		cout << "Nome do cliente: " << it.retrieve().getNomeCliente()  << endl
 				<< "NIF: " << it.retrieve().getNif() << endl
 				<< "Oferta: " << endl
-				<< "	- Nome do fornecedor:  " << it.retrieve().getOferta()->getDestino() << endl
+				<< "	- Nome do fornecedor:  " << it.retrieve().getFornecedor() << endl
 				<< "	- Destino:  " << it.retrieve().getOferta()->getDestino() << endl
-				<< "	- Barco: " << it.retrieve().getOferta()->getBarco() << endl << endl;
+				<< "	- Barco: " << it.retrieve().getOferta()->getBarco() << endl
+				<< "Data: " << it.retrieve().getData().getDia() << "/" << it.retrieve().getData().getMes() << endl << endl;
 
 		it.advance();
 	}

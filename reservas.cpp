@@ -61,5 +61,5 @@ bool Reserva::operator<(const Reserva &r2) const {
 }
 
 bool Reserva::operator==(const Reserva &r2) const {
-	return (nif == r2.getNif() && data == r2.getData());
+	return (nif == r2.getNif() && data == r2.getData() && oferta == r2.getOferta());
 }

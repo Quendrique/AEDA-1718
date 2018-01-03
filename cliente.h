@@ -28,6 +28,7 @@ public:
 	void setNome(string nome);
 	void setNIF(unsigned int NIF);
 	void setMorada(string morada);
+	void setUltimaReserva(Data data);
 	void addReserva(Reserva reserva);
 	vector<Reserva> getReservas()const;
 	string getNome() const;
@@ -35,13 +36,14 @@ public:
 	string getMorada() const;
 	void updateContadorReservas();
 	size_t getContadorReservas();
+	Data getUltimaReserva() const;
 	virtual void printInfo() const;
 	bool operator ==(const Cliente &c2);
 	virtual void printPontos() const;
 	virtual bool isRegistado() { return false; }
 	virtual double getPontos() const;
-	void removeReservaByFornecedor(long double fornecedorNIF);
-	void removeReservaByIndex(unsigned int reserva);
+	Reserva removeReservaByFornecedor(long double fornecedorNIF);
+	Reserva removeReservaByIndex(unsigned int reserva);
 	void removeReservaByOferta(Oferta o1);
 	void printReservas() const;
 
