@@ -1,11 +1,12 @@
 #include "reservas.h"
 Reserva::Reserva(){
 }
-Reserva::Reserva(Data data, unsigned long nif, string nomeCliente, Oferta* oferta) {
+Reserva::Reserva(Data data, unsigned long nif, string nomeCliente, Oferta* oferta, string fornecedor) {
 	this->data = data;
 	this->nif = nif;
 	this->nomeCliente = nomeCliente;
 	this->oferta = oferta;
+	this->fornecedor = fornecedor;
 }
 
 Data Reserva::getData() const {
@@ -52,13 +53,13 @@ void Reserva::setFornecedor(string fornecedor) {
 	this->fornecedor = fornecedor;
 }
 
-bool Reserva::operator<(const Reserva r2) const {
+bool Reserva::operator<(const Reserva &r2) const {
 	if (nomeCliente == r2.getNomeCliente())
 		return data < r2.getData();
 	else
 		return nomeCliente < r2.getNomeCliente();
 }
 
-bool Reserva::operator==(const Reserva r2) const {
+bool Reserva::operator==(const Reserva &r2) const {
 	return (nif == r2.getNif() && data == r2.getData());
 }

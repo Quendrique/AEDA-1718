@@ -26,7 +26,7 @@ public:
 	void setFornecedor(string fornecedor);
 	Oferta* getOferta() const;
 	string getFornecedor() const;
-	bool operator < (const Reserva r2) const;
-	bool operator == (const Reserva r2) const;
+	bool operator < (const Reserva &r2) const;
+	bool operator == (const Reserva &r2) const;
 
 };

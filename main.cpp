@@ -22,7 +22,7 @@ void clear_screen() // em linux, o comando system() nao aceita o argumento "cls"
 int main () 
 {
 	unsigned long NIF;// NIF usado para identificacao do cliente ou do fornecedor
-	string FornecedoresFileName, OfertasFileName, ClientesFileName, ClientesRegFileName;
+	string FornecedoresFileName, OfertasFileName, ClientesFileName, ClientesRegFileName, ReservasFile;
 	int mes_Atual, dia_Atual;
 
 
@@ -47,22 +47,24 @@ int main ()
 	cout << "Clientes não registados: ";
 	cin >>ClientesFileName;
 	cout << endl;
-cout << "Insira o dia:";
+	cout << "Reservas: ";
+	cin >> ReservasFile;
+	cout << "Insira o dia:";
 	cin >> dia_Atual;
 	cout << endl;
 	cout << "Insira o mes:";
 	cin >> mes_Atual;
 	cout << endl;
 	Data d(dia_Atual, mes_Atual);
-	Empresa PortoRivers(FornecedoresFileName, OfertasFileName, ClientesFileName, ClientesRegFileName,d);
+	Empresa PortoRivers(FornecedoresFileName, OfertasFileName, ClientesFileName, ClientesRegFileName, ReservasFile ,d);
 	
 	// TEMPORARIO - FILE PATHS PARA FICHEIROS
 
-	PortoRivers.carregaFornecedores("C:\\Users\\up201604414\\Downloads\\AEDA-1718-master\\AEDA-1718-master\\fornecedores.txt");
-	PortoRivers.carregaOferta("C:\\Users\\up201604414\\Downloads\\AEDA-1718-master\\AEDA-1718-master\\ofertas.txt");
-	PortoRivers.carregaClientes("C:\\Users\\up201604414\\Downloads\\AEDA-1718-master\\AEDA-1718-master\\clientest.txt");
-	PortoRivers.carregaClientesReg("C:\\Users\\up201604414\\Downloads\\AEDA-1718-master\\AEDA-1718-master\\clientesR.txt");
-    PortoRivers.carregaReservas("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\trabalho aeda2\\reservas.txt");
+	PortoRivers.carregaFornecedores(FornecedoresFileName);
+	PortoRivers.carregaOferta(OfertasFileName);
+	PortoRivers.carregaClientes(ClientesFileName);
+	PortoRivers.carregaClientesReg(ClientesRegFileName);
+    PortoRivers.carregaReservas(ReservasFile);
 	clear_screen(); // limpa a janela de comando
 
 	int option;
@@ -909,8 +911,8 @@ cout << "Insira o dia:";
 		case 4: //guardar a informção nos ficheiros de texto
 			
 			PortoRivers.guardaClientes(ClientesRegFileName, ClientesFileName);
-			PortoRivers.guardaFornecedores("C:\\Users\\catam\\Desktop\\aedafinal\\aedafinal\\fornecedores.txt"); //file path so para testes
-			PortoRivers.guardaOfertas("C:\\Users\\catam\\Desktop\\aedafinal\\aedafinal\\ofertas.txt");  //file path so para testes
+			PortoRivers.guardaFornecedores(FornecedoresFileName); //file path so para testes
+			//PortoRivers.guardaOfertas("C:\\Users\\catam\\Desktop\\aedafinal\\aedafinal\\ofertas.txt");  //file path so para testes
 
 		
 			break;

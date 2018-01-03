@@ -154,7 +154,7 @@ void Oferta::removeFromLotacao()
 	this->lotacaoAtual -= 1;
 }
 
-bool Oferta::operator<(const Oferta & f2) const
+bool Oferta::operator<(const Oferta & f2) 
 {
 	return this->getNif() < f2.getNif();
 }

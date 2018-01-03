@@ -41,6 +41,7 @@ private:
 	string fichOfertas;
 	string fichClientes;
 	string fichClientesReg;
+	string fichReservas;
 	string nome;
 
 public:
@@ -48,7 +49,7 @@ public:
 
 	int Descontos();
 	//....
-    Empresa(string fichFornecedores, string fichOfertas, string fichClientes, string fichClientesReg, Data data_Atual); // alterei
+    Empresa(string fichFornecedores, string fichOfertas, string fichClientes, string fichClientesReg, string fichReservas, Data data_Atual); // alterei
 	Empresa(string nome, vector<Fornecedor> fornecedores, vector<Cliente*> clientes);
 	void changeClienteMorada(Cliente* cliente, string newMorada); // added
 	void addFornecedor(Fornecedor fornecedorNew);

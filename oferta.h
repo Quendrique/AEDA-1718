@@ -49,7 +49,7 @@ public:
 
 	void addToLotacao();
 	void removeFromLotacao();
-	bool operator<(const Oferta & f2) const;
+	bool operator<(const Oferta & f2);
 	bool ordenaDist(const Oferta & f1, const Oferta & f2);
 	bool operator ==(const Oferta &o2);
 

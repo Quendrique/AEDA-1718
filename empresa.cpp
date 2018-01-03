@@ -1,15 +1,16 @@
 #include "empresa.h"
 
-Empresa::Empresa(string fichFornecedores,string fichOfertas,string fichClientes,string fichClientesReg, Data data_Atual)
+Empresa::Empresa(string fichFornecedores,string fichOfertas,string fichClientes,string fichClientesReg, string fichReservas, Data data_Atual) : reservas(Reserva())
 {
 	this->fichFornecedores = fichFornecedores;
 	this->fichOfertas = fichOfertas;
 	this->fichClientes = fichClientes;
 	this->fichClientesReg = fichClientesReg;
+	this->fichReservas = fichReservas;
 	this->data_atual = data_Atual;
 }
 
-Empresa::Empresa(string nome, vector<Fornecedor> fornecedores, vector<Cliente*> clientes)
+Empresa::Empresa(string nome, vector<Fornecedor> fornecedores, vector<Cliente*> clientes) : reservas(Reserva())
 {
 	this->nome = nome;
 	this->fornecedores = fornecedores;
@@ -734,22 +735,21 @@ void Empresa::carregaReservas(string ficheiro_reservas)
 
 						nome_fornecedor = fornecedores.at(i).getNome();
 						p_oferta = fornecedores.at(i).getOfertaPointer(j);
+
+						//verificar se a data da reserva e mais recente que a data da ultima reserva da oferta em questao
+
+						if ((*p_oferta).getUltimaData() < rese.getData())
+							(*p_oferta).setUltimaData(rese.getData());
+
+						rese.setOferta(p_oferta);
+						rese.setFornecedor(nome_fornecedor);
+						reservas.insert(rese);
+
 						break;
 					}
 				}
 
 			}
-
-			//verificar se a data da reserva e mais recente que a data da ultima reserva da oferta em questao
-
-			if((*p_oferta).getUltimaReserva() < rese.getData())
-				(*p_oferta).setUltimaReserva(rese.getData());
-
-
-			rese.setOferta(p_oferta);
-			rese.setFornecedor(nome_fornecedor);
-			reservas.insert(rese);
-
 		}
 	}
 
@@ -1174,7 +1174,7 @@ void Empresa::atribuiReserva(unsigned long fornecedorNIF, unsigned long clienteN
 
 						Oferta *o1;
 						o1 = fornecedores.at(i).getOfertaPointer(numeroOferta-1);
-						Reserva r1(dataReserva, clienteNIF, nomeCliente, o1);
+						Reserva r1(dataReserva, clienteNIF, nomeCliente, o1, fornecedores.at(i).getNome());
 						clientes.at(j)->addReserva(r1);
 						return;
 
@@ -1332,6 +1332,8 @@ int Empresa:: Descontos()
 
 	}
 
+	return 0;
+
 }
 
 /////////
@@ -1362,7 +1364,7 @@ bool Empresa::is_reservas_empty() {
 
 	BSTItrIn<Reserva> it(reservas);
 	unsigned int i = 0;
-	while (!it.isAtEnd) {
+	while (!it.isAtEnd()) {
 		i++; it.advance();
 	}
 
