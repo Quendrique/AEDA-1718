@@ -1350,7 +1350,6 @@ void Empresa::printFaturas() {
 
 		cout << "Nome do cliente: " << it.retrieve().getNomeCliente()  << endl
 				<< "NIF: " << it.retrieve().getNif() << endl
-				<< "Morada: " << it.retrieve().getNif() << endl
 				<< "Oferta: " << endl
 				<< "	- Nome do fornecedor:  " << it.retrieve().getOferta()->getDestino() << endl
 				<< "	- Destino:  " << it.retrieve().getOferta()->getDestino() << endl

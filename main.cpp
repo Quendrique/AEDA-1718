@@ -903,6 +903,25 @@ int main ()
 				clear_screen();
 			}
 				break;
+
+			case 5: {
+
+				if (PortoRivers.is_reservas_empty()) {
+					cout << "Nao existem faturas disponiveis" << endl;
+				}
+				else
+					PortoRivers.printFaturas();
+
+				cin.clear();
+				cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				cin.get();
+				clear_screen();
+
+			}
+
+					break;
+
+
 			}
 			break;
 
@@ -916,22 +935,6 @@ int main ()
 
 		
 			break;
-
-		case 5 : {
-
-			if (PortoRivers.is_reservas_empty()) {
-				cout << "Nao existem faturas disponiveis" << endl;
-			} else
-				PortoRivers.printFaturas();
-
-			cin.clear();
-			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			cin.get();
-			clear_screen();
-
-		}
-
-		break;
 
 		default: {
 			clear_screen();
