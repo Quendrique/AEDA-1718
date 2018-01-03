@@ -68,6 +68,10 @@ void Oferta::setDistancia(unsigned int distancia)
 	this->distancia = distancia;
 }
 
+void Oferta::setUltimaData(Data data) {
+	this->ultima_data = data;
+}
+
 
 /*/////////////////////////
 /////////GET //////////////

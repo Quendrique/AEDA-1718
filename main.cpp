@@ -62,7 +62,7 @@ cout << "Insira o dia:";
 	PortoRivers.carregaOferta("C:\\Users\\up201604414\\Downloads\\AEDA-1718-master\\AEDA-1718-master\\ofertas.txt");
 	PortoRivers.carregaClientes("C:\\Users\\up201604414\\Downloads\\AEDA-1718-master\\AEDA-1718-master\\clientest.txt");
 	PortoRivers.carregaClientesReg("C:\\Users\\up201604414\\Downloads\\AEDA-1718-master\\AEDA-1718-master\\clientesR.txt");
-        PortoRivers.carregaReservas("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\trabalho aeda2\\reservas.txt");
+    PortoRivers.carregaReservas("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\trabalho aeda2\\reservas.txt");
 	clear_screen(); // limpa a janela de comando
 
 	int option;
@@ -702,7 +702,8 @@ cout << "Insira o dia:";
 			cout << "+-----------------------------------------------------+" << endl;
 			cout << "|   4. Remover fornecedor                             |" << endl;
 			cout << "+-----------------------------------------------------+" << endl;
-
+			cout << "|   5. Consultar faturas                              |" << endl;
+			cout << "+-----------------------------------------------------+" << endl;
 
 			cout << "opcao: ";
 			cin >> option_gestor;
@@ -914,6 +915,21 @@ cout << "Insira o dia:";
 		
 			break;
 
+		case 5 : {
+
+			if (PortoRivers.is_reservas_empty()) {
+				cout << "Nao existem faturas disponiveis" << endl;
+			} else
+				PortoRivers.printFaturas();
+
+			cin.clear();
+			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			cin.get();
+			clear_screen();
+
+		}
+
+		break;
 
 		default: {
 			clear_screen();

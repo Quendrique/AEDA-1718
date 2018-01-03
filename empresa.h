@@ -10,6 +10,7 @@
 #include "cliente.h"
 #include "fornecedor.h"
 #include "reservas.h"
+#include "oferta.h"
 #include "BST.h"
 
 using namespace std;
@@ -91,6 +92,7 @@ public:
 
 	void inicializaBST(); //depois de as reservas serem carregadas, esta funcao e chamada
 	void printFaturas(); //percorre a bst e imprime as "faturas" uma a uma 
+	bool is_reservas_empty();
 };
 
 /////////////////////////

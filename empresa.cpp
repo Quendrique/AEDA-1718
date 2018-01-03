@@ -354,6 +354,9 @@ void Empresa::carregaOferta(string ficheiro_oferta)
 			data.setMinutosFim(minfim);
 			of.setData(data);
 
+			Data tmp(1,1);
+
+			of.setUltimaData(tmp);
 
 			for (unsigned int i = 0; i < fornecedores.size(); i++) {
 
@@ -715,28 +718,37 @@ void Empresa::carregaReservas(string ficheiro_reservas)
 			of.setData(data);
 			// Reserva rese setData
 			rese.setData(dia_reserva, mes_reserva);
+
+			//percorrer todas as ofertas disponiveis, ver qual corresponde a oferta aqui criada, obter o apontador certo e guarda lo na reserva
+
+			Oferta * p_oferta;
+			string nome_fornecedor;
+
 			for (unsigned int i = 0; i < fornecedores.size(); i++) {
 
-				if (fornecedores.at(i).getNIF() == nif_oferta) {
-					if (of.getLotacaoMax() < 20)
-					{
-						of.setPreco(of.getDistancia()*fornecedores.at(i).getPrecoKm() + fornecedores.at(i).getPrecoLot().at(0));
-					}
-					else if (of.getLotacaoMax() < 35)
-					{
-						of.setPreco(of.getDistancia()*fornecedores.at(i).getPrecoKm() + fornecedores.at(i).getPrecoLot().at(1));
-					}
-					else if (of.getLotacaoMax() < 50)
-					{
-						of.setPreco(of.getDistancia()*fornecedores.at(i).getPrecoKm() + fornecedores.at(i).getPrecoLot().at(2));
-					}
+				vector<Oferta> tmp = fornecedores.at(i).getOfertas();
 
-					fornecedores.at(i).addOfertaInit(of);
+				for (unsigned int j = 0; j < tmp.size(); j++) {
+
+					if (tmp.at(j) == of) {
+
+						nome_fornecedor = fornecedores.at(i).getNome();
+						p_oferta = fornecedores.at(i).getOfertaPointer(j);
+						break;
+					}
 				}
 
 			}
-			// falta for o Oferta* na reserva
-		
+
+			//verificar se a data da reserva e mais recente que a data da ultima reserva da oferta em questao
+
+			if((*p_oferta).getUltimaReserva() < rese.getData())
+				(*p_oferta).setUltimaReserva(rese.getData());
+
+
+			rese.setOferta(p_oferta);
+			rese.setFornecedor(nome_fornecedor);
+			reservas.insert(rese);
 
 		}
 	}
@@ -1334,9 +1346,26 @@ void Empresa::printFaturas() {
 
 	while (!it.isAtEnd()) {
 
-		cout << "Nome do cliente: " << it.retrieve.getNomeCliente() << endl;
+		cout << "Nome do cliente: " << it.retrieve().getNomeCliente()  << endl
+				<< "NIF: " << it.retrieve().getNif() << endl
+				<< "Morada: " << it.retrieve().getNif() << endl
+				<< "Oferta: " << endl
+				<< "	- Nome do fornecedor:  " << it.retrieve().getOferta()->getDestino() << endl
+				<< "	- Destino:  " << it.retrieve().getOferta()->getDestino() << endl
+				<< "	- Barco: " << it.retrieve().getOferta()->getBarco() << endl << endl;
 
+		it.advance();
+	}
+}
 
+bool Empresa::is_reservas_empty() {
+
+	BSTItrIn<Reserva> it(reservas);
+	unsigned int i = 0;
+	while (!it.isAtEnd) {
+		i++; it.advance();
 	}
 
+	return (i == 0);
 }
+

@@ -24,6 +24,11 @@ Oferta* Reserva::getOferta() const {
 	return oferta;
 
 }
+
+string Reserva::getFornecedor() const {
+	return fornecedor;
+}
+
 void Reserva::setNif(unsigned long Nif)
 {
 	this->nif=Nif;
@@ -38,6 +43,15 @@ void Reserva::setData(int dia, int mes)
 	this->data = d;
 
 }
+
+void Reserva::setOferta(Oferta* oferta) {
+	this->oferta = oferta;
+}
+
+void Reserva::setFornecedor(string fornecedor) {
+	this->fornecedor = fornecedor;
+}
+
 bool Reserva::operator<(const Reserva r2) const {
 	if (nomeCliente == r2.getNomeCliente())
 		return data < r2.getData();

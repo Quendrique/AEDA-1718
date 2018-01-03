@@ -36,6 +36,8 @@ public:
 	bool operator < (const Oferta o2) const;
 
 	Data getUltimaData() const;
+	void setUltimaData(Data data);
+
 	string getBarco() const;
 	int getPreco()const;
 	Data getData() const;
