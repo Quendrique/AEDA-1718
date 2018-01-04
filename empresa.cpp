@@ -751,11 +751,6 @@ void Empresa::carregaReservas(string ficheiro_reservas)
 			//colocar a reserva no cliente correto e modificar a data da sua ultima reserva 
 
 			for (unsigned int k = 0; k < clientes.size(); k++) {
-				
-				cout << clientes.at(k)->getNIF() << endl;
-				cin.get();
-				cin.get();
-				
 
 				if (clientes.at(k)->getNIF() == nif_cliente_reserva) {
 
@@ -1104,12 +1099,7 @@ void Empresa::removeReserva(unsigned long clienteNIF, unsigned int reserva) {
 		if (clientes.at(i)->getNIF() == clienteNIF) {
 
 			Reserva tmp = clientes.at(i)->removeReservaByIndex(reserva);
-			Reserva tmp_2 = reservas.find(tmp);
-
-			cout << tmp_2.getNomeCliente() << endl;
-			cin.get();
-			cin.get();
-
+			reservas.remove(tmp);
 			return;
 		}
 
@@ -1385,13 +1375,6 @@ void Empresa::printFaturas() {
 }
 
 bool Empresa::is_reservas_empty() {
-
-	BSTItrIn<Reserva> it(reservas);
-	unsigned int i = 0;
-	while (!it.isAtEnd()) {
-		i++; it.advance();
-	}
-
-	return (i == 0);
+	return (reservas.isEmpty());
 }
 

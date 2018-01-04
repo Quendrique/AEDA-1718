@@ -15,9 +15,10 @@ Oferta::Oferta(unsigned int nif, string barco, unsigned int lotacaoMax, unsigned
 	this->lotacaoAtual = lotacaoAtual;
 	this->data = data;
 	this->preco = 0;
+	this->ultima_data = Data(1,1);
 }
 
-Data Oferta::getUltimaData()const
+Data Oferta::getUltimaData() const
 {
 	return ultima_data;
 }
@@ -156,7 +157,7 @@ void Oferta::removeFromLotacao()
 
 bool Oferta::operator<(const Oferta & f2) 
 {
-	return this->getNif() < f2.getNif();
+	return this->getUltimaData() < f2.getUltimaData();
 }
 
 bool Oferta::ordenaDist(const Oferta &f1, const Oferta &f2)
