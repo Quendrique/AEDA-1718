@@ -1145,6 +1145,63 @@ void Empresa::visualizaOfertas(unsigned long NIF)
 	}
 }
 
+int Empresa::procurar_reservas_nif_cliente(unsigned long nif) {
+
+	BSTItrIn<Reserva> it(reservas);
+
+	cout << " /* FATURAS DO CLIENTE " << nif << " */" << endl << endl;
+
+	while (!it.isAtEnd()) {
+
+		if (it.retrieve().getNif() == nif) {
+			
+			cout << "Nome do cliente: " << it.retrieve().getNomeCliente() << endl
+				<< "NIF: " << it.retrieve().getNif() << endl
+				<< "Oferta: " << endl
+				<< "	- Nome do fornecedor:  " << it.retrieve().getFornecedor() << endl
+				<< "	- Destino:  " << it.retrieve().getOferta()->getDestino() << endl
+				<< "	- Barco: " << it.retrieve().getOferta()->getBarco() << endl
+				<< "Data: " << it.retrieve().getData().getDia() << "/" << it.retrieve().getData().getMes() << endl << endl;
+
+		}
+
+		it.advance();
+	}
+
+
+	return 0;
+
+}
+
+int Empresa::procurar_reservas_nif_fornecedor(unsigned long nif) {
+
+
+	BSTItrIn<Reserva> it(reservas);
+
+	cout << " /* FATURAS DO CLIENTE " << nif << " */" << endl << endl;
+
+	while (!it.isAtEnd()) {
+
+		if (it.retrieve().getOferta()->getNif() == nif) {
+
+			cout << "Nome do cliente: " << it.retrieve().getNomeCliente() << endl
+				<< "NIF: " << it.retrieve().getNif() << endl
+				<< "Oferta: " << endl
+				<< "	- Nome do fornecedor:  " << it.retrieve().getFornecedor() << endl
+				<< "	- Destino:  " << it.retrieve().getOferta()->getDestino() << endl
+				<< "	- Barco: " << it.retrieve().getOferta()->getBarco() << endl
+				<< "Data: " << it.retrieve().getData().getDia() << "/" << it.retrieve().getData().getMes() << endl << endl;
+
+		}
+
+		it.advance();
+	}
+
+
+	return 0;
+
+}
+
 /////////////////////////////////
 /* Metodos para fazer reservas */
 /////////////////////////////////
@@ -1169,7 +1226,7 @@ void Empresa::atribuiReserva(unsigned long fornecedorNIF, unsigned long clienteN
 
 				Oferta *updateLotacao;
 				updateLotacao = fornecedores.at(i).getOfertaPointer(numeroOferta - 1);
-				updateLotacao->addToLotacao(); // se a lotacao nao estiver cheia, adiciona 1 a lotacao atual do respetivo cruzeiro NAO VAI MODIFICAR VALOR, GETOFERTAS SO DEVOLVE UMA COPIA DO VETOR
+				updateLotacao->addToLotacao(); // se a lotacao nao estiver cheia, adiciona 1 a lotacao atual do respetivo cruzeiro
 
 				for (unsigned int j = 0; j < clientes.size(); j++) {
 
@@ -1187,8 +1244,10 @@ void Empresa::atribuiReserva(unsigned long fornecedorNIF, unsigned long clienteN
 
 						Oferta *o1;
 						o1 = fornecedores.at(i).getOfertaPointer(numeroOferta-1);
+						o1->setUltimaData(data_atual);
 						Reserva r1(dataReserva, clienteNIF, nomeCliente, o1, fornecedores.at(i).getNome());
 						clientes.at(j)->addReserva(r1);
+						atualiza_queue();
 						return;
 
 					}
@@ -1297,7 +1356,52 @@ void Empresa::guardaClientes(string fichClientesR,string fichClientes)
 	}
 }
 
+void Empresa::guardaReservas(string FichReservas) {
 
+	ofstream reservas_file(fichReservas);
+	//BSTItrIn<Reserva> it(reservas);
+	vector<Reserva> tmp;
+
+	for (unsigned int i = 0; i < clientes.size(); i++) {
+
+		tmp = clientes.at(i)->getReservas();
+
+		for (unsigned int j = 0; j < tmp.size(); j++) {
+
+			reservas_file << tmp.at(j).getNif() << "-" << tmp.at(j).getNomeCliente() << "-" << tmp.at(j).getOferta()->getNif() << ", "
+			<< tmp.at(j).getOferta()->getBarco() << ", " << tmp.at(j).getOferta()->getDestino() << ", " << tmp.at(j).getOferta()->getLotacaoMax() << ", "
+			<< tmp.at(j).getOferta()->getLotacaoAtual() << ", " << tmp.at(j).getOferta()->getDistancia() << ", " << tmp.at(j).getOferta()->getData().getMes() << ", "
+			<< tmp.at(j).getOferta()->getData().getDia() << ", " << tmp.at(j).getOferta()->getData().getHoraInicio() << ":" << tmp.at(j).getOferta()->getData().getMinutosInicio() << ", "
+			<< tmp.at(j).getOferta()->getData().getHoraFim() << ":" << tmp.at(j).getOferta()->getData().getMinutosFim() << "-" << tmp.at(j).getData().getDia() << "-" << tmp.at(j).getData().getMes();
+
+			if (j != (tmp.size() - 1))
+				reservas_file << endl;
+		}
+
+		if (i != (clientes.size() - 1))
+			reservas_file << endl;
+
+	}
+
+/*
+
+	while (!it.isAtEnd()) {
+
+		reservas_file << it.retrieve().getNif() << "-" << it.retrieve().getNomeCliente() << "-" << it.retrieve().getOferta()->getNif() << ", "
+			<< it.retrieve().getOferta()->getBarco() << ", " << it.retrieve().getOferta()->getDestino() << ", " << it.retrieve().getOferta()->getLotacaoMax() << ", "
+			<< it.retrieve().getOferta()->getLotacaoAtual() << ", " << it.retrieve().getOferta()->getDistancia() << ", " << it.retrieve().getOferta()->getData().getMes() << ", "
+			<< it.retrieve().getOferta()->getData().getDia() << ", " << it.retrieve().getOferta()->getData().getHoraInicio() << ":" << it.retrieve().getOferta()->getData().getMinutosInicio() << ", "
+			<< it.retrieve().getOferta()->getData().getHoraFim() << ":" << it.retrieve().getOferta()->getData().getMinutosFim() << "-" << it.retrieve().getData().getDia() << "-" << it.retrieve().getData().getMes();
+
+		it.advance();
+
+		if (!it.isAtEnd())
+			reservas_file << endl;
+
+	}
+
+	*/
+}
 
 /*void Empresa::visualizaOfertas(long double NIF)
 {
@@ -1309,10 +1413,23 @@ void Empresa::guardaClientes(string fichClientesR,string fichClientes)
 	}
 }*/
 
-//priority queue
+////////////////////
+/* PRIORITY QUEUE */
+////////////////////
+
 int Empresa:: Descontos()
 {
 	priority_queue<Oferta> temp;
+	temp = cruzeiros_populares;
+
+	if (temp.empty()) {
+
+		cout << "Nao ha cruzeiros para mostrar" << endl << endl;
+		cin.get();
+		cin.get();
+		return 1;
+	}
+
 	int i = 0;
 	int j = 0;
 
@@ -1328,7 +1445,7 @@ int Empresa:: Descontos()
 	temp.pop();
 
 	//ciclo para as 3 ofertas seguintes com 20% de desconto
-	while (i<3)
+	while (i<3 && !temp.empty())
 	{
 		cout << "Antes:" << temp.top().getPreco() << "  Depois: " << temp.top().getPreco() - 0.2*temp.top().getPreco() << endl;
 		temp.pop();
@@ -1338,7 +1455,7 @@ int Empresa:: Descontos()
 	//ciclo para as 3 ofertas seguintes com 5% de desconto
 	
 	cout << "Ofertas com 5% de desconto: " << endl;
-	while (j < 3)
+	while (j < 3 && !temp.empty())
 	{
 		cout << "Antes:" << temp.top().getPreco() << "  Depois: " << temp.top().getPreco() - 0.05*temp.top().getPreco() << endl;
 		temp.pop();
@@ -1346,8 +1463,26 @@ int Empresa:: Descontos()
 
 	}
 
+	cin.get();
+	cin.get();
 	return 0;
 
+}
+
+void Empresa::atualiza_queue() {
+
+	vector<Oferta> tmp;
+
+	for (unsigned int i = 0; i < fornecedores.size(); i++) {
+
+		tmp = fornecedores.at(i).getOfertas();
+
+		for (unsigned int j = 0; j < tmp.size(); j++) {
+
+			cruzeiros_populares.push(tmp.at(j));
+		}
+
+	}
 }
 
 /////////

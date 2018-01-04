@@ -157,7 +157,7 @@ void Oferta::removeFromLotacao()
 
 bool Oferta::operator<(const Oferta & f2) 
 {
-	return this->getUltimaData() < f2.getUltimaData();
+	return f2.getUltimaData() < this->getUltimaData();
 }
 
 bool Oferta::ordenaDist(const Oferta &f1, const Oferta &f2)

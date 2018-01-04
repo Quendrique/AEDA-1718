@@ -65,6 +65,7 @@ int main ()
 	PortoRivers.carregaClientes(ClientesFileName);
 	PortoRivers.carregaClientesReg(ClientesRegFileName);
     PortoRivers.carregaReservas(ReservasFile);
+	PortoRivers.atualiza_queue();
 	clear_screen(); // limpa a janela de comando
 
 	int option;
@@ -146,6 +147,8 @@ int main ()
 			}
 
 			if (NIF == 0) break;
+
+			clear_screen();
 
 			//FIM DE VERIFICACAO
 
@@ -600,6 +603,7 @@ int main ()
 			case 5: //mostrar descontos
 
 				PortoRivers.Descontos();
+				clear_screen();
 				break;
 
 			}
@@ -722,7 +726,7 @@ int main ()
 			switch (option_gestor)
 			{
 			case 1: //visualizar dados
-				
+
 				int option_visualiza_g;
 				cout << "+-----------------------------------------------------+" << endl;
 				cout << "| O que pretende visualizar:                          |" << endl;
@@ -734,7 +738,7 @@ int main ()
 
 				cout << "opcao: ";
 				cin >> option_visualiza_g;
-				
+
 				while (cin.fail()) {// input nao e um numero
 
 					cin.clear();
@@ -780,7 +784,7 @@ int main ()
 				cin.get();
 				clear_screen();
 			}
-				break;
+					break;
 
 			case 3: {
 
@@ -870,7 +874,7 @@ int main ()
 				cin.get();
 				clear_screen();
 			}
-				break;
+					break;
 
 			case 4: { //remove forneceedor do vetor de fornecedores
 
@@ -885,7 +889,7 @@ int main ()
 					cout << "Por favor insira um numero: ";
 					cin >> nifFornecedor;
 				}
-				
+
 				try {
 					PortoRivers.removerFornecedor(nifFornecedor);
 				}
@@ -902,20 +906,99 @@ int main ()
 				cin.get();
 				clear_screen();
 			}
-				break;
+					break;
 
 			case 5: {
 
-				if (PortoRivers.is_reservas_empty()) {
-					cout << "Nao existem faturas disponiveis" << endl;
-				}
-				else
-					PortoRivers.printFaturas();
+				int option_visualiza_g;
+				cout << "+-----------------------------------------------------+" << endl;
+				cout << "| O que pretende visualizar:                          |" << endl;
+				cout << "+-----------------------------------------------------+" << endl;
+				cout << "|   1. Faturas por NIF do cliente                     |" << endl;
+				cout << "+-----------------------------------------------------+" << endl;
+				cout << "|   2. Faturas por NIF do fornecedor                  |" << endl;
+				cout << "+-----------------------------------------------------+" << endl;
+				cout << "|   3. Todas as faturas                               |" << endl;
+				cout << "+-----------------------------------------------------+" << endl;
 
-				cin.clear();
-				cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-				cin.get();
+				cout << "opcao: ";
+				cin >> option_visualiza_g;
+
+				while (cin.fail()) {// input nao e um numero
+
+					cin.clear();
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					cout << "Por favor insira um numero: ";
+					cin >> option_visualiza_g;
+				}
 				clear_screen();
+
+				switch (option_visualiza_g) {
+
+				case 1: {
+
+					unsigned long nif_tmp;
+
+					cout << "Insira no NIF do cliente a procurar: ";
+					cin >> nif_tmp;
+					while (cin.fail()) {// input nao e um numero
+
+						cin.clear();
+						cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+						cout << "Por favor insira um numero: ";
+						cin >> nif_tmp;
+					}
+
+					PortoRivers.procurar_reservas_nif_cliente(nif_tmp);
+					cin.clear();
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					cin.get();
+					clear_screen();
+
+				}
+						break;
+
+				case 2: {
+
+					unsigned long nif_tmp;
+
+					cout << "Insira no NIF do fornecedor a procurar: ";
+					cin >> nif_tmp;
+					while (cin.fail()) {// input nao e um numero
+
+						cin.clear();
+						cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+						cout << "Por favor insira um numero: ";
+						cin >> nif_tmp;
+					}
+
+					PortoRivers.procurar_reservas_nif_fornecedor(nif_tmp);
+					cin.clear();
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					cin.get();
+					clear_screen();
+
+				}
+						break;
+
+				case 3: {
+
+					if (PortoRivers.is_reservas_empty()) {
+						cout << "Nao existem faturas disponiveis" << endl;
+					}
+					else
+						PortoRivers.printFaturas();
+
+					cin.clear();
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					cin.get();
+					clear_screen();
+
+				}
+						break;
+
+				}
+
 
 			}
 
@@ -923,15 +1006,17 @@ int main ()
 
 
 			}
+
 			break;
 
 		}
 
 		case 4: //guardar a informção nos ficheiros de texto
 			
-			PortoRivers.guardaClientes(ClientesRegFileName, ClientesFileName);
-			PortoRivers.guardaFornecedores(FornecedoresFileName); //file path so para testes
-			//PortoRivers.guardaOfertas("C:\\Users\\catam\\Desktop\\aedafinal\\aedafinal\\ofertas.txt");  //file path so para testes
+			//PortoRivers.guardaClientes(ClientesRegFileName, ClientesFileName);
+			PortoRivers.guardaFornecedores(FornecedoresFileName); 
+			PortoRivers.guardaOfertas(OfertasFileName);  
+			PortoRivers.guardaReservas(ReservasFile);
 
 		
 			break;

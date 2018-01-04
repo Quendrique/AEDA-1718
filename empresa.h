@@ -45,10 +45,6 @@ private:
 	string nome;
 
 public:
-	//priority_queue
-
-	int Descontos();
-	//....
     Empresa(string fichFornecedores, string fichOfertas, string fichClientes, string fichClientesReg, string fichReservas, Data data_Atual); // alterei
 	Empresa(string nome, vector<Fornecedor> fornecedores, vector<Cliente*> clientes);
 	void changeClienteMorada(Cliente* cliente, string newMorada); // added
@@ -89,11 +85,19 @@ public:
 	void removerFornecedor(unsigned long NIF);
 	void printReservasByCliente(unsigned long NIF) const;
 
-	//BST
+	//BST e reservas
 
-	void inicializaBST(); //depois de as reservas serem carregadas, esta funcao e chamada
+//	void inicializaBST(); //depois de as reservas serem carregadas, esta funcao e chamada
 	void printFaturas(); //percorre a bst e imprime as "faturas" uma a uma 
 	bool is_reservas_empty();
+	void guardaReservas(string fichReservas);
+	int procurar_reservas_nif_cliente(unsigned long nif);
+	int procurar_reservas_nif_fornecedor(unsigned long nif);
+
+	//priority queue
+
+	int Descontos();
+	void atualiza_queue();
 };
 
 /////////////////////////
