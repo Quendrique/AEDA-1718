@@ -82,8 +82,7 @@ bool Data::operator<(const Data d2) const
 	{
 		return false;
 	}
-
-	else
+    else if(mes == d2.getMes())
 	{
 
 		if (dia < d2.getDia())
@@ -97,3 +96,28 @@ bool Data::operator<(const Data d2) const
 	}
 
 }
+/*bool Data::operator<(const Data d2) const
+{
+	if (mes < d2.getMes())
+	{
+		return false;
+	}
+	else if (mes > d2.getMes())
+	{
+		return true;
+	}
+	else if (mes == d2.getMes())
+	{
+
+		if (dia < d2.getDia())
+		{
+			return false;
+		}
+		else if (dia > d2.getDia())
+		{
+			return true;
+		}
+	}
+	return false;
+
+}*/

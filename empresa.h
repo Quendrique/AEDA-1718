@@ -226,6 +226,7 @@ public:
 
 	int Descontos();
 	void inicializa_queue();
+	void atualiza_queue(int nif);
 	// hash
 	void changeClienteMorada(int nif_cli, string newMorada);
 	void PrintClientesInativos();

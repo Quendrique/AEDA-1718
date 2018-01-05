@@ -1318,7 +1318,7 @@ void Empresa::atribuiReserva(unsigned long fornecedorNIF, unsigned long clienteN
 						clientes.at(j)->addReserva(r1);
 						clientes.at(j)->setUltimaReserva(Data(r1.getData().getDia(), r1.getData().getMes()));
 						colocaClientesInativos();
-						
+						atualiza_queue(o1->getNif());
 						//cruzeiros_populares.push(*o1);
 
 						return;
@@ -1554,6 +1554,38 @@ void Empresa::inicializa_queue() {
 		}
 
 	}
+}
+void Empresa::atualiza_queue(int nif) {
+	vector<Oferta> temp;
+
+	//procura caixa mais cheia, ainda com espaco para obj
+	while (!cruzeiros_populares.empty())
+	{
+		Oferta of = cruzeiros_populares.top();
+		cruzeiros_populares.pop();
+		if (of.getNif() == nif) {
+
+			of.setLotacaoAtual(of.getLotacaoAtual()+1);
+			of.setUltimaData(data_atual);
+			temp.push_back(of);
+		}
+		else temp.push_back(of); //coloca as caixas nao utilizadas num vetor temporario
+	}
+	for (unsigned i = 0; i<temp.size(); i++) //repoe as caixas nao utilizadas de volta, caso nenhuma sirva
+		cruzeiros_populares.push(temp[i]);
+
+	/*vector<Oferta> tmp;
+
+	for (unsigned int i = 0; i < fornecedores.size(); i++) {
+
+		tmp = fornecedores.at(i).getOfertas();
+
+		for (unsigned int j = 0; j < tmp.size(); j++) {
+
+			cruzeiros_populares.push(tmp.at(j));
+		}
+
+	}*/
 }
 
 /////////

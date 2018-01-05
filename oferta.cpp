@@ -155,7 +155,7 @@ bool Oferta::operator<(const Oferta & f2) const
 	return f2.getUltimaData() < this->getUltimaData();
 }
 
-bool Oferta::ordenaDist(const Oferta &f1, const Oferta &f2)
+bool Oferta::ordenaDist(const Oferta &f1, const Oferta &f2) 
 {
 	return f1.getDistancia() < f2.getDistancia();
 }
