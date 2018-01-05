@@ -14,7 +14,7 @@ Cliente::Cliente(string nome, unsigned int NIF, string morada) //alterei
 	this->NIF = NIF;
 	this->morada = morada;
 	this->inativo = 0;//partimos do principio que esta ativo
-	this->ultima_reserva = Data(1, 1);
+	this->ultima_reserva = Data(0, 0);
 	this->contadorReservas = 0; 
 }
 
@@ -39,9 +39,6 @@ void Cliente::setMorada(string morada)
 	this->morada = morada;
 }
 
-void Cliente::setUltimaReserva(Data data) {
-	this->ultima_reserva = data;
-}
 
 void Cliente::addReserva(Reserva reserva)
 {
@@ -68,6 +65,17 @@ string Cliente::getNome() const
 	return nome ;
 }
 
+void Cliente::setUltimaReserva(Data data) {
+	this->ultima_reserva = data;
+}
+unsigned int Cliente::getInativo() const
+{
+	return inativo;
+}
+void Cliente::setInativo(unsigned int inativo)
+{
+	this->inativo = inativo;
+}
 unsigned int Cliente::getNIF() const
 {
 	return NIF;
