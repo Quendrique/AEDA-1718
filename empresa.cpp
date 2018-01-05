@@ -1313,7 +1313,9 @@ void Empresa::atribuiReserva(unsigned long fornecedorNIF, unsigned long clienteN
 						Reserva r1(dataReserva, clienteNIF, nomeCliente, o1, fornecedores.at(i).getNome());
 						clientes.at(j)->addReserva(r1);
 						clientes.at(j)->setUltimaReserva(Data(r1.getData().getDia(), r1.getData().getMes()));
-						atualiza_queue();
+						colocaClientesInativos();
+						cruzeiros_populares.push(*o1);
+
 						return;
 
 					}
@@ -1535,7 +1537,7 @@ int Empresa:: Descontos()
 
 }
 
-void Empresa::atualiza_queue() {
+void Empresa::inicializa_queue() {
 
 	vector<Oferta> tmp;
 
