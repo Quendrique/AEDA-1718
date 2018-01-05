@@ -33,7 +33,7 @@ public:
 	void setData(Data data);
 	void setDistancia(unsigned int distancia);
 	void setNif(unsigned int nif);
-	bool operator < (const Oferta o2) const;
+	//bool operator < (const Oferta o2) const;
 
 	Data getUltimaData() const;
 	void setUltimaData(Data data);
@@ -49,9 +49,9 @@ public:
 
 	void addToLotacao();
 	void removeFromLotacao();
-	bool operator<(const Oferta & f2);
+	bool operator<(const Oferta & f2) const;
 	bool ordenaDist(const Oferta & f1, const Oferta & f2);
-	bool operator ==(const Oferta &o2);
+	bool operator ==(const Oferta &o2) const;
 
 };
 

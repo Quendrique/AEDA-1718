@@ -41,11 +41,6 @@ void Oferta::setNif(unsigned int nif)
 	this->nif = nif;
 }
 
-bool Oferta::operator<(const Oferta o2) const
-{
-	return this->ultima_data < o2.getUltimaData();
-}
-
 void Oferta::setLotacaoMax(unsigned int lotacaoMax)
 {
 	this->lotacaoMax = lotacaoMax;
@@ -114,7 +109,7 @@ unsigned int Oferta::getDistancia() const
 Data Oferta::getData() const { return data; }
 
 
-bool Oferta::operator ==(const Oferta &o2)
+bool Oferta::operator ==(const Oferta &o2) const
 {
 	if (this->barco == o2.barco)
 	{
@@ -155,7 +150,7 @@ void Oferta::removeFromLotacao()
 	this->lotacaoAtual -= 1;
 }
 
-bool Oferta::operator<(const Oferta & f2) 
+bool Oferta::operator<(const Oferta & f2) const 
 {
 	return f2.getUltimaData() < this->getUltimaData();
 }
