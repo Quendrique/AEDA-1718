@@ -60,11 +60,11 @@ int main ()
 	
 	// TEMPORARIO - FILE PATHS PARA FICHEIROS
 
-	PortoRivers.carregaFornecedores(FornecedoresFileName);
-	PortoRivers.carregaOferta(OfertasFileName);
-	PortoRivers.carregaClientes(ClientesFileName);
-	PortoRivers.carregaClientesReg(ClientesRegFileName);
-    PortoRivers.carregaReservas(ReservasFile);
+	PortoRivers.carregaFornecedores("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\aeda2321\\fornecedores.txt");
+	PortoRivers.carregaOferta("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\aeda2321\\ofertas.txt");
+	PortoRivers.carregaClientes("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\aeda2321\\clientest.txt");
+	PortoRivers.carregaClientesReg("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\aeda2321\\clientesR.txt");
+    PortoRivers.carregaReservas("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\aeda2321\\reservas.txt");
 	PortoRivers.atualiza_queue();
 	clear_screen(); // limpa a janela de comando
 
@@ -710,6 +710,8 @@ int main ()
 			cout << "+-----------------------------------------------------+" << endl;
 			cout << "|   5. Consultar faturas                              |" << endl;
 			cout << "+-----------------------------------------------------+" << endl;
+			cout << "|   6. Clientes Inativos                              |" << endl;
+			cout << "+-----------------------------------------------------+" << endl;
 
 			cout << "opcao: ";
 			cin >> option_gestor;
@@ -996,14 +998,63 @@ int main ()
 
 				}
 						break;
+				default:
+					break;
+				}
+			case 6: {
+				int numero_cliente;
 
+				cout << "+-----------------------------------------------------+" << endl;
+				cout << "|   Escolha a opcao pertendida                        |" << endl;
+				cout << "+-----------------------------------------------------+" << endl;
+				cout << "|   1.Visualizar clientes inativos                    |" << endl;
+				cout << "+-----------------------------------------------------+" << endl;
+				cout << "|   2.Atualizar Morada                                |" << endl;
+				cout << "+-----------------------------------------------------+" << endl;
+
+
+				cout << "opcao: ";
+				cin >> numero_cliente;
+				switch (numero_cliente)
+				{
+				case 1: {
+					PortoRivers.PrintClientesInativos();
+				}
+						break;
+				case 2: {
+					int nif_cliente_inativo;
+					string newMorada;
+					PortoRivers.PrintClientesInativos();
+					cout << "Indoduza o NIF do cliente: ";
+					cin >> nif_cliente_inativo;
+					cin.ignore(100, '\n');
+					cout << "Indoduza a nova morada: ";
+					getline(cin, newMorada);
+
+
+
+
+					PortoRivers.changeClienteMorada(nif_cliente_inativo, newMorada);
+
+
+
+
+				}
+						break;
+				default:
+					break;
 				}
 
 
+
+
+
+
+
+
+
 			}
-
-					break;
-
+			}
 
 			}
 
