@@ -2,7 +2,7 @@
 
 Oferta::Oferta()
 {
-
+	this->preco = 40;
 }
 
 Oferta::Oferta(unsigned int nif, string barco, unsigned int lotacaoMax, unsigned int lotacaoAtual, string destino, unsigned int distancia, Data data)

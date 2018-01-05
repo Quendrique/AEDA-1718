@@ -21,6 +21,10 @@ vector<Fornecedor> Empresa::getFornecedores() const
 {
 	return fornecedores;
 }
+HEAP_OFT Empresa::getCruzeiros() const
+{
+	return this->cruzeiros_populares;
+}
 
 string Empresa::getNome() const
 {
@@ -1314,7 +1318,8 @@ void Empresa::atribuiReserva(unsigned long fornecedorNIF, unsigned long clienteN
 						clientes.at(j)->addReserva(r1);
 						clientes.at(j)->setUltimaReserva(Data(r1.getData().getDia(), r1.getData().getMes()));
 						colocaClientesInativos();
-						cruzeiros_populares.push(*o1);
+						
+						//cruzeiros_populares.push(*o1);
 
 						return;
 

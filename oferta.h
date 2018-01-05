@@ -8,6 +8,7 @@
 
 using namespace std;
 
+
 class Oferta {
 
 private:
@@ -20,7 +21,6 @@ private:
 	unsigned int preco;
 	unsigned int nif;
 	Data ultima_data;
-	priority_queue<Oferta> menos_popular;
 
 public:
 	Oferta();

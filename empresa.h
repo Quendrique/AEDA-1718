@@ -26,7 +26,7 @@ struct clientesInativosHash
 		return (cl1.getNIF() == cl2.getNIF());
 	}
 };
-
+typedef priority_queue<Oferta> HEAP_OFT;
 typedef unordered_set<clientesInativos, clientesInativosHash, clientesInativosHash> HashTabclientesInativos;
 class Empresa {
 
@@ -35,7 +35,8 @@ private:
 	vector<Cliente*> clientes;
 	Data data_atual;
 	HashTabclientesInativos ClientesInativos;
-	priority_queue<Oferta> cruzeiros_populares;
+	//priority_queue<Oferta> cruzeiros_populares;
+	HEAP_OFT cruzeiros_populares;
 	BST<Reserva> reservas; 
 	string fichFornecedores;
 	string fichOfertas;
@@ -66,6 +67,8 @@ public:
 	*   @param fornecedor 
 	*/
 	void addFornecedor(Fornecedor fornecedorNew);
+
+	HEAP_OFT getCruzeiros() const;
 	/**
 	*	@brief Adiciona um cliente
 	*   @param cliente
