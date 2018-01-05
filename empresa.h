@@ -222,7 +222,7 @@ public:
 	//priority queue
 
 	int Descontos();
-	void atualiza_queue();
+	void inicializa_queue();
 	// hash
 	void changeClienteMorada(int nif_cli, string newMorada);
 	void PrintClientesInativos();
