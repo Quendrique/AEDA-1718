@@ -60,12 +60,12 @@ int main ()
 	
 	// TEMPORARIO - FILE PATHS PARA FICHEIROS
 
-	PortoRivers.carregaFornecedores("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\aeda2321\\fornecedores.txt");
-	PortoRivers.carregaOferta("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\aeda2321\\ofertas.txt");
-	PortoRivers.carregaClientes("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\aeda2321\\clientest.txt");
-	PortoRivers.carregaClientesReg("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\aeda2321\\clientesR.txt");
-    PortoRivers.carregaReservas("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\aeda2321\\reservas.txt");
-	PortoRivers.atualiza_queue();
+	PortoRivers.carregaFornecedores("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\aeda15\\fornecedores.txt");
+	PortoRivers.carregaOferta("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\aeda15\\ofertas.txt");
+	PortoRivers.carregaClientes("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\aeda15\\clientest.txt");
+	PortoRivers.carregaClientesReg("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\aeda15\\clientesR.txt");
+    PortoRivers.carregaReservas("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\aeda15\\reservas.txt");
+	PortoRivers.inicializa_queue();
 	clear_screen(); // limpa a janela de comando
 
 	int option;
@@ -1001,6 +1001,8 @@ int main ()
 				default:
 					break;
 				}
+			}
+					break;
 			case 6: {
 				int numero_cliente;
 
@@ -1019,6 +1021,11 @@ int main ()
 				{
 				case 1: {
 					PortoRivers.PrintClientesInativos();
+
+					cin.clear();
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					cin.get();
+					clear_screen();
 				}
 						break;
 				case 2: {
@@ -1035,6 +1042,11 @@ int main ()
 
 
 					PortoRivers.changeClienteMorada(nif_cliente_inativo, newMorada);
+
+					cin.clear();
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					cin.get();
+					clear_screen();
 
 
 
@@ -1056,7 +1068,7 @@ int main ()
 			}
 			}
 
-			}
+			
 
 			break;
 
