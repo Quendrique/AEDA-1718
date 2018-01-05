@@ -34,13 +34,13 @@ void Empresa::setData_atual(int dia, int mes) // acrecentei
 bool Empresa::compareData(Data data_cliente) // não sei se está completamente correto
 {
 	int dias;
-	
+
 	if (abs(this->data_atual.getMes() - data_cliente.getMes() == 1))
 	{
 		if (data_atual.getMes() > data_cliente.getMes())
 		{
 			dias = (30 - data_cliente.getDia()) + data_atual.getMes();
-			
+
 		}
 		else // não pode acontecer ma esta aqui na mesma
 		{
@@ -51,26 +51,90 @@ bool Empresa::compareData(Data data_cliente) // não sei se está completamente 
 			return true;
 		}
 	}
+	else if (abs(this->data_atual.getMes() - data_cliente.getMes() >= 1))
+	{
+		return true;
+	}
 	return false;
-	
+
 
 }
-void Empresa::changeClienteMorada(Cliente* cliente, string newMorada) {
-	// See if the user is in the table
-	auto it = ClientesInativos.find(clientesInativos(cliente));
+void Empresa::changeClienteMorada(int nif_cli, string newMorada) {
+	//Cliente* clienteptr;
+	for (int i = 0; i < clientes.size(); i++)
+	{
+		if (clientes.at(i)->getNIF() == nif_cli)
+		{
+			if (clientes.at(i)->getInativo() == 1)
+			{
 
-	if (it == ClientesInativos.end())	// He isn't
-		return;
+				auto it = ClientesInativos.find(clientesInativos(clientes.at(i)));
 
-	// He is : Remove it ...
-	ClientesInativos.erase(it);
+				if (it == ClientesInativos.end())
+					return;
 
-	// ... change it ...
-	cliente->setMorada(newMorada);
 
-	// ... and re-add it!
-	ClientesInativos.insert(clientesInativos(cliente));
+				ClientesInativos.erase(it);
+
+
+				clientes.at(i)->setMorada(newMorada);
+
+
+				ClientesInativos.insert(clientesInativos(clientes.at(i)));
+				clientes.at(i)->setMorada(newMorada);
+				break;
+			}
+		}
+	}
+
+
+
 }
+void Empresa::colocaClientesInativos()
+{
+
+	for (int i = 0; i < clientes.size(); i++)
+	{
+		if (clientes.at(i)->getUltimaReserva().getDia() > 0 && clientes.at(i)->getUltimaReserva().getMes() > 0)
+		{
+			if (compareData(clientes.at(i)->getUltimaReserva()) && clientes.at(i)->getInativo() == 0)
+			{
+				
+				clientes.at(i)->setInativo(1);
+				ClientesInativos.insert(clientes.at(i));
+			}
+			else if (!compareData(clientes.at(i)->getUltimaReserva()) && clientes.at(i)->getInativo() == 1)
+			{
+				clientes.at(i)->setInativo(0);
+				auto it = ClientesInativos.find(clientesInativos(clientes.at(i)));
+				if (it == ClientesInativos.end())
+				{
+					return;
+				}
+				ClientesInativos.erase(it);
+			}
+		}
+	}
+
+}
+void Empresa::PrintClientesInativos()
+{
+	for (HashTabclientesInativos::const_iterator it = ClientesInativos.begin();
+		it != ClientesInativos.end(); it++)
+	{
+		for (int i = 0; i < clientes.size(); i++)
+		{
+			if (clientes.at(i)->getNIF() == (it)->getNIF())
+			{
+				clientes.at(i)->printInfo();
+			}
+		}
+
+
+	}
+}
+
+
 //////////////////////////////////////////////
 /* Metodos para ler informacao dos ficheiros*/
 //////////////////////////////////////////////
@@ -767,6 +831,7 @@ void Empresa::carregaReservas(string ficheiro_reservas)
 
 		}
 	}
+	colocaClientesInativos();
 
 }
 
