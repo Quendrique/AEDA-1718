@@ -1,2 +1,2 @@
-Paula,333467890,Braga,2
-Manuel,123098766,Vila Real,7
+Paula,333467890,Braga,0
+Manuel,123098766,Vila Real,0

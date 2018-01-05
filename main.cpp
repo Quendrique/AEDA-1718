@@ -60,11 +60,17 @@ int main ()
 	
 	// TEMPORARIO - FILE PATHS PARA FICHEIROS
 
-	PortoRivers.carregaFornecedores("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\aeda15\\fornecedores.txt");
-	PortoRivers.carregaOferta("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\aeda15\\ofertas.txt");
-	PortoRivers.carregaClientes("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\aeda15\\clientest.txt");
-	PortoRivers.carregaClientesReg("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\aeda15\\clientesR.txt");
-    PortoRivers.carregaReservas("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\aeda15\\reservas.txt");
+	PortoRivers.carregaFornecedores("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\AEDA_PARTE2\\fornecedores.txt");
+	PortoRivers.carregaOferta("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\AEDA_PARTE2\\ofertas.txt");
+	PortoRivers.carregaClientes("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\AEDA_PARTE2\\clientest.txt");
+	PortoRivers.carregaClientesReg("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\AEDA_PARTE2\\clientesR.txt");
+    PortoRivers.carregaReservas("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\AEDA_PARTE2\\reservas.txt"); 
+	/*PortoRivers.carregaFornecedores(FornecedoresFileName);
+	PortoRivers.carregaOferta(OfertasFileName);
+	PortoRivers.carregaClientes(ClientesFileName);
+	PortoRivers.carregaClientesReg(ClientesRegFileName);
+	PortoRivers.carregaReservas(ReservasFile);*/
+
 	PortoRivers.inicializa_queue();
 	clear_screen(); // limpa a janela de comando
 
@@ -1076,10 +1082,17 @@ int main ()
 
 		case 4: //guardar a informção nos ficheiros de texto
 			
-			//PortoRivers.guardaClientes(ClientesRegFileName, ClientesFileName);
+			
+			PortoRivers.guardaFornecedores("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\AEDA_PARTE2\\fornecedores.txt");
+			PortoRivers.guardaOfertas("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\AEDA_PARTE2\\ofertas.txt");
+			//PortoRivers.carregaClientes("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\AEDA_PARTE2\\clientest.txt");
+			//PortoRivers.carregaClientesReg("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\AEDA_PARTE2\\clientesR.txt");
+			PortoRivers.guardaReservas("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\AEDA_PARTE2\\reservas.txt");
+			PortoRivers.guardaClientes("C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\AEDA_PARTE2\\clientesR.txt", "C:\\Users\\catam\\Documents\\Visual Studio 2015\\Projects\\AEDA_PARTE2\\clientest.txt");
+			/*PortoRivers.guardaClientes(ClientesRegFileName, ClientesFileName);
 			PortoRivers.guardaFornecedores(FornecedoresFileName); 
 			PortoRivers.guardaOfertas(OfertasFileName);  
-			PortoRivers.guardaReservas(ReservasFile);
+			PortoRivers.guardaReservas(ReservasFile);*/
 
 		
 			break;

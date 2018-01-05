@@ -1408,17 +1408,15 @@ void Empresa::guardaClientes(string fichClientesR,string fichClientes)
 	{
 		if (clientes.at(i)->isRegistado())
 		{
-			ClientesFileR << clientes[i]->getNome() << "," << clientes[i]->getNIF() << "," << clientes[i]->getMorada() << clientes[i]->getPontos();
+			ClientesFileR << clientes[i]->getNome() << "," << clientes[i]->getNIF() << "," << clientes[i]->getMorada() << "," << clientes[i]->getPontos() << endl ;
 			
-			if (i != (clientes.size() - 1))
-				ClientesFileR << endl;
+		
 		}
 		else
 		{
-			ClientesFile << clientes[i]->getNome() << "," << clientes[i]->getNIF() << "," << clientes[i]->getMorada();
+			ClientesFile << clientes[i]->getNome() << "," << clientes[i]->getNIF() << "," << clientes[i]->getMorada() << endl;
 			
-			if (i != (clientes.size() - 1))
-				ClientesFileR << endl;
+		
 		}
 
 	}

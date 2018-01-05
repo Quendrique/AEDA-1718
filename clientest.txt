@@ -1,2 +1,4 @@
 Ana,333444555,Porto
 Rui Pedro,123456789,Paranhos
+Catarina,223344556,Figueira da Foz
+Fernando,333467891,Porto
