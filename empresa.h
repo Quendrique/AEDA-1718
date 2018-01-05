@@ -47,7 +47,7 @@ private:
 public:
     Empresa(string fichFornecedores, string fichOfertas, string fichClientes, string fichClientesReg, string fichReservas, Data data_Atual); // alterei
 	Empresa(string nome, vector<Fornecedor> fornecedores, vector<Cliente*> clientes);
-	void changeClienteMorada(Cliente* cliente, string newMorada); // added
+	
 	void addFornecedor(Fornecedor fornecedorNew);
 	void addCliente(Cliente * clienteNew);
 	void addOfertas(unsigned int NIF);
@@ -98,6 +98,10 @@ public:
 
 	int Descontos();
 	void atualiza_queue();
+	// hash
+	void changeClienteMorada(int nif_cli, string newMorada);
+	void PrintClientesInativos();
+	void colocaClientesInativos();
 };
 
 /////////////////////////
