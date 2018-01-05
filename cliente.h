@@ -30,6 +30,10 @@ public:
 	void setNIF(unsigned int NIF);
 	void setMorada(string morada);
 	void setUltimaReserva(Data data);
+	
+	
+	void setInativo(unsigned int inativo);
+	unsigned int getInativo() const;
 	void addReserva(Reserva reserva);
 	vector<Reserva> getReservas()const;
 	string getNome() const;
