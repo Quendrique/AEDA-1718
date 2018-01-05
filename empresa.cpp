@@ -1312,6 +1312,7 @@ void Empresa::atribuiReserva(unsigned long fornecedorNIF, unsigned long clienteN
 						o1->setUltimaData(data_atual);
 						Reserva r1(dataReserva, clienteNIF, nomeCliente, o1, fornecedores.at(i).getNome());
 						clientes.at(j)->addReserva(r1);
+						clientes.at(j)->setUltimaReserva(Data(r1.getData().getDia(), r1.getData().getMes()));
 						atualiza_queue();
 						return;
 
